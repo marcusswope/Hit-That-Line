@@ -1,6 +1,14 @@
-# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-bin
+# Copied from fubu gitignore
+build
+artifacts
 obj
-
-# mstest test results
-TestResults
+bin
+src/CommonAssemblyInfo.cs
+*.csproj.user
+_ReSharper.*
+*.[Rr]e[Ss]harper.user
+src/FubuMVC.*.ReSharper
+*.DotSettings.user
+*.suo
+*.cache
+~$*
