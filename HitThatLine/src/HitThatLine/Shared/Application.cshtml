@@ -1,0 +1,17 @@
+﻿@using FubuMVC.Core.UI
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hit That Line</title>
+    @{this.Css("Site.css");}
+    @this.WriteCssTags()
+</head>
+    <body>
+        <div id="htl-head">
+            
+        </div>
+        <div id="page">
+            @RenderBody()
+        </div>
+    </body>
+</html>
