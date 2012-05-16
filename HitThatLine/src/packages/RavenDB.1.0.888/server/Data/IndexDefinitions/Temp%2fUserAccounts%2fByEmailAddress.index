@@ -1,0 +1,18 @@
+{
+  "Name": "Temp/UserAccounts/ByEmailAddress",
+  "Map": "from doc in docs.UserAccounts\r\nselect new { EmailAddress = doc.EmailAddress }",
+  "Maps": [
+    "from doc in docs.UserAccounts\r\nselect new { EmailAddress = doc.EmailAddress }"
+  ],
+  "Reduce": null,
+  "TransformResults": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "IsTemp": true,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {},
+  "Analyzers": {},
+  "Fields": [],
+  "Type": "Temp"
+}

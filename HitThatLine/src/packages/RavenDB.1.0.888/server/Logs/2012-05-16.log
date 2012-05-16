@@ -1,0 +1,248 @@
+time,logger,level,message,exception
+2012-05-16 12:39:25.1445,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-05-16 12:39:25.1953,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-05-16 12:39:28.5576,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-05-16 12:39:28.7578,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-05-16 12:39:28.7578,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:39:28.7939,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:39:28.7939,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-05-16 13:52:24.2734,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-05-16 13:52:24.2734,Raven.Database.Server.HttpServer,Debug,Request #   1: GET     -    29 ms - <default>  - 404 - /docs/Raven/Replication/Destinations,
+2012-05-16 13:52:39.2343,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByEmailAddress:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-05-16 13:52:39.6191,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/UserAccounts/ByEmailAddress with encoded name Temp/UserAccounts/ByEmailAddress,
+2012-05-16 13:52:40.0117,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByEmailAddress,
+2012-05-16 13:52:40.0341,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: PUT INDEX Temp/UserAccounts/ByEmailAddress,
+2012-05-16 13:52:40.0966,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:52:40.0966,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:m@m.com,
+2012-05-16 13:52:40.1093,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: IndexingExecuter, will wait for additional work",
+2012-05-16 13:52:40.2763,Raven.Database.Server.HttpServer,Debug,"Request #   2: GET     - 1,934 ms - <default>  - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Am%2540m.com&start=0&pageSize=1&aggregation=None",
+2012-05-16 13:52:40.2763,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:m@m.com
+	Time: 1,876 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 0 returned out of 0 total.
+",
+2012-05-16 13:52:40.3857,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was not found,
+2012-05-16 13:52:40.3857,Raven.Database.Server.HttpServer,Debug,Request #   3: GET     -     5 ms - <default>  - 404 - /docs/Raven/Hilo/UserAccounts,
+2012-05-16 13:52:40.9824,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/UserAccounts', update: False, ",
+2012-05-16 13:52:40.9824,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: PUT Raven/Hilo/UserAccounts,
+2012-05-16 13:52:40.9843,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/UserAccounts with etag 00000000-0000-0100-0000-000000000001,
+2012-05-16 13:52:41.0156,Raven.Database.Server.HttpServer,Debug,Request #   4: PUT     -   145 ms - <default>  - 201 - /docs/Raven/Hilo/UserAccounts,
+2012-05-16 13:52:41.0156,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:52:41.1210,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'UserAccounts/1', update: False, ",
+2012-05-16 13:52:41.1210,Raven.Database.DocumentDatabase,Debug,Put document UserAccounts/1 with etag 00000000-0000-0100-0000-000000000002,
+2012-05-16 13:52:41.1210,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: PUT UserAccounts/1,
+2012-05-16 13:52:41.1210,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0049537,
+2012-05-16 13:52:41.1210,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:52:41.1259,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-05-16 13:52:41.1259,Raven.Database.Server.HttpServer,Debug,Request #   5: POST    -    22 ms - <default>  - 200 - /bulk_docs,
+2012-05-16 13:52:41.1259,Raven.Database.Server.HttpServer,Debug,"	PUT UserAccounts/1
+",
+2012-05-16 13:52:41.2949,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-05-16 13:52:41.3046,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-05-16 13:52:41.3359,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByEmailAddress, no indexing will be performed, updating to 00000000-0000-0100-0000-000000000001, 5/16/2012 6:52:40 PM",
+2012-05-16 13:52:41.3642,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: WORK BY IndexingExecuter,
+2012-05-16 13:52:41.3642,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:52:41.3642,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0100-0000-000000000001,
+2012-05-16 13:52:41.3642,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-05-16 13:52:41.3750,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/UserAccounts/ByEmailAddress, LastIndexedEtag: 00000000-0000-0100-0000-000000000001",
+2012-05-16 13:52:41.3750,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/UserAccounts/ByEmailAddress. (UserAccounts/1),
+2012-05-16 13:52:41.6328,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts/1 result in index Temp/UserAccounts/ByEmailAddress gave document: 	__document_id IS: useraccounts/1
+	EmailAddress I-: m@m.com
+",
+2012-05-16 13:52:41.7578,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/UserAccounts/ByEmailAddress,
+2012-05-16 13:52:41.7578,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 5 because: WORK BY IndexingExecuter,
+2012-05-16 13:52:41.7578,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:52:41.7578,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: IndexingExecuter, will wait for additional work",
+2012-05-16 13:54:05.6738,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-05-16 13:54:05.7187,Raven.Database.Indexing.IndexStorage,Info,Creating index Raven/DocumentsByEntityName with encoded name Raven/DocumentsByEntityName,
+2012-05-16 13:54:05.8115,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-05-16 13:54:06.1142,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 6 because: PUT INDEX Raven/DocumentsByEntityName,
+2012-05-16 13:54:06.4580,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:54:06.5673,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 2 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-05-16 13:54:06.5673,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-05-16 13:54:06.5673,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-05-16 13:54:06.5673,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-05-16 13:54:06.5673,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (UserAccounts/1),
+2012-05-16 13:54:06.5957,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts/1 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: useraccounts/1
+	Tag I-: UserAccounts
+	LastModified I-: 20120516185241121
+",
+2012-05-16 13:54:06.8867,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-05-16 13:54:07.1728,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 7 because: WORK BY IndexingExecuter,
+2012-05-16 13:54:07.2314,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: ReducingExecuter, will wait for additional work",
+2012-05-16 13:54:07.2402,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: IndexingExecuter, will wait for additional work",
+2012-05-16 13:54:09.4140,Raven.Database.Server.HttpServer,Debug,Request #   6: GET     -    13 ms - <default>  - 200 - /docs?pageSize=0&noCache=-1675649030,
+2012-05-16 13:54:09.4804,Raven.Database.Server.HttpServer,Debug,Request #   7: GET     -     7 ms - <default>  - 200 - /build/version?noCache=-209749067,
+2012-05-16 13:54:09.5009,Raven.Database.Server.HttpServer,Debug,Request #   8: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=2079069631,
+2012-05-16 13:54:09.5009,Raven.Database.Server.HttpServer,Debug,Request #   9: GET     -     2 ms - <default>  - 200 - /license/status?noCache=1572046457,
+2012-05-16 13:54:09.5488,Raven.Database.Server.HttpServer,Debug,Request #  10: GET     -    75 ms - <default>  - 200 - /stats?noCache=1833159938,
+2012-05-16 13:54:12.7197,Raven.Database.Server.HttpServer,Debug,Request #  11: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=-1348722860,
+2012-05-16 13:54:14.0097,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:14.0380,Raven.Database.Server.HttpServer,Debug,Request #  12: GET     -    28 ms - <default>  - 200 - /docs/UserAccounts/1?noCache=-36382627,
+2012-05-16 13:54:14.1123,Raven.Database.Server.HttpServer,Debug,Request #  13: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts/1/&noCache=-350736382,
+2012-05-16 13:54:14.4169,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:20.4980,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:26.5527,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:31.6171,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:32.5019,Raven.Database.Server.HttpServer,Debug,Request #  14: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=-955710262,
+2012-05-16 13:54:32.5937,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was found,
+2012-05-16 13:54:32.5937,Raven.Database.Server.HttpServer,Debug,Request #  15: GET     -     0 ms - <default>  - 200 - /docs/Raven/Hilo/UserAccounts?noCache=248769946,
+2012-05-16 13:54:32.6181,Raven.Database.Server.HttpServer,Debug,Request #  16: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=Raven/Hilo/UserAccounts/&noCache=-735145767,
+2012-05-16 13:54:32.6289,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was found,
+2012-05-16 13:54:34.2998,Raven.Database.Server.HttpServer,Debug,Request #  17: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=1168752850,
+2012-05-16 13:54:34.3984,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:34.3984,Raven.Database.Server.HttpServer,Debug,Request #  18: GET     -     0 ms - <default>  - 200 - /docs/UserAccounts/1?noCache=955527387,
+2012-05-16 13:54:34.4218,Raven.Database.Server.HttpServer,Debug,Request #  19: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts/1/&noCache=-1510444799,
+2012-05-16 13:54:34.6347,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:39.7177,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:44.7656,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:49.8105,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:54.9121,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:54:59.9550,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:05.0507,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:10.0986,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:15.1923,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:20.2763,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:24.5361,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-05-16 13:55:24.5361,Raven.Database.Server.HttpServer,Debug,Request #  20: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations,
+2012-05-16 13:55:25.3457,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:30.4277,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:35.5351,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:40.6445,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:44.7363,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:m@m.com,
+2012-05-16 13:55:44.7500,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts/1' was found,
+2012-05-16 13:55:44.7675,Raven.Database.Server.HttpServer,Debug,Request #  21: GET     -    50 ms - <default>  - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Am%2540m.com&start=0&pageSize=1&aggregation=None,
+2012-05-16 13:55:44.7675,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:m@m.com
+	Time: 35 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 1 returned out of 1 total.
+",
+2012-05-16 13:55:45.7861,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:50.9726,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:55:56.1445,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:56:01.3623,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:56:06.5507,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:56:11.7236,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,
+2012-05-16 13:56:16.8154,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was found,

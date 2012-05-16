@@ -79,9 +79,6 @@
     <Reference Include="Raven.Client.Lightweight">
       <HintPath>..\packages\RavenDB.1.0.888\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight.FSharp">
-      <HintPath>..\packages\RavenDB.1.0.888\lib\net40\Raven.Client.Lightweight.FSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Raven.Client.MvcIntegration">
       <HintPath>..\packages\RavenDB.1.0.888\lib\net40\Raven.Client.MvcIntegration.dll</HintPath>
     </Reference>
@@ -134,13 +131,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FubuMVC.cs" />
+    <Compile Include="Endpoints\Account\AccountEndpoint.cs" />
+    <Compile Include="Endpoints\Account\Models\CreateAccountCommand.cs" />
+    <Compile Include="Endpoints\Account\Models\CreateAccountViewModel.cs" />
+    <Compile Include="Endpoints\Account\Models\NewAccountInputModel.cs" />
     <Compile Include="Endpoints\Home\HomeEndpoint.cs" />
     <Compile Include="Endpoints\Home\Models\HomeInputModel.cs" />
     <Compile Include="Endpoints\Home\Models\HomeViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HitThatLineRegistry.cs" />
+    <Compile Include="Infrastructure\Behaviors\RavenBehavior.cs" />
+    <Compile Include="Infrastructure\Conventions\RouteConventions.cs" />
+    <Compile Include="Infrastructure\HitThatLineRegistry.cs" />
+    <Compile Include="Infrastructure\Conventions\Html\InputConventions.cs" />
+    <Compile Include="Infrastructure\RavenDBRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +163,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Shared\Application.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Account\Views\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HitThatLine.Core\HitThatLine.Core.csproj">
+      <Project>{1C489335-8FB6-4BDA-9E4C-559072202DBF}</Project>
+      <Name>HitThatLine.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

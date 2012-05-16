@@ -1,2 +1,5 @@
-﻿@model HitThatLine.Endpoints.Home.Models.HomeViewModel
-<h1>@Model.Message</h1>
+﻿@using HitThatLine.Endpoints.Account.Models
+@model HitThatLine.Endpoints.Home.Models.HomeViewModel
+<h1>
+    @(this.LinkTo<NewAccountInputModel>().Text("Create Account"))
+</h1>

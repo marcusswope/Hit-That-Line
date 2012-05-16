@@ -1,7 +1,9 @@
 using Bottles;
 using FubuMVC.Core;
 using FubuMVC.StructureMap;
+using HitThatLine.Infrastructure;
 using StructureMap;
+using System.Collections.Generic;
 
 namespace HitThatLine.App_Start
 {
@@ -18,8 +20,14 @@ namespace HitThatLine.App_Start
         }
 
 
-        private static void SetupContainer(ConfigurationExpression x)
+        private static void SetupContainer(ConfigurationExpression map)
         {
+            map.Scan(x =>
+                         {
+                             x.TheCallingAssembly();
+                             PackageRegistry.PackageAssemblies.Each(x.Assembly);
+                             x.LookForRegistries();
+                         });
         }
     }
 }

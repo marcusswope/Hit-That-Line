@@ -1,0 +1,12 @@
+﻿@using HitThatLine.Endpoints.Account
+@model HitThatLine.Endpoints.Account.Models.CreateAccountViewModel
+<h1>
+    Create New Account
+</h1>
+@(this.FormFor<AccountEndpoint>(x => x.Create(null)))
+@this.LabelFor(x => x.EmailAddress)
+@this.InputFor(x => x.EmailAddress)
+<br/>
+@this.LabelFor(x => x.Password)
+@this.InputFor(x => x.Password)
+<button type="submit">Submit</button>
