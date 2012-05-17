@@ -24,7 +24,7 @@ namespace HitThatLine.Endpoints.Discussion
 
         public DiscussionThreadViewModel discussion_view_Id(DiscussionThreadListViewModel input)
         {
-            var thread = _session.Get<DiscussionThread>(input.Id);
+            var thread = _session.Load<DiscussionThread>(input.Id);
             return new DiscussionThreadViewModel(thread);
         }
 

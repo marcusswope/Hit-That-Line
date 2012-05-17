@@ -1,9 +1,8 @@
 ﻿@using HitThatLine.Endpoints.Discussion
 @using HitThatLine.Endpoints.Discussion.Models
 @model HitThatLine.Endpoints.Discussion.Models.DiscussionListSummaryViewModel
-
 @(this.LinkTo<NewThreadViewModel>().Text("Create New"))
-@foreach(var thread in Model.Threads)
+@foreach (var thread in Model.Threads)
 {
     @(this.LinkTo(thread).Text(thread.Title))
 }
