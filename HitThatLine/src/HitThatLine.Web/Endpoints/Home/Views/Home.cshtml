@@ -1,0 +1,7 @@
+﻿@using HitThatLine.Web.Endpoints.Account.Models
+@using HitThatLine.Web.Endpoints.Discussion.Models
+@model HitThatLine.Web.Endpoints.Home.Models.HomeViewModel
+<h1>
+    @(this.LinkTo<NewAccountInputModel>().Text("Create Account"))
+    @(this.LinkTo<DiscussionHomeInputModel>().Text("Threads"))
+</h1>

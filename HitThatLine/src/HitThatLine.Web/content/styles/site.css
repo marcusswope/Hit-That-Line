@@ -1,0 +1,25 @@
+﻿html
+{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body
+{
+    background-color: #EAE9E6;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+#htl-head
+{
+    height: 70px;
+}
+#htl-border
+{
+    height: 20px;
+}

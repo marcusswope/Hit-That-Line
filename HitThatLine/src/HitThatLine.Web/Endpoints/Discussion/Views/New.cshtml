@@ -1,0 +1,24 @@
+﻿@using HitThatLine.Web.Endpoints.Discussion
+@model HitThatLine.Web.Endpoints.Discussion.Models.CreateThreadViewModel
+@{this.Asset("markdownConverter");}
+@{this.Asset("markdownEditor");}
+@{this.Asset("markdownSanitizer");}
+@{this.Asset("markdownStyles");}
+
+@(this.FormFor<DiscussionEndpoint>(x => x.Create(null)))
+@this.LabelFor(x => x.Title)
+@this.InputFor(x => x.Title)
+<br />
+@this.LabelFor(x => x.Body)
+<div id="wmd-button-bar">
+</div>
+@this.InputFor(x => x.Body).Id("wmd-input").AddClass("wmd-input")
+<div id="wmd-preview">
+</div>
+<input type="submit"/>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        new Markdown.Editor(Markdown.getSanitizingConverter()).run();
+    });
+</script>
