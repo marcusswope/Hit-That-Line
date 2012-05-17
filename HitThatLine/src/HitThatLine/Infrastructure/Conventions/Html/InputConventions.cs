@@ -1,5 +1,6 @@
 using FubuMVC.Core.UI;
 using FubuCore;
+using HtmlTags;
 
 namespace HitThatLine.Infrastructure.Conventions.Html
 {
@@ -14,6 +15,10 @@ namespace HitThatLine.Infrastructure.Conventions.Html
             Editors
                 .If(x => x.Accessor.FieldName.Contains("Email") && x.Accessor.PropertyType.IsString())
                 .Attr("type", "email");
+
+            Editors
+                .If(x => x.Accessor.FieldName.Contains("Body") && x.Accessor.PropertyType.IsString())
+                .Modify(x => x.TagName("textarea"));
         }
     }
 }

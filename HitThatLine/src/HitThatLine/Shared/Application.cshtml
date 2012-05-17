@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Hit That Line</title>
-    @{this.Css("Site.css");}
+    @{this.Asset("styles");}
+    @{this.Asset("jquery");}
     @this.WriteCssTags()
+    @this.WriteScriptTags()
 </head>
     <body>
         <div id="htl-head">

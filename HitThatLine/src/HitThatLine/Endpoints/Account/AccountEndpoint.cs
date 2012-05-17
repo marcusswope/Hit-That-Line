@@ -1,6 +1,5 @@
 ﻿using HitThatLine.Core.Accounts;
 using HitThatLine.Endpoints.Account.Models;
-using HitThatLine.Endpoints.Home.Models;
 using Raven.Client;
 using System.Linq;
 

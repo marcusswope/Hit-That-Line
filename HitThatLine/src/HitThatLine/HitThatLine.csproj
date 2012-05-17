@@ -118,7 +118,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="content\styles\Site.css" />
+    <Content Include="content\scripts\jquery-1.7.2.min.js" />
+    <Content Include="content\scripts\Markdown.Converter.js" />
+    <Content Include="content\scripts\Markdown.Editor.js" />
+    <Content Include="content\scripts\Markdown.Sanitizer.js" />
+    <Content Include="content\images\wmd-buttons.png" />
+    <Content Include="content\styles\markdown.css" />
+    <Content Include="content\styles\site.css" />
     <Content Include="fubu-content\FubuMVC.GettingStarted.dll" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -135,6 +141,13 @@
     <Compile Include="Endpoints\Account\Models\CreateAccountCommand.cs" />
     <Compile Include="Endpoints\Account\Models\CreateAccountViewModel.cs" />
     <Compile Include="Endpoints\Account\Models\NewAccountInputModel.cs" />
+    <Compile Include="Endpoints\Discussion\Models\CreateThreadCommand.cs" />
+    <Compile Include="Endpoints\Discussion\Models\CreateThreadViewModel.cs" />
+    <Compile Include="Endpoints\Discussion\DiscussionEndpoint.cs" />
+    <Compile Include="Endpoints\Discussion\Models\DiscussionThreadViewModel.cs" />
+    <Compile Include="Endpoints\Discussion\Models\DiscussionListSummaryViewModel.cs" />
+    <Compile Include="Endpoints\Discussion\Models\DiscussionHomeInputModel.cs" />
+    <Compile Include="Endpoints\Discussion\Models\NewThreadViewModel.cs" />
     <Compile Include="Endpoints\Home\HomeEndpoint.cs" />
     <Compile Include="Endpoints\Home\Models\HomeInputModel.cs" />
     <Compile Include="Endpoints\Home\Models\HomeViewModel.cs" />
@@ -142,16 +155,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Behaviors\RavenBehavior.cs" />
+    <Compile Include="Infrastructure\Conventions\AssetConfiguration.cs" />
     <Compile Include="Infrastructure\Conventions\RouteConventions.cs" />
     <Compile Include="Infrastructure\HitThatLineRegistry.cs" />
     <Compile Include="Infrastructure\Conventions\Html\InputConventions.cs" />
     <Compile Include="Infrastructure\RavenDBRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="content\images\" />
-    <Folder Include="content\scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Endpoints\Home\Views\Home.cshtml" />
   </ItemGroup>
@@ -172,6 +183,15 @@
       <Project>{1C489335-8FB6-4BDA-9E4C-559072202DBF}</Project>
       <Name>HitThatLine.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Discussion\Views\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Discussion\Views\View.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Discussion\Views\New.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
