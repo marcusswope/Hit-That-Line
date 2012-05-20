@@ -1,25 +1,23 @@
-﻿html
-{
-    border: 0;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-}
-
-body
-{
+﻿html { border: 0; margin: 0; padding: 0; vertical-align: baseline; }
+body {
     background-color: #EAE9E6;
     border: 0;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
+    height: 100%;
+    font: 12px/18px Helvetica, Arial, "Liberation Sans", "Bitstream Vera Sans", sans-serif;
 }
+a { color: black; text-decoration: none }
+a:visited { color: black; }
+a:hover { text-decoration: underline; }
 
-#htl-head
-{
-    height: 70px;
-}
-#htl-border
-{
-    height: 20px;
-}
+div#container { border-radius: 0 0 10px 10px; background-color: #F5F5F5 }
+
+div#main-header { width:100%; text-align:center; }
+html.range_4 div#main-logo object { height: 60px; }
+html.range_3 div#main-logo object { height: 60px; }
+html.range_2 div#main-logo object { height: 55px; }
+html.range_1 div#main-logo object { height: 50px; }
+html.range_0 div#main-logo object { height: 45px; }
+div#main-header a { margin-top: 20px; font-size: 20px }

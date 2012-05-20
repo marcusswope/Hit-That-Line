@@ -1,45 +1,39 @@
 ﻿@using FubuMVC.Core.Assets.Files
 @using FubuMVC.Core.UI
+@using HitThatLine.Web.Endpoints.Account.Models
+@using HitThatLine.Web.Endpoints.Discussion.Models
 @using HitThatLine.Web.Utility
 <!DOCTYPE html>
 <html>
 <head>
     <title>Hit That Line</title>
-    @{this.Asset("styles");}
-    @{this.Asset("reset");}
-    @{this.Asset("text");}
-    
-    @{this.Asset("jquery");}
-    @{this.Asset("master");}
-    @{this.Asset("adapt");}
+    @{this.Asset("siteStyles");}
+    @{this.Asset("siteScripts");}
 </head>
     <body>
-        <div class="container_12" style="background-color: whitesmoke">
+        <div id="container" class="container_12" style="">
             @this.Clear(5)
-            <div style="height:15%" class="grid_6 prefix_3">
-                <object data="/HitThatLine/content/images/hitthatline.svg" type="image/svg+xml">
-                </object>
+            <div id="main-header">
+                @(this.LinkTo<DiscussionHomeInputModel>().Text("Discussion").Suffix(1))
+                @(this.LinkTo<DiscussionHomeInputModel>().Text("Chat").Suffix(1))
+                <div id="main-logo" class="grid_6">
+                    @this.SvgImage("hitthatline.svg")
+                </div>
+                @(this.LinkTo<NewAccountInputModel>().Text("Help").Grid().Suffix(1))
+                @(this.LinkTo<NewAccountInputModel>().Text("Register").Grid().Suffix(1))
+                @(this.LinkTo<NewAccountInputModel>().Text("Login").Grid().Suffix(1))
             </div>
             @this.Clear(10)
             <div id="page">
                 @RenderBody()
             </div>
         </div>
-        <script type="text/javascript">
-            var ADAPT_CONFIG = {
-                path: '@Urls.UrlForAsset(AssetFolder.styles, "960.cs").TrimEnd("960.cs".ToCharArray())',
-                dynamic: true,
-
-                range: [
-                    '0px    to 760px  = mobile.min.css',
-                    '760px  to 980px  = 720.min.css',
-                    '980px  to 1280px = 960.min.css',
-                    '1280px to 1600px = 1200.min.css',
-                    '1600px           = 1560.min.css'
-                ]
-            };
-        </script>
         @this.WriteCssTags()
         @this.WriteScriptTags()
+        <script type="text/javascript">
+            $.htl.urls({
+                stylesDir: '@Urls.UrlForAsset(AssetFolder.styles, "site.css").TrimEnd("site.css".ToCharArray())'
+            });
+        </script>
     </body>
 </html>

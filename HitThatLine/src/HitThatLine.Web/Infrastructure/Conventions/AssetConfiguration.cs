@@ -12,13 +12,12 @@ namespace HitThatLine.Web.Infrastructure.Conventions
             assets.Alias("text").Is("text.css");
           
             assets.Alias("jquery").Is("jquery-1.7.2.js");
-            assets.Alias("master").Is("master.js");
             assets.Alias("adapt").Is("adapt.min.js");
-
+            
             assets.Alias("markdownConverter").Is("Markdown.Converter.js");
             assets.Alias("markdownEditor").Is("Markdown.Editor.js");
             assets.Alias("markdownSanitizer").Is("Markdown.Sanitizer.js");
-            assets.OrderedSet("markdown").Is("markdownConverter,markdownEditor,markdownSanitizer");
+            assets.AssetSet("markdown").Includes("markdownConverter,markdownEditor,markdownSanitizer");
 
             assets.CombineAllUniqueAssetRequests();
         }

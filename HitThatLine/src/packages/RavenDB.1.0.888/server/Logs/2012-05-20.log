@@ -1,0 +1,6 @@
+time,logger,level,message,exception
+2012-05-20 14:10:46.7841,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-05-20 14:10:47.7509,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: IndexingExecuter, will wait for additional work",
+2012-05-20 16:03:15.3164,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-05-20 16:03:16.2001,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: IndexingExecuter, will wait for additional work",
+2012-05-20 16:52:13.3857,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

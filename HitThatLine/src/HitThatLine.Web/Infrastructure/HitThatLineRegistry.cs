@@ -25,8 +25,7 @@ namespace HitThatLine.Web.Infrastructure
             Views.TryToAttachWithDefaultConventions();
             
             HtmlConvention<InputConventions>();
-            
-            Assets.Configure();
+            Assets.CombineAllUniqueAssetRequests();
         }
     }
 }
