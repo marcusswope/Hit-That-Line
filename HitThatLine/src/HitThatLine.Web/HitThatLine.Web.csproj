@@ -139,7 +139,6 @@
     <Content Include="content\styles\reset.css" />
     <Content Include="content\styles\site.css" />
     <Content Include="content\styles\text.css" />
-    <Content Include="fubu-content\FubuMVC.GettingStarted.dll" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
