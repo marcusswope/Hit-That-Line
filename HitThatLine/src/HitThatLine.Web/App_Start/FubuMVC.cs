@@ -1,4 +1,5 @@
 using Bottles;
+using FubuCore.Binding;
 using FubuMVC.Core;
 using FubuMVC.StructureMap;
 using HitThatLine.Web.Infrastructure;
@@ -25,8 +26,11 @@ namespace HitThatLine.Web.App_Start
             map.Scan(x =>
                          {
                              x.TheCallingAssembly();
-                             PackageRegistry.PackageAssemblies.Each(x.Assembly);
+                             x.WithDefaultConventions();
                              x.LookForRegistries();
+                             x.AddAllTypesOf<IPropertyBinder>();
+
+                             PackageRegistry.PackageAssemblies.Each(x.Assembly);
                          });
         }
     }

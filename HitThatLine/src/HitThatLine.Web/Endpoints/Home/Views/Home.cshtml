@@ -1,7 +1,13 @@
-﻿@using HitThatLine.Web.Endpoints.Account.Models
-@using HitThatLine.Web.Endpoints.Discussion.Models
+﻿@using HitThatLine.Web.Endpoints.Discussion.Models
+@using HitThatLine.Web.Utility
 @model HitThatLine.Web.Endpoints.Home.Models.HomeViewModel
-<h1>
-    @(this.LinkTo<NewAccountInputModel>().Text("Create Account"))
-    @(this.LinkTo<DiscussionHomeInputModel>().Text("Threads"))
-</h1>
+<div id="nav-bar">
+    @this.Clear(5)
+    @(this.LinkTo<DiscussionHomeInputModel>().Text("New Thread").Grid())
+    @(this.LinkTo<DiscussionHomeInputModel>().Text("Tags").Grid())
+    @(this.LinkTo<DiscussionHomeInputModel>().Text("Search").Grid())
+    @this.Clear(5)
+</div>
+<div id="threads">
+    
+</div>

@@ -12,12 +12,14 @@ a { color: black; text-decoration: none }
 a:visited { color: black; }
 a:hover { text-decoration: underline; }
 
-div#container { border-radius: 0 0 10px 10px; background-color: #F5F5F5 }
-
-div#main-header { width:100%; text-align:center; }
-html.range_4 div#main-logo object { height: 60px; }
-html.range_3 div#main-logo object { height: 60px; }
-html.range_2 div#main-logo object { height: 55px; }
-html.range_1 div#main-logo object { height: 50px; }
-html.range_0 div#main-logo object { height: 45px; }
-div#main-header a { margin-top: 20px; font-size: 20px }
+div#nav-bar { border-radius: 5px; background-color: #f4f6f5 }
+div#nav-bar a { margin: 5px;font-size: 18px; margin-right:30px }
+div#nav-bar:first-child a { margin-left:15px }
+div#main-header { height:95px;width:100%;background-color: #f4f6f5;margin-bottom: 15px;background-image: url('../images/main-header-logo.png');background-repeat: repeat-x }
+#main-logo { height:70px; margin: 5px; float:left }
+#user-summary { height:70px; margin: 30px 30px 0 0; float: right;vertical-align: middle; font-size:20px }
+html.range_4 div#main-header object { height: 70px; }
+html.range_3 div#main-header object { height: 70px; }
+html.range_2 div#main-header object { height: 65px; }
+html.range_1 div#main-header object { height: 60px; }
+html.range_0 div#main-header object { height: 55px; }
