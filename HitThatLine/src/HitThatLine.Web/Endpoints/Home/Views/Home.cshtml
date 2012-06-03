@@ -1,7 +1,7 @@
 ﻿@using HitThatLine.Web.Endpoints.Discussion.Models
 @using HitThatLine.Web.Utility
 @model HitThatLine.Web.Endpoints.Home.Models.HomeViewModel
-<div id="nav-bar">
+<div class="section" id="nav-bar">
     @this.Clear(5)
     @(this.LinkTo<DiscussionHomeInputModel>().Text("New Thread").Grid())
     @(this.LinkTo<DiscussionHomeInputModel>().Text("Tags").Grid())

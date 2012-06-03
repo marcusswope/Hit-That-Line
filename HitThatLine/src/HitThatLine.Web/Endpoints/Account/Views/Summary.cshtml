@@ -1,9 +1,10 @@
-﻿@model HitThatLine.Web.Endpoints.Account.Models.AccountSummaryViewModel
+﻿@using HitThatLine.Web.Endpoints.Account.Models
+@model HitThatLine.Web.Endpoints.Account.Models.AccountSummaryViewModel
 @if(Model.IsLoggedIn)
 {
     <a href="#">@Model.UserName</a>
 }
 else
 {
-    <text><a href="#">Register</a> | <a href="#">Login</a></text>
+    <a href="#">Login</a> <text>|</text> @(this.LinkTo<AccountRegisterInputModel>().Text("Register"))
 }

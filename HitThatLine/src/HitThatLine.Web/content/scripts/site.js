@@ -29,3 +29,8 @@ function updateHtmlClass(i, width) {
         html.className += ' range_' + i;
     }
 }
+
+$.extend($.validator.messages, {
+    required: "required",
+    email: "email is not valid"
+});

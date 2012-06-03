@@ -48,5 +48,10 @@ namespace HitThatLine.Web.Utility
             }
             return objectTag;
         }
+
+        public static HtmlTag AutoFocus(this HtmlTag tag)
+        {
+            return tag.Attr("autofocus", "autofocus");
+        }
     }
 }

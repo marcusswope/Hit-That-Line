@@ -3,6 +3,7 @@ using FubuMVC.Razor;
 using HitThatLine.Web.Infrastructure.Behaviors;
 using HitThatLine.Web.Infrastructure.Conventions;
 using HitThatLine.Web.Infrastructure.Conventions.Html;
+using HitThatLine.Web.Infrastructure.Conventions.Validation;
 
 namespace HitThatLine.Web.Infrastructure
 {
@@ -12,20 +13,29 @@ namespace HitThatLine.Web.Infrastructure
         {
             IncludeDiagnostics(true);
 
-            Applies.ToThisAssembly();
+            Applies
+                .ToThisAssembly();
 
-            Policies.WrapBehaviorChainsWith<RavenBehavior>();
+            Policies
+                .WrapBehaviorChainsWith<RavenBehavior>();
 
-            Actions.IncludeTypesNamed(x => x.EndsWith("Endpoint"));
+            Actions
+                .IncludeTypesNamed(x => x.EndsWith("Endpoint"));
 
-            Routes.Configure();
+            Routes
+                .Configure();
             
             Import<RazorEngineRegistry>();
             
-            Views.TryToAttachWithDefaultConventions();
+            Views
+                .TryToAttachWithDefaultConventions();
             
+            Assets
+                .CombineAllUniqueAssetRequests();
+
             HtmlConvention<InputConventions>();
-            Assets.CombineAllUniqueAssetRequests();
+            HtmlConvention<LabelConventions>();
+            ApplyConvention<ValidationConvention>();
         }
     }
 }
