@@ -26,45 +26,37 @@ namespace HitThatLine.Web.Infrastructure.Conventions.Validation
                 {
                     AddRule(new PropertyRequiredRule(propertyChain));
                 }
-
                 if (property.HasAttribute<MinLengthAttribute>())
                 {
                     AddRule(new MinimumLengthRequiredRule(propertyChain, property.GetAttribute<MinLengthAttribute>().Length));
                 }
-
                 if (property.HasAttribute<MaxLengthAttribute>())
                 {
                     AddRule(new MaximumLengthRequiredRule(propertyChain, property.GetAttribute<MaxLengthAttribute>().Length));
                 }
-
                 if (property.PropertyType.IsTypeOrNullableOf<DateTime>())
                 {
                     AddRule(new DateAfterTodayRule(propertyChain));
                 }
-
                 if (property.Name.Contains("Email") && property.PropertyType == typeof(string))
                 {
                     AddRule(new EmailAddressRule(propertyChain));
                 }
-
                 if ((property.Name.Contains("Zip") && property.PropertyType == typeof(string)))
                 {
                     AddRule(new MinimumLengthRequiredRule(propertyChain, 5));
                     AddRule(new MaximumLengthRequiredRule(propertyChain, 9));
                 }
-
                 if ((property.Name.Contains("Phone") && property.PropertyType == typeof(string)))
                 {
                     AddRule(new MinimumLengthRequiredRule(propertyChain, 10));
                     AddRule(new MaximumLengthRequiredRule(propertyChain, 10));
                 }
-
                 if ((property.Name.Contains("SocialSecurity") && property.PropertyType == typeof(string)))
                 {
                     AddRule(new MinimumLengthRequiredRule(propertyChain, 9));
                     AddRule(new MaximumLengthRequiredRule(propertyChain, 9));
                 }
-
                 if (property.PropertyType.IsClass && property.PropertyType.Assembly == typeof(T).Assembly)
                 {
                     var allProps = new List<PropertyInfo>(precedingProperties);

@@ -1,12 +1,12 @@
 ﻿@using HitThatLine.Web.Endpoints.Account.Models
 @using HitThatLine.Web.Utility
-@model HitThatLine.Web.Endpoints.Account.Models.AccountRegisterViewModel
+@model HitThatLine.Web.Endpoints.Account.Models.RegisterViewModel
 @{ this.Script("accountRegistrationJs"); }
 <div class="section-title">
     Account Registration
 </div>
 <div class="section grid_12">
-    @(this.FormFor<AccountRegisterViewModel>().Id("registrationForm"))
+    @(this.FormFor<RegisterViewModel>().Id("registrationForm"))
     @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
     @this.Clear()
     @this.InputFor(x => x.Username).Grid(3)

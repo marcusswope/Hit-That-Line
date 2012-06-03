@@ -19,12 +19,11 @@ namespace HitThatLine.Web.Infrastructure.Conventions.Validation
             _length = length;
         }
 
-
         public IEnumerable<ValidationFailure> Validate(ValidationContext context)
         {
             var rawValue = _propertyChain.GetValue(context.InstanceToValidate);
-            var validationFailure = new ValidationFailure(_propertyChain.Name, string.Format("{0} must be less than {1} characters", context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString(), _length));
-            if (rawValue != null && rawValue.ToString().Length > _length)
+            var validationFailure = new ValidationFailure(_propertyChain.Name, string.Format("{0} must be at least {1} characters", context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString(), _length));
+            if (rawValue != null && rawValue.ToString().Length < _length)
             {
                 yield return validationFailure;
             }

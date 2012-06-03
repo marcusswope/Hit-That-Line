@@ -53,10 +53,15 @@ namespace HitThatLine.Web.Infrastructure.Conventions.Html
                             {
                                 var result = request.Get<IFubuRequest>().Get<ValidationResult>();
                                 if (result == null || result.IsValid) return;
-                                var errorLabels = result.Errors
-                                    .Where(x => x.PropertyName == request.Accessor.InnerProperty.Name)
-                                    .Select(x => new HtmlTag("label", t => t.Text(x.ErrorMessage).AddClass("error")));
-                                tag.Next = errorLabels.FirstOrDefault();
+                                var error = result.Errors.FirstOrDefault(x => x.PropertyName == request.Accessor.InnerProperty.Name);
+                                if (error == null) return;
+
+                                var errorLabel = new HtmlTag("label");
+                                errorLabel.Text(error.ErrorMessage);
+                                errorLabel.AddClass("error");
+                                errorLabel.Attr("for", request.Accessor.InnerProperty.Name);
+                                errorLabel.Attr("generated", "true");
+                                tag.Next = errorLabel;
                             });
                 
         }

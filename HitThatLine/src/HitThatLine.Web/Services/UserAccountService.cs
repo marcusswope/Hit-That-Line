@@ -1,4 +1,5 @@
 ﻿using HitThatLine.Core.Accounts;
+using HitThatLine.Web.Endpoints.Account.Models;
 using HitThatLine.Web.Utility;
 using Raven.Client;
 
@@ -7,6 +8,9 @@ namespace HitThatLine.Web.Services
     public interface IUserAccountService
     {
         UserAccount GetLoggedOnUser();
+        void Login(UserAccount userAccount);
+        void CreateNew(RegisterViewModel model);
+        void Logout(UserAccount userAccount);
     }
 
     public class UserAccountService : IUserAccountService
@@ -26,6 +30,28 @@ namespace HitThatLine.Web.Services
             if (userId == null) return null;
 
             return _session.Load<UserAccount>(userId);
+        }
+
+        public void Login(UserAccount userAccount)
+        {
+            _cookieStorage.Set(AppSettings.LoginCookieName, userAccount.Id);
+        }
+
+        public void CreateNew(RegisterViewModel model)
+        {
+            var account = new UserAccount
+                              {
+                                  EmailAddress = model.EmailAddress,
+                                  Password = model.Password,
+                                  Username = model.Username
+                              };
+            _session.Store(account);
+            _cookieStorage.Set(AppSettings.LoginCookieName, account.Id);
+        }
+
+        public void Logout(UserAccount userAccount)
+        {
+            _cookieStorage.Remove(AppSettings.LoginCookieName);
         }
     }
 }
