@@ -6,7 +6,7 @@
     Login
 </div>
 <div class="section grid_12">
-    @(this.FormFor<LoginViewModel>().Id("registrationForm"))
+    @(this.FormFor<LoginCommand>().Id("registrationForm"))
     @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
     @this.Clear()
     @this.InputFor(x => x.Username).Grid(3)
@@ -16,6 +16,6 @@
     @this.InputFor(x => x.Password).Grid(3)
     @this.Clear(20)
     <div class="grid_2">
-        <input type="submit" value="Register" class="grid"/>    
+        <input type="submit" value="Login" class="grid" />
     </div>
 </div>

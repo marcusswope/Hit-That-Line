@@ -6,7 +6,7 @@
     Account Registration
 </div>
 <div class="section grid_12">
-    @(this.FormFor<RegisterViewModel>().Id("registrationForm"))
+    @(this.FormFor<RegisterCommand>().Id("registrationForm"))
     @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
     @this.Clear()
     @this.InputFor(x => x.Username).Grid(3)

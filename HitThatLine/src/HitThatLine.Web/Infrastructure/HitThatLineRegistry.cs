@@ -11,8 +11,9 @@ namespace HitThatLine.Web.Infrastructure
     {
         public HitThatLineRegistry()
         {
+#if DEBUG
             IncludeDiagnostics(true);
-
+#endif
             Applies
                 .ToThisAssembly();
 

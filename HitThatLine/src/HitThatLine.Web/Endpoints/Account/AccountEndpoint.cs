@@ -1,12 +1,9 @@
-﻿using FluentValidation.Results;
-using FubuMVC.Core;
-using FubuMVC.Core.Continuations;
+﻿using FubuMVC.Core.Continuations;
 using HitThatLine.Core.Accounts;
 using HitThatLine.Web.Endpoints.Account.Models;
 using FubuCore;
 using HitThatLine.Web.Endpoints.Home.Models;
 using HitThatLine.Web.Services;
-using Raven.Client;
 using System.Linq;
 
 namespace HitThatLine.Web.Endpoints.Account
@@ -14,54 +11,43 @@ namespace HitThatLine.Web.Endpoints.Account
     public class AccountEndpoint
     {
         private readonly IUserAccountService _service;
-        private readonly IDocumentSession _session;
 
-        public AccountEndpoint(IUserAccountService service, IDocumentSession session)
+        public AccountEndpoint(IUserAccountService service)
         {
             _service = service;
-            _session = session;
         }
 
-        public SummaryViewModel Summary(SummaryInputModel input)
+        public SummaryViewModel Summary(SummaryRequest request)
         {
-            var viewModel = new SummaryViewModel { IsLoggedIn = input.LoggedIn };
-            input.User.IfNotNull(x => viewModel.UserName = x.Username);
-
-            return viewModel;
+            return new SummaryViewModel(request);
         }
 
-        public RegisterViewModel Register(RegisterInputModel input)
+        public RegisterViewModel Register(RegisterRequest request)
         {
-            return new RegisterViewModel();
+            return new RegisterViewModel(request);
         }
 
-        public FubuContinuation Create(RegisterViewModel input)
+        public FubuContinuation Register(RegisterCommand command)
         {
-            _service.CreateNew(input);
+            _service.CreateNew(command);
             return FubuContinuation.RedirectTo<HomeInputModel>();
         }
 
-        public FubuContinuation Logout(LogoutInputModel input)
+        public FubuContinuation Logout(LogoutRequest request)
         {
-            _service.Logout(input.UserAccount);
+            _service.Logout(request.UserAccount);
             return FubuContinuation.RedirectTo<HomeInputModel>();
         }
 
-        public LoginViewModel Login(LoginInputModel model)
+        public LoginViewModel Login(LoginRequest model)
         {
             return new LoginViewModel(model);
         }
 
-        public FubuContinuation PerformLogin(LoginViewModel input)
+        public FubuContinuation Login(LoginCommand command)
         {
-            var userAccount = _session.Query<UserAccount>().FirstOrDefault(x => x.Username == input.Username);
-            if (userAccount != null && userAccount.Password == input.Password)
-            {
-                _service.Login(userAccount);
-                return FubuContinuation.RedirectTo<HomeInputModel>();
-            }
-
-            return FubuContinuation.TransferTo(new LoginInputModel(input));
+            _service.Login(command.UserAccount);
+            return FubuContinuation.RedirectTo<HomeInputModel>();
         }
     }
 }

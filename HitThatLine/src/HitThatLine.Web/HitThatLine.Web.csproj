@@ -168,14 +168,13 @@
   <ItemGroup>
     <Compile Include="App_Start\FubuMVC.cs" />
     <Compile Include="Endpoints\Account\AccountEndpoint.cs" />
-    <Compile Include="Endpoints\Account\Models\LoginInputModel.cs" />
-    <Compile Include="Endpoints\Account\Models\LoginViewModel.cs" />
-    <Compile Include="Endpoints\Account\Models\LogoutInputModel.cs" />
-    <Compile Include="Endpoints\Account\Models\RegisterInputModel.cs" />
-    <Compile Include="Endpoints\Account\Models\RegisterViewModel.cs" />
-    <Compile Include="Endpoints\Account\Models\SummaryInputModel.cs" />
-    <Compile Include="Endpoints\Account\Models\SummaryViewModel.cs" />
-    <Compile Include="Endpoints\Account\Validation\AccountRegisterViewModelValidator.cs" />
+    <Compile Include="Endpoints\Account\Validation\LoginCommandValidator.cs" />
+    <Compile Include="Infrastructure\IValidatedCommand.cs" />
+    <Compile Include="Endpoints\Account\Models\Login.cs" />
+    <Compile Include="Endpoints\Account\Models\Logout.cs" />
+    <Compile Include="Endpoints\Account\Models\Register.cs" />
+    <Compile Include="Endpoints\Account\Models\Summary.cs" />
+    <Compile Include="Endpoints\Account\Validation\RegisterCommandValidator.cs" />
     <Compile Include="Endpoints\Discussion\Models\CreateThreadCommand.cs" />
     <Compile Include="Endpoints\Discussion\Models\CreateThreadViewModel.cs" />
     <Compile Include="Endpoints\Discussion\DiscussionEndpoint.cs" />

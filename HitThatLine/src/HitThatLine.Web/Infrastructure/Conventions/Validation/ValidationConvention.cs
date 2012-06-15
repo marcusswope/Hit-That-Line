@@ -3,6 +3,7 @@ using System.Linq;
 using FubuMVC.Core.Registration.Nodes;
 using HitThatLine.Web.Infrastructure.Behaviors;
 using System.Collections.Generic;
+using FubuCore;
 
 namespace HitThatLine.Web.Infrastructure.Conventions.Validation
 {
@@ -11,7 +12,7 @@ namespace HitThatLine.Web.Infrastructure.Conventions.Validation
         public void Configure(BehaviorGraph graph)
         {
             graph.Actions()
-                .Where(x => x.HasInput && x.InputType().IsClass)
+                .Where(x => x.HasInput && x.InputType().CanBeCastTo<IValidatedCommand>())
                 .Each(x => x.AddBefore(new Wrapper(typeof(ValidationBehavior<>).MakeGenericType(x.InputType()))));
         }
     }

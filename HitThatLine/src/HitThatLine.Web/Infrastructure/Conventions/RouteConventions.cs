@@ -10,6 +10,7 @@ namespace HitThatLine.Web.Infrastructure.Conventions
             routes
                 .IgnoreControllerNamespaceEntirely()
                 .IgnoreClassSuffix("Endpoint")
+                .ConstrainToHttpMethod(x => x.InputType().Name.EndsWith("Request"), "GET")
                 .ConstrainToHttpMethod(x => x.InputType().Name.EndsWith("Command"), "POST")
                 .HomeIs<HomeInputModel>();
         }

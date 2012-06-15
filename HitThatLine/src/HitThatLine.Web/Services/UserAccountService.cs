@@ -9,7 +9,7 @@ namespace HitThatLine.Web.Services
     {
         UserAccount GetLoggedOnUser();
         void Login(UserAccount userAccount);
-        void CreateNew(RegisterViewModel model);
+        void CreateNew(RegisterCommand model);
         void Logout(UserAccount userAccount);
     }
 
@@ -37,7 +37,7 @@ namespace HitThatLine.Web.Services
             _cookieStorage.Set(AppSettings.LoginCookieName, userAccount.Id);
         }
 
-        public void CreateNew(RegisterViewModel model)
+        public void CreateNew(RegisterCommand model)
         {
             var account = new UserAccount
                               {

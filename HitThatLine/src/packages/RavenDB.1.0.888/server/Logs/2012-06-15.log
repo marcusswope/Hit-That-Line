@@ -1,0 +1,1479 @@
+time,logger,level,message,exception
+2012-06-15 10:10:22.5136,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-15 10:10:22.5380,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-15 10:10:24.1289,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:10:24.4433,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fDiscussionThreads%2fByScoreSortByScore:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fDiscussionThreads_2fByScoreSortByScore : AbstractViewGenerator
+{
+	public Index_Temp_2fDiscussionThreads_2fByScoreSortByScore()
+	{
+		this.ViewText = @""from doc in docs.DiscussionThreads
+select new { Score = doc.Score }
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads""
+			select new { Score = doc.Score, __document_id = doc.__document_id });
+		this.AddField(""Score"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Score"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Score"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fDiscussionThreads_2fByScoreSortByScore : AbstractViewGenerator
+{
+	public Index_Temp_2fDiscussionThreads_2fByScoreSortByScore()
+	{
+		this.ViewText = @""from doc in docs.DiscussionThreads
+select new { Score = doc.Score }
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads""
+			select new { Score = doc.Score, __document_id = doc.__document_id });
+		this.AddField(""Score"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Score"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Score"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:10:24.6074,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByEmailAddress:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:10:24.7324,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:10:24.7509,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-06-15 10:10:24.7753,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-15 10:10:24.8251,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Temp/DiscussionThreads/ByScoreSortByScore,
+2012-06-15 10:10:24.8808,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/DiscussionThreads/ByScoreSortByScore,
+2012-06-15 10:10:24.8808,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:10:24.8808,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:10:24.8808,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Temp/UserAccounts/ByUsername,
+2012-06-15 10:10:24.8808,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByUsername,
+2012-06-15 10:10:24.9414,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-15 10:10:25.0361,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/DiscussionThreads/ByScoreSortByScore,
+2012-06-15 10:10:25.0458,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: DELETE INDEX Temp/DiscussionThreads/ByScoreSortByScore,
+2012-06-15 10:10:25.0458,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:10:25.0458,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: DELETE INDEX Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:10:25.0458,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByUsername,
+2012-06-15 10:10:25.0742,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: DELETE INDEX Temp/UserAccounts/ByUsername,
+2012-06-15 10:10:25.0917,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:10:25.1074,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:11:03.2714,Raven.Database.Server.HttpServer,Debug,Request #   1: GET     -   238 ms - <default>  - 200 - /docs?pageSize=0&noCache=-1090333491,
+2012-06-15 10:11:03.3398,Raven.Database.Server.HttpServer,Debug,Request #   2: GET     -    34 ms - <default>  - 200 - /license/status?noCache=242111325,
+2012-06-15 10:11:03.4433,Raven.Database.Server.HttpServer,Debug,Request #   3: GET     -   101 ms - <default>  - 200 - /stats?noCache=541170196,
+2012-06-15 10:11:03.4804,Raven.Database.Server.HttpServer,Debug,Request #   4: GET     -    36 ms - <default>  - 200 - /docs/?start=0&pageSize=15&noCache=-481101416,
+2012-06-15 10:11:03.4980,Raven.Database.Server.HttpServer,Debug,Request #   5: GET     -     6 ms - <default>  - 200 - /build/version?noCache=1410906515,
+2012-06-15 10:11:09.4511,Raven.Database.Server.HttpServer,Debug,Request #   6: GET     -    29 ms - <default>  - 200 - /stats?noCache=-2103469224,
+2012-06-15 10:11:15.5009,Raven.Database.Server.HttpServer,Debug,Request #   7: GET     -    41 ms - <default>  - 200 - /stats?noCache=-1760534640,
+2012-06-15 10:11:24.1972,Raven.Database.Server.HttpServer,Debug,Request #   8: GET     -    27 ms - <default>  - 200 - /docs/?start=0&pageSize=16&noCache=620180851,
+2012-06-15 10:11:34.7246,Raven.Database.Server.HttpServer,Debug,Request #   9: GET     -    30 ms - <default>  - 200 - /docs/?start=0&pageSize=16&noCache=426944410,
+2012-06-15 10:11:46.8583,Raven.Database.Server.HttpServer,Debug,Request #  10: GET     -    28 ms - <default>  - 200 - /stats?noCache=1536782645,
+2012-06-15 10:11:57.4042,Raven.Database.Server.HttpServer,Debug,Request #  11: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=-2102351168,
+2012-06-15 10:11:58.2343,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-65' was found,
+2012-06-15 10:11:58.2343,Raven.Database.Server.HttpServer,Debug,Request #  12: GET     -    11 ms - <default>  - 200 - /docs/UserAccounts-65?noCache=1873507364,
+2012-06-15 10:11:58.3066,Raven.Database.Server.HttpServer,Debug,Request #  13: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts-65-&noCache=-29243414,
+2012-06-15 10:11:59.2910,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-65' was found,
+2012-06-15 10:12:05.2548,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-65 and etag ,
+2012-06-15 10:12:05.2724,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-65' was deleted,
+2012-06-15 10:12:05.3173,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: DEL UserAccounts-65,
+2012-06-15 10:12:05.3173,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0723832,
+2012-06-15 10:12:05.3242,Raven.Database.Server.HttpServer,Debug,Request #  14: POST    -   116 ms - <default>  - 200 - /bulk_docs,
+2012-06-15 10:12:05.3242,Raven.Database.Server.HttpServer,Debug,"	DELETE UserAccounts-65
+",
+2012-06-15 10:12:05.3408,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:12:05.3583,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: UserAccounts-65",
+2012-06-15 10:12:05.3955,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-65' was not found,
+2012-06-15 10:12:05.4375,Raven.Database.Server.HttpServer,Debug,Request #  15: GET     -    26 ms - <default>  - 200 - /docs/?start=0&pageSize=16&noCache=1389506478,
+2012-06-15 10:12:05.5048,Raven.Database.Server.HttpServer,Debug,Request #  16: GET     -    62 ms - <default>  - 200 - /stats?noCache=-589488009,
+2012-06-15 10:12:05.5214,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (UserAccounts-65) from Raven/DocumentsByEntityName,
+2012-06-15 10:12:05.5732,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 5 because: WORK BY IndexingExecuter,
+2012-06-15 10:12:05.5732,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:12:05.5732,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:12:15.4628,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-33 and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-33' was deleted,
+2012-06-15 10:12:15.4648,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-33 and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-33' was deleted,
+2012-06-15 10:12:15.4648,Raven.Database.DocumentDatabase,Debug,Delete a document with key: Raven/Hilo/DiscussionThreads and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/DiscussionThreads' was deleted,
+2012-06-15 10:12:15.4648,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts/1 and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was deleted,
+2012-06-15 10:12:15.4648,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-97 and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-97' was deleted,
+2012-06-15 10:12:15.4648,Raven.Database.DocumentDatabase,Debug,Delete a document with key: Raven/Hilo/UserAccounts and etag ,
+2012-06-15 10:12:15.4648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was deleted,
+2012-06-15 10:12:15.4814,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 6 because: DEL UserAccounts-33, DEL DiscussionThreads-33, DEL Raven/Hilo/DiscussionThreads, DEL UserAccounts/1, DEL UserAccounts-97, DEL Raven/Hilo/UserAccounts",
+2012-06-15 10:12:15.4814,Raven.Database.DocumentDatabase,Debug,Successfully executed 6 commands in 00:00:00.0191003,
+2012-06-15 10:12:15.4814,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: UserAccounts-33, DiscussionThreads-33, Raven/Hilo/DiscussionThreads, UserAccounts/1, UserAccounts-97, Raven/Hilo/UserAccounts",
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-33' was not found,
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-33' was not found,
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/DiscussionThreads' was not found,
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts/1' was not found,
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-97' was not found,
+2012-06-15 10:12:15.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was not found,
+2012-06-15 10:12:15.4814,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:12:15.4814,Raven.Database.Indexing.Index.Indexing,Debug,"Deleting (UserAccounts-33, DiscussionThreads-33, Raven/Hilo/DiscussionThreads, UserAccounts/1, UserAccounts-97, Raven/Hilo/UserAccounts) from Raven/DocumentsByEntityName",
+2012-06-15 10:12:15.4814,Raven.Database.Server.HttpServer,Debug,Request #  17: POST    -    20 ms - <default>  - 200 - /bulk_docs,
+2012-06-15 10:12:15.4951,Raven.Database.Server.HttpServer,Debug,"	DELETE UserAccounts-33
+	DELETE DiscussionThreads-33
+	DELETE Raven/Hilo/DiscussionThreads
+	DELETE UserAccounts/1
+	DELETE UserAccounts-97
+	DELETE Raven/Hilo/UserAccounts
+",
+2012-06-15 10:12:15.5273,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 7 because: WORK BY IndexingExecuter,
+2012-06-15 10:12:15.5273,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:12:15.5273,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:12:22.7656,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-15 10:12:22.8710,Raven.Database.Server.HttpServer,Debug,Request #  18: GET     -   134 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:22.8710,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 119 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.8710,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-15 10:12:22.8710,Raven.Database.Server.HttpServer,Debug,Request #  19: GET     -     4 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:22.8710,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 119 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.8886,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 4 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9013,Raven.Database.Server.HttpServer,Debug,Request #  20: POST    -   193 ms - <default>  - 200 - /multi_get/,
+2012-06-15 10:12:22.9013,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 119 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9013,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 4 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9628,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-15 10:12:22.9638,Raven.Database.Server.HttpServer,Debug,Request #  21: GET     -     1 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:22.9638,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9638,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-15 10:12:22.9638,Raven.Database.Server.HttpServer,Debug,Request #  22: GET     -     1 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:22.9638,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9638,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9824,Raven.Database.Server.HttpServer,Debug,Request #  23: POST    -    20 ms - <default>  - 200 - /multi_get/,
+2012-06-15 10:12:22.9824,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:22.9824,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:23.5937,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-15 10:12:23.5937,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:24.6103,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-15 10:12:24.6103,Raven.Database.Server.HttpServer,Debug,Request #  24: GET     -     2 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:24.6103,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:24.6103,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-15 10:12:24.6201,Raven.Database.Server.HttpServer,Debug,Request #  25: GET     -     1 ms - <default>  - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:12:24.6201,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:24.6201,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:24.6201,Raven.Database.Server.HttpServer,Debug,Request #  26: POST    -    22 ms - <default>  - 200 - /multi_get/,
+2012-06-15 10:12:24.6201,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:24.6396,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:12:26.4843,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-15 10:12:26.5126,Raven.Database.Server.HttpServer,Debug,Request #  27: DELETE  -    41 ms - <default>  - 200 - /bulk_docs/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=128&aggregation=None&allowStale=True,
+2012-06-15 10:12:31.9345,Raven.Database.Indexing.IndexStorage,Info,Deleting index Raven/DocumentsByEntityName,
+2012-06-15 10:12:31.9677,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 8 because: DELETE INDEX Raven/DocumentsByEntityName,
+2012-06-15 10:12:31.9677,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:12:31.9677,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:12:31.9677,Raven.Database.Server.HttpServer,Debug,Request #  28: DELETE  -    44 ms - <default>  - 204 - /indexes/Raven/DocumentsByEntityName,
+2012-06-15 10:12:43.2314,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Index 'Raven/DocumentsByEntityName' does not exist
+   at Raven.Database.Indexing.IndexStorage.GetIndexByName(String indexName) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 407
+   at Raven.Database.Indexing.IndexStorage.GetCurrentIndexSearcher(String indexName, IndexSearcher& searcher) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 398
+   at Raven.Database.Queries.TermsQueryRunner.GetTerms(String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunner.cs:line 30
+   at Raven.Database.Queries.TermsQueryRunnerExtensions.ExecuteGetTermsQuery(DocumentDatabase self, String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunnerExtensions.cs:line 15
+   at Raven.Database.Server.Responders.Terms.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Terms.cs:line 38
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:12:43.2314,Raven.Database.Server.HttpServer,Debug,Request #  29: GET     -   183 ms - <default>  - 500 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=100&noCache=1547107727,
+2012-06-15 10:12:43.2744,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Could not find index named: Raven/DocumentsByEntityName
+   at Raven.Database.DocumentDatabase.<>c__DisplayClass82.<Query>b__78(IStorageActionsAccessor actions) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 771
+   at Raven.Storage.Esent.TransactionalStorage.ExecuteBatch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 376
+   at Raven.Storage.Esent.TransactionalStorage.Batch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 337
+   at Raven.Database.DocumentDatabase.Query(String index, IndexQuery query) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 766
+   at Raven.Database.Server.Responders.Index.PerformQueryAgainstExistingIndex(IHttpContext context, String index, IndexQuery indexQuery, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 200
+   at Raven.Database.Server.Responders.Index.ExecuteQuery(IHttpContext context, String index, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 165
+   at Raven.Database.Server.Responders.Index.GetIndexQueryRessult(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 118
+   at Raven.Database.Server.Responders.Index.OnGet(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 90
+   at Raven.Database.Server.Responders.Index.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 45
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:12:43.2744,Raven.Database.Server.HttpServer,Debug,Request #  30: GET     -   131 ms - <default>  - 500 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=64&aggregation=None&noCache=1818361789,
+2012-06-15 10:12:44.8740,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Could not find index named: Raven/DocumentsByEntityName
+   at Raven.Database.DocumentDatabase.<>c__DisplayClass82.<Query>b__78(IStorageActionsAccessor actions) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 771
+   at Raven.Storage.Esent.TransactionalStorage.ExecuteBatch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 376
+   at Raven.Storage.Esent.TransactionalStorage.Batch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 337
+   at Raven.Database.DocumentDatabase.Query(String index, IndexQuery query) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 766
+   at Raven.Database.Server.Responders.Index.PerformQueryAgainstExistingIndex(IHttpContext context, String index, IndexQuery indexQuery, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 200
+   at Raven.Database.Server.Responders.Index.ExecuteQuery(IHttpContext context, String index, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 165
+   at Raven.Database.Server.Responders.Index.GetIndexQueryRessult(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 118
+   at Raven.Database.Server.Responders.Index.OnGet(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 90
+   at Raven.Database.Server.Responders.Index.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 45
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:12:48.4619,Raven.Database.Server.HttpServer,Debug,Request #  31: DELETE  -     2 ms - <default>  - 404 - /bulk_docs/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=128&aggregation=None&allowStale=True,
+2012-06-15 10:12:48.9199,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Index 'Raven/DocumentsByEntityName' does not exist
+   at Raven.Database.Indexing.IndexStorage.GetIndexByName(String indexName) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 407
+   at Raven.Database.Indexing.IndexStorage.GetCurrentIndexSearcher(String indexName, IndexSearcher& searcher) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 398
+   at Raven.Database.Queries.TermsQueryRunner.GetTerms(String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunner.cs:line 30
+   at Raven.Database.Queries.TermsQueryRunnerExtensions.ExecuteGetTermsQuery(DocumentDatabase self, String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunnerExtensions.cs:line 15
+   at Raven.Database.Server.Responders.Terms.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Terms.cs:line 38
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:12:49.9287,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Could not find index named: Raven/DocumentsByEntityName
+   at Raven.Database.DocumentDatabase.<>c__DisplayClass82.<Query>b__78(IStorageActionsAccessor actions) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 771
+   at Raven.Storage.Esent.TransactionalStorage.ExecuteBatch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 376
+   at Raven.Storage.Esent.TransactionalStorage.Batch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 337
+   at Raven.Database.DocumentDatabase.Query(String index, IndexQuery query) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 766
+   at Raven.Database.Server.Responders.Index.PerformQueryAgainstExistingIndex(IHttpContext context, String index, IndexQuery indexQuery, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 200
+   at Raven.Database.Server.Responders.Index.ExecuteQuery(IHttpContext context, String index, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 165
+   at Raven.Database.Server.Responders.Index.GetIndexQueryRessult(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 118
+   at Raven.Database.Server.Responders.Index.OnGet(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 90
+   at Raven.Database.Server.Responders.Index.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 45
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:12:56.0458,Raven.Database.Server.HttpServer,Debug,Request #  32: GET     -    29 ms - <default>  - 200 - /stats?noCache=-1276144566,
+2012-06-15 10:13:02.1611,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was not found,
+2012-06-15 10:13:02.1611,Raven.Database.Server.HttpServer,Debug,Request #  33: GET     -    24 ms - <default>  - 404 - /docs/Raven/Databases/HitThatLine?noCache=1619276737,
+2012-06-15 10:13:02.3330,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Databases/HitThatLine', update: False, ",
+2012-06-15 10:13:02.3925,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 9 because: PUT Raven/Databases/HitThatLine,
+2012-06-15 10:13:02.3925,Raven.Database.DocumentDatabase,Debug,Put document Raven/Databases/HitThatLine with etag 00000000-0000-0a00-0000-000000000001,
+2012-06-15 10:13:02.3925,Raven.Database.Server.HttpServer,Debug,Request #  34: PUT     -   219 ms - <default>  - 201 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:13:02.4863,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:13:02.4863,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:13:02.4863,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:13:02.5439,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-15 10:13:02.5439,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-15 10:13:06.3779,Raven.Database.Server.HttpServer,Debug,Request #  35: GET     -    54 ms - <default>  - 200 - /stats?noCache=2132598173,
+2012-06-15 10:13:06.5683,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-15 10:13:06.5830,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:13:06.5830,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:13:06.6201,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:13:06.6201,Raven.Database.Indexing.IndexStorage,Info,Creating index Raven/DocumentsByEntityName with encoded name Raven/DocumentsByEntityName,
+2012-06-15 10:13:06.6201,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-15 10:13:06.6376,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: PUT INDEX Raven/DocumentsByEntityName,
+2012-06-15 10:13:06.6376,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:13:06.6376,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:13:06.6376,Raven.Database.Server.HttpServer,Debug,"Request #  36: GET     - 4,232 ms - HitThatLine - 200 - /silverlight/ensureStartup?noCache=1562625146",
+2012-06-15 10:13:06.6845,Raven.Database.Server.HttpServer,Debug,Request #  37: GET     -    36 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1109020711,
+2012-06-15 10:14:24.9599,Raven.Database.Server.HttpServer,Debug,Request #  38: GET     -    56 ms - <default>  - 200 - /stats?noCache=-1196250303,
+2012-06-15 10:15:22.0009,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:15:22.0009,Raven.Database.Server.HttpServer,Debug,Request #  39: GET     -    15 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:15:22.1269,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:15:22.1269,Raven.Database.Server.HttpServer,Debug,Request #  40: GET     -    20 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:15:22.2773,Raven.Database.Server.HttpServer,Debug,Request #  41: GET     -    29 ms - <default>  - 200 - /stats?noCache=618948820,
+2012-06-15 10:15:26.5351,Raven.Database.Server.HttpServer,Debug,Request #  42: GET     -   239 ms - <default>  - 200 - /docs/?start=0&pageSize=16&noCache=-583947423,
+2012-06-15 10:15:26.5351,Raven.Database.Server.HttpServer,Debug,Request #  43: GET     -   240 ms - <default>  - 200 - /docs/?start=0&pageSize=16&noCache=-1844230474,
+2012-06-15 10:17:09.2050,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:17:09.2050,Raven.Database.Server.HttpServer,Debug,Request #  44: GET     -    17 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:17:09.2968,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:17:09.2968,Raven.Database.Server.HttpServer,Debug,Request #  45: GET     -    17 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:18:15.1005,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/UserAccounts' was not found,
+2012-06-15 10:18:15.1005,Raven.Database.Server.HttpServer,Debug,Request #  46: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Hilo/UserAccounts,
+2012-06-15 10:18:15.1455,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/UserAccounts', update: False, ",
+2012-06-15 10:18:15.1455,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: PUT Raven/Hilo/UserAccounts,
+2012-06-15 10:18:15.1455,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/UserAccounts with etag 00000000-0000-0100-0000-000000000001,
+2012-06-15 10:18:15.1455,Raven.Database.Server.HttpServer,Debug,Request #  47: PUT     -    14 ms - HitThatLine - 201 - /docs/Raven/Hilo/UserAccounts,
+2012-06-15 10:18:15.1542,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:15.2392,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-15 10:18:15.3203,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'UserAccounts-1', update: False, ",
+2012-06-15 10:18:15.3203,Raven.Database.DocumentDatabase,Debug,Put document UserAccounts-1 with etag 00000000-0000-0100-0000-000000000002,
+2012-06-15 10:18:15.3349,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: PUT UserAccounts-1,
+2012-06-15 10:18:15.3349,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0151116,
+2012-06-15 10:18:15.3349,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:15.3349,Raven.Database.Server.HttpServer,Debug,Request #  48: POST    -    17 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-15 10:18:15.3349,Raven.Database.Server.HttpServer,Debug,"	PUT UserAccounts-1
+",
+2012-06-15 10:18:15.3710,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:18:15.3710,Raven.Database.Server.HttpServer,Debug,Request #  49: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-1,
+2012-06-15 10:18:15.5830,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-15 10:18:15.5927,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-0100-0000-000000000001, 6/15/2012 3:18:15 PM",
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: WORK BY IndexingExecuter,
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0100-0000-000000000001,
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0100-0000-000000000001",
+2012-06-15 10:18:15.6386,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (UserAccounts-1),
+2012-06-15 10:18:15.8818,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-1 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: useraccounts-1
+	Tag I-: UserAccounts
+	LastModified I-: 20120615151815320
+",
+2012-06-15 10:18:15.9697,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-15 10:18:15.9697,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 5 because: WORK BY IndexingExecuter,
+2012-06-15 10:18:15.9697,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:18:15.9697,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:17.5273,Raven.Database.Server.HttpServer,Debug,Request #  50: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=2086399826,
+2012-06-15 10:18:20.1074,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:18:20.1074,Raven.Database.Server.HttpServer,Debug,Request #  51: GET     -     2 ms - HitThatLine - 304 - /docs/UserAccounts-1,
+2012-06-15 10:18:36.7490,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'UserAccounts-2', update: False, ",
+2012-06-15 10:18:36.7490,Raven.Database.DocumentDatabase,Debug,Put document UserAccounts-2 with etag 00000000-0000-0100-0000-000000000003,
+2012-06-15 10:18:36.7490,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 6 because: PUT UserAccounts-2,
+2012-06-15 10:18:36.7490,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0648461,
+2012-06-15 10:18:36.7490,Raven.Database.Server.HttpServer,Debug,Request #  52: POST    -    66 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-15 10:18:36.7490,Raven.Database.Server.HttpServer,Debug,"	PUT UserAccounts-2
+",
+2012-06-15 10:18:36.7880,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:18:36.7880,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0100-0000-000000000002,
+2012-06-15 10:18:36.7880,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-15 10:18:36.7880,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0100-0000-000000000002",
+2012-06-15 10:18:36.7880,Raven.Database.Server.HttpServer,Debug,Request #  53: GET     -    23 ms - HitThatLine - 200 - /docs/UserAccounts-2,
+2012-06-15 10:18:36.7880,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (UserAccounts-2),
+2012-06-15 10:18:36.7880,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-2 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: useraccounts-2
+	Tag I-: UserAccounts
+	LastModified I-: 20120615151836749
+",
+2012-06-15 10:18:36.8232,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:36.8232,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-15 10:18:36.8232,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 7 because: WORK BY IndexingExecuter,
+2012-06-15 10:18:36.8232,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:18:36.8232,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:18:47.1630,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Index 'Raven/DocumentsByEntityName' does not exist
+   at Raven.Database.Indexing.IndexStorage.GetIndexByName(String indexName) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 407
+   at Raven.Database.Indexing.IndexStorage.GetCurrentIndexSearcher(String indexName, IndexSearcher& searcher) in c:\Builds\RavenDB-Stable\Raven.Database\Indexing\IndexStorage.cs:line 398
+   at Raven.Database.Queries.TermsQueryRunner.GetTerms(String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunner.cs:line 30
+   at Raven.Database.Queries.TermsQueryRunnerExtensions.ExecuteGetTermsQuery(DocumentDatabase self, String index, String field, String fromValue, Int32 pageSize) in c:\Builds\RavenDB-Stable\Raven.Database\Queries\TermsQueryRunnerExtensions.cs:line 15
+   at Raven.Database.Server.Responders.Terms.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Terms.cs:line 38
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:18:47.2431,Raven.Database.Server.HttpServer,Warn,Error on request,"System.InvalidOperationException: Could not find index named: Raven/DocumentsByEntityName
+   at Raven.Database.DocumentDatabase.<>c__DisplayClass82.<Query>b__78(IStorageActionsAccessor actions) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 771
+   at Raven.Storage.Esent.TransactionalStorage.ExecuteBatch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 376
+   at Raven.Storage.Esent.TransactionalStorage.Batch(Action`1 action) in c:\Builds\RavenDB-Stable\Raven.Storage.Esent\TransactionalStorage.cs:line 337
+   at Raven.Database.DocumentDatabase.Query(String index, IndexQuery query) in c:\Builds\RavenDB-Stable\Raven.Database\DocumentDatabase.cs:line 766
+   at Raven.Database.Server.Responders.Index.PerformQueryAgainstExistingIndex(IHttpContext context, String index, IndexQuery indexQuery, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 200
+   at Raven.Database.Server.Responders.Index.ExecuteQuery(IHttpContext context, String index, Guid& indexEtag) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 165
+   at Raven.Database.Server.Responders.Index.GetIndexQueryRessult(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 118
+   at Raven.Database.Server.Responders.Index.OnGet(IHttpContext context, String index) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 90
+   at Raven.Database.Server.Responders.Index.Respond(IHttpContext context) in c:\Builds\RavenDB-Stable\Raven.Database\Server\Responders\Index.cs:line 45
+   at Raven.Database.Server.HttpServer.DispatchRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 548
+   at Raven.Database.Server.HttpServer.HandleActualRequest(IHttpContext ctx) in c:\Builds\RavenDB-Stable\Raven.Database\Server\HttpServer.cs:line 315"
+2012-06-15 10:18:47.2431,Raven.Database.Server.HttpServer,Debug,Request #  54: GET     -    41 ms - <default>  - 500 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=64&aggregation=None&noCache=1803765780,
+2012-06-15 10:18:52.2060,Raven.Database.Server.HttpServer,Debug,Request #  55: GET     -     0 ms - HitThatLine - 200 - /silverlight/ensureStartup?noCache=-3720274,
+2012-06-15 10:18:52.2617,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-15 10:18:52.2617,Raven.Database.Server.HttpServer,Debug,Request #  56: GET     -     4 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None,
+2012-06-15 10:18:52.2617,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-15 10:18:52.2792,Raven.Database.Server.HttpServer,Debug,Request #  57: POST    -    11 ms - HitThatLine - 200 - /multi_get/,
+2012-06-15 10:18:52.2792,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-15 10:18:53.9179,Raven.Database.Server.HttpServer,Debug,Request #  58: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=250744884,
+2012-06-15 10:18:54.0166,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:18:54.0166,Raven.Database.Server.HttpServer,Debug,Request #  59: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-2?noCache=1989053483,
+2012-06-15 10:18:54.0419,Raven.Database.Server.HttpServer,Debug,Request #  60: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts-2-&noCache=-1310846935,
+2012-06-15 10:18:54.4951,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:18:56.6250,Raven.Database.Server.HttpServer,Debug,Request #  61: GET     -     1 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=-392386871,
+2012-06-15 10:18:56.7246,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:18:56.7246,Raven.Database.Server.HttpServer,Debug,Request #  62: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-1?noCache=1271635251,
+2012-06-15 10:18:56.7500,Raven.Database.Server.HttpServer,Debug,Request #  63: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts-1-&noCache=436405797,
+2012-06-15 10:18:57.5302,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:18:59.9130,Raven.Database.Server.HttpServer,Debug,Request #  64: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=-671267263,
+2012-06-15 10:19:00.0136,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:19:00.0136,Raven.Database.Server.HttpServer,Debug,Request #  65: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-2?noCache=-1750286969,
+2012-06-15 10:19:00.0400,Raven.Database.Server.HttpServer,Debug,Request #  66: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts-2-&noCache=1888646096,
+2012-06-15 10:19:00.5576,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:19:02.3564,Raven.Database.Server.HttpServer,Debug,Request #  67: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=2091983960,
+2012-06-15 10:19:02.4570,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:19:02.4570,Raven.Database.Server.HttpServer,Debug,Request #  68: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-1?noCache=-778505434,
+2012-06-15 10:19:02.4833,Raven.Database.Server.HttpServer,Debug,Request #  69: GET     -     0 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=UserAccounts-1-&noCache=1510504672,
+2012-06-15 10:19:02.5869,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was found,
+2012-06-15 10:19:41.8642,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:19:41.8642,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was found,
+2012-06-15 10:19:41.8642,Raven.Database.Server.HttpServer,Debug,Request #  70: GET     -    19 ms - HitThatLine - 304 - /docs/UserAccounts-2,
+2012-06-15 10:19:41.8642,Raven.Database.Server.HttpServer,Debug,Request #  71: GET     -    18 ms - HitThatLine - 304 - /docs/UserAccounts-2,
+2012-06-15 10:20:22.4628,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'UserAccounts-3', update: False, ",
+2012-06-15 10:20:22.4628,Raven.Database.DocumentDatabase,Debug,Put document UserAccounts-3 with etag 00000000-0000-0100-0000-000000000004,
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 8 because: PUT UserAccounts-3,
+2012-06-15 10:20:22.4638,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0015772,
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0100-0000-000000000003,
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-0100-0000-000000000003",
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (UserAccounts-3),
+2012-06-15 10:20:22.4638,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-3 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: useraccounts-3
+	Tag I-: UserAccounts
+	LastModified I-: 20120615152022462
+",
+2012-06-15 10:20:22.4638,Raven.Database.Server.HttpServer,Debug,Request #  72: POST    -     2 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-15 10:20:22.4638,Raven.Database.Server.HttpServer,Debug,"	PUT UserAccounts-3
+",
+2012-06-15 10:20:22.4794,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was found,
+2012-06-15 10:20:22.4794,Raven.Database.Server.HttpServer,Debug,Request #  73: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-3,
+2012-06-15 10:20:22.4794,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-15 10:20:22.7626,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 9 because: WORK BY IndexingExecuter,
+2012-06-15 10:20:22.7626,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:20:22.7626,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:20:50.5712,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:20:50.5712,Raven.Database.Server.HttpServer,Debug,Request #  74: GET     -     1 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:20:50.6865,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:20:50.6865,Raven.Database.Server.HttpServer,Debug,Request #  75: GET     -    26 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:20:51.8671,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was found,
+2012-06-15 10:20:51.8671,Raven.Database.Server.HttpServer,Debug,Request #  76: GET     -     0 ms - HitThatLine - 200 - /docs/UserAccounts-3,
+2012-06-15 10:21:03.7138,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByEmailAddress:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/UserAccounts/ByEmailAddress with encoded name Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 10 because: PUT INDEX Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 4 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 10, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:21:03.7138,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 3 documents remained",
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: Temp/UserAccounts/ByEmailAddress, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-06-15 10:21:03.7138,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: Temp/UserAccounts/ByEmailAddress. (UserAccounts-1,UserAccounts-2,UserAccounts-3)",
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:marcusswope@gmail.com,
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-1 result in index Temp/UserAccounts/ByEmailAddress gave document: 	__document_id IS: useraccounts-1
+	EmailAddress I-: marcusswope@gmail.com
+",
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-2 result in index Temp/UserAccounts/ByEmailAddress gave document: 	__document_id IS: useraccounts-2
+	EmailAddress I-: marcusswope@gmail.com
+",
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-3 result in index Temp/UserAccounts/ByEmailAddress gave document: 	__document_id IS: useraccounts-3
+	EmailAddress I-: marcusswope@gmail.com
+",
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 9 documents for Temp/UserAccounts/ByEmailAddress,
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 11 because: WORK BY IndexingExecuter,
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 11, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:21:03.7294,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 11, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:21:03.8310,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:marcusswope@gmail.com,
+2012-06-15 10:21:03.8437,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:21:03.8437,Raven.Database.Server.HttpServer,Debug,Request #  77: GET     -   163 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Amarcusswope%2540gmail.com&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:21:03.8437,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:marcusswope@gmail.com
+	Time: 161 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:21:03.8837,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/UserAccounts/ByUsername with encoded name Temp/UserAccounts/ByUsername,
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByUsername,
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 12 because: PUT INDEX Temp/UserAccounts/ByUsername,
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 12, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 4 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-15 10:21:03.8857,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 3 documents remained",
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: Temp/UserAccounts/ByUsername, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-06-15 10:21:03.8857,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: Temp/UserAccounts/ByUsername. (UserAccounts-1,UserAccounts-2,UserAccounts-3)",
+2012-06-15 10:21:03.9101,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-1 result in index Temp/UserAccounts/ByUsername gave document: 	__document_id IS: useraccounts-1
+	Username I-: test
+",
+2012-06-15 10:21:03.9101,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-2 result in index Temp/UserAccounts/ByUsername gave document: 	__document_id IS: useraccounts-2
+	Username I-: test
+",
+2012-06-15 10:21:03.9101,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on UserAccounts-3 result in index Temp/UserAccounts/ByUsername gave document: 	__document_id IS: useraccounts-3
+	Username I-: test
+",
+2012-06-15 10:21:03.9101,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 9 documents for Temp/UserAccounts/ByUsername,
+2012-06-15 10:21:03.9248,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 13 because: WORK BY IndexingExecuter,
+2012-06-15 10:21:03.9248,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 13, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:21:03.9248,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 13, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:21:03.9990,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 10:21:03.9990,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:21:03.9990,Raven.Database.Server.HttpServer,Debug,Request #  78: GET     -   117 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:21:03.9990,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 117 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:25:13.0869,Raven.Database.Server.HttpServer,Debug,Request #  79: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=-1999433153,
+2012-06-15 10:25:43.5019,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:25:43.5019,Raven.Database.Server.HttpServer,Debug,Request #  80: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:25:43.6142,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:25:43.6142,Raven.Database.Server.HttpServer,Debug,Request #  81: GET     -    23 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:25:44.9482,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:marcusswope@gmail.com,
+2012-06-15 10:25:44.9482,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:25:44.9482,Raven.Database.Server.HttpServer,Debug,Request #  82: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Amarcusswope%2540gmail.com&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:25:44.9482,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:marcusswope@gmail.com
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:25:45.0371,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 10:25:45.0371,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:25:45.0371,Raven.Database.Server.HttpServer,Debug,Request #  83: GET     -     2 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:25:45.0371,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 1 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:31:21.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:31:21.0566,Raven.Database.Server.HttpServer,Debug,Request #  84: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:31:21.1484,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:31:21.1484,Raven.Database.Server.HttpServer,Debug,Request #  85: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:31:22.4873,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:marcusswope@gmail.com,
+2012-06-15 10:31:22.4873,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:31:22.4873,Raven.Database.Server.HttpServer,Debug,Request #  86: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Amarcusswope%2540gmail.com&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:31:22.4873,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:marcusswope@gmail.com
+	Time: 4 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:31:22.5771,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 10:31:22.5771,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:31:22.5771,Raven.Database.Server.HttpServer,Debug,Request #  87: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:31:22.5771,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:32:07.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:32:07.8398,Raven.Database.Server.HttpServer,Debug,Request #  88: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:32:07.9462,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:32:07.9462,Raven.Database.Server.HttpServer,Debug,Request #  89: GET     -    17 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:32:09.2460,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByEmailAddress for: EmailAddress:marcusswope@gmail.com,
+2012-06-15 10:32:09.2460,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:32:09.2460,Raven.Database.Server.HttpServer,Debug,Request #  90: GET     -     3 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=EmailAddress%253Amarcusswope%2540gmail.com&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:32:09.2460,Raven.Database.Server.HttpServer,Debug,"	Query: EmailAddress:marcusswope@gmail.com
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByEmailAddress
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:32:09.3349,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 10:32:09.3349,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'useraccounts-1' was found,
+2012-06-15 10:32:09.3349,Raven.Database.Server.HttpServer,Debug,Request #  91: GET     -     1 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:32:09.3349,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 1 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 1 returned out of 3 total.
+",
+2012-06-15 10:32:28.0175,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-3 and etag ,
+2012-06-15 10:32:28.0175,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was deleted,
+2012-06-15 10:32:28.0175,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-2 and etag ,
+2012-06-15 10:32:28.0175,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was deleted,
+2012-06-15 10:32:28.0175,Raven.Database.DocumentDatabase,Debug,Delete a document with key: UserAccounts-1 and etag ,
+2012-06-15 10:32:28.0175,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was deleted,
+2012-06-15 10:32:28.0175,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 14 because: DEL UserAccounts-3, DEL UserAccounts-2, DEL UserAccounts-1",
+2012-06-15 10:32:28.0175,Raven.Database.DocumentDatabase,Debug,Successfully executed 3 commands in 00:00:00.0030265,
+2012-06-15 10:32:28.0175,Raven.Database.Server.HttpServer,Debug,Request #  92: POST    -     4 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-15 10:32:28.0175,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 14, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:32:28.0175,Raven.Database.Server.HttpServer,Debug,"	DELETE UserAccounts-3
+	DELETE UserAccounts-2
+	DELETE UserAccounts-1
+",
+2012-06-15 10:32:28.0263,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: UserAccounts-3, UserAccounts-2, UserAccounts-1",
+2012-06-15 10:32:28.0488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was not found,
+2012-06-15 10:32:28.0488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was not found,
+2012-06-15 10:32:28.0488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was not found,
+2012-06-15 10:32:28.0488,Raven.Database.Indexing.Index.Indexing,Debug,"Deleting (UserAccounts-3, UserAccounts-2, UserAccounts-1) from Raven/DocumentsByEntityName",
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Temp/UserAccounts/ByEmailAddress, Keys: UserAccounts-3, UserAccounts-2, UserAccounts-1",
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was not found,
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was not found,
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was not found,
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.Index.Indexing,Debug,"Deleting (UserAccounts-3, UserAccounts-2, UserAccounts-1) from Temp/UserAccounts/ByEmailAddress",
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Temp/UserAccounts/ByUsername, Keys: UserAccounts-3, UserAccounts-2, UserAccounts-1",
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-3' was not found,
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-2' was not found,
+2012-06-15 10:32:28.0800,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'UserAccounts-1' was not found,
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.Index.Indexing,Debug,"Deleting (UserAccounts-3, UserAccounts-2, UserAccounts-1) from Temp/UserAccounts/ByUsername",
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 15 because: WORK BY IndexingExecuter,
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 15, for: IndexingExecuter, will wait for additional work",
+2012-06-15 10:32:28.0800,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 15, for: ReducingExecuter, will wait for additional work",
+2012-06-15 10:35:02.3085,Raven.Database.Server.HttpServer,Debug,Request #  93: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=-1520686060,
+2012-06-15 10:35:07.4414,Raven.Database.Server.HttpServer,Debug,Request #  94: GET     -    31 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1405772161,
+2012-06-15 10:35:07.4414,Raven.Database.Server.HttpServer,Debug,Request #  95: GET     -    31 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-2087545172,
+2012-06-15 10:35:07.4638,Raven.Database.Server.HttpServer,Debug,Request #  96: GET     -    54 ms - HitThatLine - 200 - /stats?noCache=-2141027997,
+2012-06-15 10:36:28.9667,Raven.Database.Server.HttpServer,Debug,Request #  97: GET     -    26 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=327931469,
+2012-06-15 10:41:06.0654,Raven.Database.Server.HttpServer,Debug,Request #  98: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=1431559292,
+2012-06-15 10:44:30.2773,Raven.Database.Server.HttpServer,Debug,Request #  99: GET     -    29 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1046707482,
+2012-06-15 10:46:31.1220,Raven.Database.Server.HttpServer,Debug,Request # 100: GET     -    26 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-601244324,
+2012-06-15 10:49:36.7041,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:49:36.7041,Raven.Database.Server.HttpServer,Debug,Request # 101: GET     -    13 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:49:36.8037,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:49:36.8037,Raven.Database.Server.HttpServer,Debug,Request # 102: GET     -    21 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:49:48.6191,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:[[NULL_VALUE]],
+2012-06-15 10:49:48.6210,Raven.Database.Server.HttpServer,Debug,Request # 103: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:49:48.6210,Raven.Database.Server.HttpServer,Debug,"	Query: Username:[[NULL_VALUE]]
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:50:31.5097,Raven.Database.Server.HttpServer,Debug,Request # 104: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-2064918399,
+2012-06-15 10:52:32.0136,Raven.Database.Server.HttpServer,Debug,Request # 105: GET     -    27 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-291782403,
+2012-06-15 10:52:32.0292,Raven.Database.Server.HttpServer,Debug,Request # 106: GET     -    43 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1952281692,
+2012-06-15 10:53:39.7929,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 10:53:39.7929,Raven.Database.Server.HttpServer,Debug,Request # 107: GET     -     5 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 10:53:39.9003,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 10:53:39.9003,Raven.Database.Server.HttpServer,Debug,Request # 108: GET     -    24 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 10:53:44.9121,Raven.Database.Server.HttpServer,Debug,Request # 109: GET     -   288 ms - HitThatLine - 200 - /stats?noCache=1529949255,
+2012-06-15 10:54:52.6259,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:[[NULL_VALUE]],
+2012-06-15 10:54:52.6259,Raven.Database.Server.HttpServer,Debug,Request # 110: GET     -    17 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:54:52.6259,Raven.Database.Server.HttpServer,Debug,"	Query: Username:[[NULL_VALUE]]
+	Time: 16 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 10:55:23.6660,Raven.Database.Server.HttpServer,Debug,Request # 111: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=-391770254,
+2012-06-15 10:56:06.7128,Raven.Database.Server.HttpServer,Debug,Request # 112: GET     -    10 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2012-06-15 10:56:06.7138,Raven.Database.Server.HttpServer,Debug,"	Query: Username:[[NULL_VALUE]]
+	Time: 9 ms
+",
+2012-06-15 10:56:20.2128,Raven.Database.Server.HttpServer,Debug,Request # 113: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=-1375127123,
+2012-06-15 10:58:33.1035,Raven.Database.Server.HttpServer,Debug,Request # 114: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=280510789,
+2012-06-15 11:00:24.9658,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByEmailAddress,
+2012-06-15 11:00:24.9658,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 16 because: DELETE INDEX Temp/UserAccounts/ByEmailAddress,
+2012-06-15 11:00:24.9658,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 16, for: ReducingExecuter, will wait for additional work",
+2012-06-15 11:00:24.9658,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 16, for: IndexingExecuter, will wait for additional work",
+2012-06-15 11:10:34.3769,Raven.Database.Server.HttpServer,Debug,Request # 115: GET     -    66 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=2045985157,
+2012-06-15 11:12:35.5048,Raven.Database.Server.HttpServer,Debug,Request # 116: GET     -    85 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-2053622218,
+2012-06-15 11:12:35.5048,Raven.Database.Server.HttpServer,Debug,Request # 117: GET     -    86 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-1357465948,
+2012-06-15 11:12:35.5048,Raven.Database.Server.HttpServer,Debug,Request # 118: GET     -    89 ms - HitThatLine - 200 - /stats?noCache=-1612270476,
+2012-06-15 11:13:02.0117,Raven.Database.Server.HttpServer,Debug,Request # 119: GET     -    29 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-362049074,
+2012-06-15 11:13:02.0117,Raven.Database.Server.HttpServer,Debug,Request # 120: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=1754638589,
+2012-06-15 11:13:02.5107,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: IndexingExecuter, will wait for additional work",
+2012-06-15 11:13:02.5107,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2012-06-15 11:13:18.0185,Raven.Database.Server.HttpServer,Debug,Request # 121: GET     -    98 ms - HitThatLine - 200 - /stats?noCache=-987467993,
+2012-06-15 11:13:23.2607,Raven.Database.Server.HttpServer,Debug,Request # 122: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-111625930,
+2012-06-15 11:13:23.2607,Raven.Database.Server.HttpServer,Debug,Request # 123: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=-1515304892,
+2012-06-15 11:13:28.6376,Raven.Database.Server.HttpServer,Debug,Request # 124: GET     -    93 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1728900027,
+2012-06-15 11:13:28.7070,Raven.Database.Server.HttpServer,Debug,Request # 125: GET     -   162 ms - HitThatLine - 200 - /stats?noCache=-835026296,
+2012-06-15 11:13:44.5351,Raven.Database.Server.HttpServer,Debug,Request # 126: GET     -    53 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1937389779,
+2012-06-15 11:13:44.5429,Raven.Database.Server.HttpServer,Debug,Request # 127: GET     -    61 ms - HitThatLine - 200 - /stats?noCache=399827274,
+2012-06-15 11:13:47.6933,Raven.Database.Server.HttpServer,Debug,Request # 128: GET     -    39 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-945913999,
+2012-06-15 11:13:58.3085,Raven.Database.Server.HttpServer,Debug,Request # 129: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1249123910,
+2012-06-15 11:14:00.4482,Raven.Database.Server.HttpServer,Debug,Request # 130: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=1354648779,
+2012-06-15 11:14:11.1484,Raven.Database.Server.HttpServer,Debug,Request # 131: GET     -   104 ms - HitThatLine - 200 - /stats?noCache=385100991,
+2012-06-15 11:14:16.3896,Raven.Database.Server.HttpServer,Debug,Request # 132: GET     -    32 ms - HitThatLine - 200 - /stats?noCache=-114669285,
+2012-06-15 11:14:21.7207,Raven.Database.Server.HttpServer,Debug,Request # 133: GET     -    51 ms - HitThatLine - 200 - /stats?noCache=-2057154833,
+2012-06-15 11:14:27.0449,Raven.Database.Server.HttpServer,Debug,Request # 134: GET     -    63 ms - HitThatLine - 200 - /stats?noCache=-1580273621,
+2012-06-15 11:14:32.3691,Raven.Database.Server.HttpServer,Debug,Request # 135: GET     -    74 ms - HitThatLine - 200 - /stats?noCache=-1440717326,
+2012-06-15 11:14:37.6582,Raven.Database.Server.HttpServer,Debug,Request # 136: GET     -    51 ms - HitThatLine - 200 - /stats?noCache=325618111,
+2012-06-15 11:14:42.9609,Raven.Database.Server.HttpServer,Debug,Request # 137: GET     -    41 ms - HitThatLine - 200 - /stats?noCache=-1608226156,
+2012-06-15 11:14:48.2675,Raven.Database.Server.HttpServer,Debug,Request # 138: GET     -    36 ms - HitThatLine - 200 - /stats?noCache=1715543819,
+2012-06-15 11:14:58.9082,Raven.Database.Server.HttpServer,Debug,Request # 139: GET     -    51 ms - HitThatLine - 200 - /stats?noCache=368994000,
+2012-06-15 11:15:09.9179,Raven.Database.Server.HttpServer,Debug,Request # 140: GET     -   436 ms - HitThatLine - 200 - /stats?noCache=-306332373,
+2012-06-15 11:15:15.9218,Raven.Database.Server.HttpServer,Debug,Request # 141: GET     -    64 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=53661944,
+2012-06-15 11:15:16.0927,Raven.Database.Server.HttpServer,Debug,Request # 142: GET     -   235 ms - HitThatLine - 200 - /stats?noCache=797697731,
+2012-06-15 11:15:19.0800,Raven.Database.Server.HttpServer,Debug,Request # 143: GET     -    35 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1928097482,
+2012-06-15 11:15:21.2626,Raven.Database.Server.HttpServer,Debug,Request # 144: GET     -    92 ms - HitThatLine - 200 - /stats?noCache=-1641490489,
+2012-06-15 11:15:24.3945,Raven.Database.Server.HttpServer,Debug,Request # 145: GET     -    37 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1489310321,
+2012-06-15 11:15:26.6035,Raven.Database.Server.HttpServer,Debug,Request # 146: GET     -   120 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-319406170,
+2012-06-15 11:15:26.8154,Raven.Database.Server.HttpServer,Debug,Request # 147: GET     -   332 ms - HitThatLine - 200 - /stats?noCache=1807802074,
+2012-06-15 11:15:29.7128,Raven.Database.Server.HttpServer,Debug,Request # 148: GET     -    43 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-2135601301,
+2012-06-15 11:15:31.8212,Raven.Database.Server.HttpServer,Debug,Request # 149: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1599614658,
+2012-06-15 11:15:33.1259,Raven.Database.Server.HttpServer,Debug,Request # 150: GET     -   268 ms - HitThatLine - 200 - /stats?noCache=1125220976,
+2012-06-15 11:15:35.0634,Raven.Database.Server.HttpServer,Debug,Request # 151: GET     -    80 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-341151054,
+2012-06-15 11:15:37.1376,Raven.Database.Server.HttpServer,Debug,Request # 152: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1422235180,
+2012-06-15 11:15:39.7089,Raven.Database.Server.HttpServer,Debug,Request # 153: GET     -   493 ms - HitThatLine - 200 - /stats?noCache=-2131566624,
+2012-06-15 11:15:40.4951,Raven.Database.Server.HttpServer,Debug,Request # 154: GET     -   200 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1275671243,
+2012-06-15 11:15:42.4628,Raven.Database.Server.HttpServer,Debug,Request # 155: GET     -    42 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=802813705,
+2012-06-15 11:15:45.7509,Raven.Database.Server.HttpServer,Debug,Request # 156: GET     -   141 ms - HitThatLine - 200 - /stats?noCache=-1854530853,
+2012-06-15 11:15:46.6953,Raven.Database.Server.HttpServer,Debug,Request # 157: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=114199255,
+2012-06-15 11:15:50.9521,Raven.Database.Server.HttpServer,Debug,Request # 158: GET     -    31 ms - HitThatLine - 200 - /stats?noCache=1003480618,
+2012-06-15 11:15:56.3125,Raven.Database.Server.HttpServer,Debug,Request # 159: GET     -    79 ms - HitThatLine - 200 - /stats?noCache=-1885288076,
+2012-06-15 11:16:01.6367,Raven.Database.Server.HttpServer,Debug,Request # 160: GET     -    91 ms - HitThatLine - 200 - /stats?noCache=1218259848,
+2012-06-15 11:16:03.7109,Raven.Database.Server.HttpServer,Debug,Request # 161: GET     -    40 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1629836940,
+2012-06-15 11:16:03.7109,Raven.Database.Server.HttpServer,Debug,Request # 162: GET     -    41 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=960711195,
+2012-06-15 11:16:06.9296,Raven.Database.Server.HttpServer,Debug,Request # 163: GET     -    72 ms - HitThatLine - 200 - /stats?noCache=-954194459,
+2012-06-15 11:16:12.2626,Raven.Database.Server.HttpServer,Debug,Request # 164: GET     -    93 ms - HitThatLine - 200 - /stats?noCache=-1618809662,
+2012-06-15 11:16:14.3515,Raven.Database.Server.HttpServer,Debug,Request # 165: GET     -    56 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=2108682702,
+2012-06-15 11:16:14.3515,Raven.Database.Server.HttpServer,Debug,Request # 166: GET     -    57 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1568921462,
+2012-06-15 11:16:17.5156,Raven.Database.Server.HttpServer,Debug,Request # 167: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=1345238872,
+2012-06-15 11:16:22.8408,Raven.Database.Server.HttpServer,Debug,Request # 168: GET     -    46 ms - HitThatLine - 200 - /stats?noCache=822223665,
+2012-06-15 11:16:28.1562,Raven.Database.Server.HttpServer,Debug,Request # 169: GET     -    48 ms - HitThatLine - 200 - /stats?noCache=403190577,
+2012-06-15 11:16:33.5156,Raven.Database.Server.HttpServer,Debug,Request # 170: GET     -    95 ms - HitThatLine - 200 - /stats?noCache=-1049540519,
+2012-06-15 11:16:38.7802,Raven.Database.Server.HttpServer,Debug,Request # 171: GET     -    47 ms - HitThatLine - 200 - /stats?noCache=-520569170,
+2012-06-15 11:16:49.3886,Raven.Database.Server.HttpServer,Debug,Request # 172: GET     -    31 ms - HitThatLine - 200 - /stats?noCache=-194459411,
+2012-06-15 11:16:54.7197,Raven.Database.Server.HttpServer,Debug,Request # 173: GET     -    50 ms - HitThatLine - 200 - /stats?noCache=894234507,
+2012-06-15 11:17:18.0820,Raven.Database.Server.HttpServer,Debug,Request # 174: GET     -    37 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-261714305,
+2012-06-15 11:17:18.0820,Raven.Database.Server.HttpServer,Debug,Request # 175: GET     -    37 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=185991755,
+2012-06-15 11:17:21.2763,Raven.Database.Server.HttpServer,Debug,Request # 176: GET     -    43 ms - HitThatLine - 200 - /stats?noCache=1465780470,
+2012-06-15 11:17:31.9042,Raven.Database.Server.HttpServer,Debug,Request # 177: GET     -    46 ms - HitThatLine - 200 - /stats?noCache=1899216039,
+2012-06-15 11:17:37.2187,Raven.Database.Server.HttpServer,Debug,Request # 178: GET     -    48 ms - HitThatLine - 200 - /stats?noCache=840364606,
+2012-06-15 11:17:42.5351,Raven.Database.Server.HttpServer,Debug,Request # 179: GET     -    52 ms - HitThatLine - 200 - /stats?noCache=-42777233,
+2012-06-15 11:17:53.1425,Raven.Database.Server.HttpServer,Debug,Request # 180: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=173431343,
+2012-06-15 11:17:58.4492,Raven.Database.Server.HttpServer,Debug,Request # 181: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=-1598382642,
+2012-06-15 11:18:03.7910,Raven.Database.Server.HttpServer,Debug,Request # 182: GET     -    58 ms - HitThatLine - 200 - /stats?noCache=-790630872,
+2012-06-15 11:18:09.0732,Raven.Database.Server.HttpServer,Debug,Request # 183: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=66428340,
+2012-06-15 11:18:14.4111,Raven.Database.Server.HttpServer,Debug,Request # 184: GET     -    53 ms - HitThatLine - 200 - /stats?noCache=854784866,
+2012-06-15 11:18:19.6992,Raven.Database.Server.HttpServer,Debug,Request # 185: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=-393031607,
+2012-06-15 11:18:21.8291,Raven.Database.Server.HttpServer,Debug,Request # 186: GET     -    34 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1485788615,
+2012-06-15 11:18:21.8291,Raven.Database.Server.HttpServer,Debug,Request # 187: GET     -    34 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=474394267,
+2012-06-15 11:18:30.3212,Raven.Database.Server.HttpServer,Debug,Request # 188: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=423401789,
+2012-06-15 11:18:32.4462,Raven.Database.Server.HttpServer,Debug,Request # 189: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1598493639,
+2012-06-15 11:18:32.4462,Raven.Database.Server.HttpServer,Debug,Request # 190: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1885586002,
+2012-06-15 11:18:35.7099,Raven.Database.Server.HttpServer,Debug,Request # 191: GET     -   102 ms - HitThatLine - 200 - /stats?noCache=1058503185,
+2012-06-15 11:18:36.7031,Raven.Database.Server.HttpServer,Debug,Request # 192: GET     -    34 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-72996347,
+2012-06-15 11:18:37.7626,Raven.Database.Server.HttpServer,Debug,Request # 193: GET     -    29 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-642478541,
+2012-06-15 11:18:37.7626,Raven.Database.Server.HttpServer,Debug,Request # 194: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=234049787,
+2012-06-15 11:18:40.9472,Raven.Database.Server.HttpServer,Debug,Request # 195: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=1995805399,
+2012-06-15 11:18:46.6298,Raven.Database.Server.HttpServer,Debug,Request # 196: GET     -   396 ms - HitThatLine - 200 - /stats?noCache=1593840967,
+2012-06-15 11:19:08.5712,Raven.Database.Server.HttpServer,Debug,Request # 197: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=1305956022,
+2012-06-15 11:19:40.4453,Raven.Database.Server.HttpServer,Debug,Request # 198: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=23516206,
+2012-06-15 11:20:12.3740,Raven.Database.Server.HttpServer,Debug,Request # 199: GET     -    79 ms - HitThatLine - 200 - /stats?noCache=1698896842,
+2012-06-15 11:20:18.2402,Raven.Database.Server.HttpServer,Debug,Request # 200: GET     -   633 ms - HitThatLine - 200 - /stats?noCache=-2049116045,
+2012-06-15 11:20:24.9667,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByUsername,
+2012-06-15 11:20:24.9921,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 17 because: DELETE INDEX Temp/UserAccounts/ByUsername,
+2012-06-15 11:20:24.9980,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 17, for: ReducingExecuter, will wait for additional work",
+2012-06-15 11:20:24.9980,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 17, for: IndexingExecuter, will wait for additional work",
+2012-06-15 11:20:34.6416,Raven.Database.Server.HttpServer,Debug,Request # 201: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=-1708955121,
+2012-06-15 11:20:37.8222,Raven.Database.Server.HttpServer,Debug,Request # 202: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-227537116,
+2012-06-15 11:20:39.9482,Raven.Database.Server.HttpServer,Debug,Request # 203: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=-1724428600,
+2012-06-15 11:20:45.2656,Raven.Database.Server.HttpServer,Debug,Request # 204: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=1991472228,
+2012-06-15 11:20:50.5742,Raven.Database.Server.HttpServer,Debug,Request # 205: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=1399344511,
+2012-06-15 11:20:51.6376,Raven.Database.Server.HttpServer,Debug,Request # 206: GET     -    29 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1942626812,
+2012-06-15 11:20:51.6376,Raven.Database.Server.HttpServer,Debug,Request # 207: GET     -    29 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1062431940,
+2012-06-15 11:20:55.9228,Raven.Database.Server.HttpServer,Debug,Request # 208: GET     -    65 ms - HitThatLine - 200 - /stats?noCache=-114973362,
+2012-06-15 11:21:01.5664,Raven.Database.Server.HttpServer,Debug,Request # 209: GET     -   396 ms - HitThatLine - 200 - /stats?noCache=2102356749,
+2012-06-15 11:22:00.7001,Raven.Database.Server.HttpServer,Debug,Request # 210: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1655764929,
+2012-06-15 11:22:00.7001,Raven.Database.Server.HttpServer,Debug,Request # 211: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=514541317,
+2012-06-15 11:22:00.7001,Raven.Database.Server.HttpServer,Debug,Request # 212: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=1312726031,
+2012-06-15 11:22:06.0097,Raven.Database.Server.HttpServer,Debug,Request # 213: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=2130932113,
+2012-06-15 11:22:06.0097,Raven.Database.Server.HttpServer,Debug,Request # 214: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-649151846,
+2012-06-15 11:22:06.0283,Raven.Database.Server.HttpServer,Debug,Request # 215: GET     -    45 ms - HitThatLine - 200 - /stats?noCache=-1463539479,
+2012-06-15 11:22:11.3554,Raven.Database.Server.HttpServer,Debug,Request # 216: GET     -    52 ms - HitThatLine - 200 - /stats?noCache=230903022,
+2012-06-15 11:22:16.6367,Raven.Database.Server.HttpServer,Debug,Request # 217: GET     -    75 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-414261329,
+2012-06-15 11:22:16.6367,Raven.Database.Server.HttpServer,Debug,Request # 218: GET     -    75 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=850926684,
+2012-06-15 11:22:16.6367,Raven.Database.Server.HttpServer,Debug,Request # 219: GET     -    80 ms - HitThatLine - 200 - /stats?noCache=1214220519,
+2012-06-15 11:22:21.9169,Raven.Database.Server.HttpServer,Debug,Request # 220: GET     -    43 ms - HitThatLine - 200 - /stats?noCache=991322382,
+2012-06-15 11:22:27.0341,Raven.Database.Server.HttpServer,Debug,Request # 221: GET     -    61 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1722159141,
+2012-06-15 11:22:27.0341,Raven.Database.Server.HttpServer,Debug,Request # 222: GET     -    61 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-591794982,
+2012-06-15 11:22:27.0585,Raven.Database.Server.HttpServer,Debug,Request # 223: GET     -    90 ms - HitThatLine - 200 - /stats?noCache=-1727044988,
+2012-06-15 11:22:32.2666,Raven.Database.Server.HttpServer,Debug,Request # 225: GET     -    33 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=787821571,
+2012-06-15 11:22:32.2666,Raven.Database.Server.HttpServer,Debug,Request # 224: GET     -    33 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1755741299,
+2012-06-15 11:22:32.2666,Raven.Database.Server.HttpServer,Debug,Request # 226: GET     -    39 ms - HitThatLine - 200 - /stats?noCache=1231159490,
+2012-06-15 11:22:37.5742,Raven.Database.Server.HttpServer,Debug,Request # 227: GET     -    27 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=603081851,
+2012-06-15 11:22:37.5742,Raven.Database.Server.HttpServer,Debug,Request # 228: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-2029089906,
+2012-06-15 11:22:37.5742,Raven.Database.Server.HttpServer,Debug,Request # 229: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=-478025389,
+2012-06-15 11:22:38.6328,Raven.Database.Server.HttpServer,Debug,Request # 230: GET     -    26 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-161468413,
+2012-06-15 11:22:53.5312,Raven.Database.Server.HttpServer,Debug,Request # 231: GET     -    48 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1513064043,
+2012-06-15 11:22:53.5312,Raven.Database.Server.HttpServer,Debug,Request # 232: GET     -    48 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1403816937,
+2012-06-15 11:22:53.5312,Raven.Database.Server.HttpServer,Debug,Request # 233: GET     -    51 ms - HitThatLine - 200 - /stats?noCache=-144869604,
+2012-06-15 11:23:04.1738,Raven.Database.Server.HttpServer,Debug,Request # 234: GET     -    64 ms - HitThatLine - 200 - /stats?noCache=-1784323218,
+2012-06-15 11:23:09.4599,Raven.Database.Server.HttpServer,Debug,Request # 235: GET     -    38 ms - HitThatLine - 200 - /stats?noCache=1556970647,
+2012-06-15 11:23:14.7636,Raven.Database.Server.HttpServer,Debug,Request # 236: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1415740920,
+2012-06-15 11:23:14.7636,Raven.Database.Server.HttpServer,Debug,Request # 237: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1173691844,
+2012-06-15 11:23:14.7636,Raven.Database.Server.HttpServer,Debug,Request # 238: GET     -    36 ms - HitThatLine - 200 - /stats?noCache=1440445401,
+2012-06-15 11:23:20.0742,Raven.Database.Server.HttpServer,Debug,Request # 239: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=-1370313851,
+2012-06-15 11:23:25.3906,Raven.Database.Server.HttpServer,Debug,Request # 240: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=-1547261612,
+2012-06-15 11:23:30.7402,Raven.Database.Server.HttpServer,Debug,Request # 241: GET     -    69 ms - HitThatLine - 200 - /stats?noCache=1197924831,
+2012-06-15 11:23:36.0244,Raven.Database.Server.HttpServer,Debug,Request # 242: GET     -    41 ms - HitThatLine - 200 - /stats?noCache=-1270014317,
+2012-06-15 11:23:41.3457,Raven.Database.Server.HttpServer,Debug,Request # 243: GET     -    50 ms - HitThatLine - 200 - /stats?noCache=-222199546,
+2012-06-15 11:23:46.6708,Raven.Database.Server.HttpServer,Debug,Request # 244: GET     -    62 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1674914451,
+2012-06-15 11:23:46.6708,Raven.Database.Server.HttpServer,Debug,Request # 245: GET     -    62 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1123011599,
+2012-06-15 11:23:46.6992,Raven.Database.Server.HttpServer,Debug,Request # 246: GET     -    90 ms - HitThatLine - 200 - /stats?noCache=-270651838,
+2012-06-15 11:23:51.9902,Raven.Database.Server.HttpServer,Debug,Request # 247: GET     -    69 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-20820259,
+2012-06-15 11:23:51.9902,Raven.Database.Server.HttpServer,Debug,Request # 248: GET     -    69 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1462073956,
+2012-06-15 11:23:52.0419,Raven.Database.Server.HttpServer,Debug,Request # 249: GET     -   121 ms - HitThatLine - 200 - /stats?noCache=-861879265,
+2012-06-15 11:24:23.8212,Raven.Database.Server.HttpServer,Debug,Request # 250: GET     -    26 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=803932532,
+2012-06-15 11:24:23.8242,Raven.Database.Server.HttpServer,Debug,Request # 251: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=1537250211,
+2012-06-15 11:25:01.0185,Raven.Database.Server.HttpServer,Debug,Request # 252: GET     -    35 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1433740305,
+2012-06-15 11:25:01.0185,Raven.Database.Server.HttpServer,Debug,Request # 253: GET     -    35 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1702760025,
+2012-06-15 11:25:01.0371,Raven.Database.Server.HttpServer,Debug,Request # 254: GET     -    54 ms - HitThatLine - 200 - /stats?noCache=-1077111630,
+2012-06-15 11:25:11.6376,Raven.Database.Server.HttpServer,Debug,Request # 255: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=1698960989,
+2012-06-15 11:25:32.8906,Raven.Database.Server.HttpServer,Debug,Request # 256: GET     -    32 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=302422990,
+2012-06-15 11:25:32.8906,Raven.Database.Server.HttpServer,Debug,Request # 257: GET     -    33 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1852197295,
+2012-06-15 11:25:32.8906,Raven.Database.Server.HttpServer,Debug,Request # 258: GET     -    36 ms - HitThatLine - 200 - /stats?noCache=567663080,
+2012-06-15 11:27:24.4697,Raven.Database.Server.HttpServer,Debug,Request # 259: GET     -    49 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1310399964,
+2012-06-15 11:27:24.4697,Raven.Database.Server.HttpServer,Debug,Request # 260: GET     -    49 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1326947074,
+2012-06-15 11:27:24.4697,Raven.Database.Server.HttpServer,Debug,Request # 261: GET     -    52 ms - HitThatLine - 200 - /stats?noCache=-1727709510,
+2012-06-15 11:27:45.7548,Raven.Database.Server.HttpServer,Debug,Request # 262: GET     -    84 ms - HitThatLine - 200 - /stats?noCache=1393624242,
+2012-06-15 11:27:51.0957,Raven.Database.Server.HttpServer,Debug,Request # 263: GET     -   128 ms - HitThatLine - 200 - /stats?noCache=-1114489508,
+2012-06-15 13:14:58.5673,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-06-15 13:15:10.3554,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2012-06-15 13:15:10.3554,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: IndexingExecuter, will wait for additional work",
+2012-06-15 13:15:12.6992,Raven.Database.Server.HttpServer,Debug,Request # 264: GET     -   616 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1569742923,
+2012-06-15 13:15:16.5957,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:15:16.6386,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-15 13:15:16.6562,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-15 13:15:17.5966,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:15:17.5966,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:15:17.8837,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 13:15:17.8837,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-06-15 13:15:17.8837,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-15 13:15:17.8964,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-15 13:15:17.9169,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-15 13:15:17.9326,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-15 13:15:17.9326,Raven.Database.Server.HttpServer,Debug,"Request # 265: GET     - 1,336 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=245311983",
+2012-06-15 13:15:17.9326,Raven.Database.Server.HttpServer,Debug,Request # 266: GET     -   351 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1751055410,
+2012-06-15 13:15:17.9326,Raven.Database.Server.HttpServer,Debug,Request # 267: GET     -   355 ms - HitThatLine - 200 - /stats?noCache=-180449393,
+2012-06-15 13:15:23.8554,Raven.Database.Server.HttpServer,Debug,Request # 268: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=-870443490,
+2012-06-15 13:15:23.8720,Raven.Database.Server.HttpServer,Debug,Request # 269: GET     -    44 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-1133044126,
+2012-06-15 13:15:23.8720,Raven.Database.Server.HttpServer,Debug,Request # 270: GET     -    44 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=-211297737,
+2012-06-15 13:17:14.8417,Raven.Database.Server.HttpServer,Debug,Request # 271: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=726666378,
+2012-06-15 13:18:15.5048,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 13:18:15.5048,Raven.Database.Server.HttpServer,Debug,Request # 272: GET     -    11 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 13:18:15.5869,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:18:15.5869,Raven.Database.Server.HttpServer,Debug,Request # 273: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 13:18:18.8750,Raven.Database.Server.HttpServer,Debug,Request # 274: GET     -    61 ms - HitThatLine - 200 - /stats?noCache=-533665066,
+2012-06-15 13:20:19.1728,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-15 13:20:19.1728,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/UserAccounts/ByUsername with encoded name Temp/UserAccounts/ByUsername,
+2012-06-15 13:20:19.1728,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByUsername,
+2012-06-15 13:20:19.3398,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: PUT INDEX Temp/UserAccounts/ByUsername,
+2012-06-15 13:20:19.3398,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-15 13:20:19.3398,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-15 13:20:19.3398,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-06-15 13:20:19.3398,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: ReducingExecuter, will wait for additional work",
+2012-06-15 13:20:19.3398,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-0100-0000-000000000001, 6/15/2012 3:18:15 PM",
+2012-06-15 13:20:19.3710,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:[[NULL_VALUE]],
+2012-06-15 13:20:19.3710,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: WORK BY IndexingExecuter,
+2012-06-15 13:20:19.3710,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: IndexingExecuter, will wait for additional work",
+2012-06-15 13:20:19.3710,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2012-06-15 13:20:19.4785,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:[[NULL_VALUE]],
+2012-06-15 13:20:19.4794,Raven.Database.Server.HttpServer,Debug,Request # 275: GET     -   307 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:20:19.4794,Raven.Database.Server.HttpServer,Debug,"	Query: Username:[[NULL_VALUE]]
+	Time: 307 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 13:21:30.9306,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 13:21:30.9306,Raven.Database.Server.HttpServer,Debug,Request # 276: GET     -     3 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 13:21:31.0175,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:21:31.0175,Raven.Database.Server.HttpServer,Debug,Request # 277: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 13:21:38.9140,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 13:21:38.9140,Raven.Database.Server.HttpServer,Debug,Request # 278: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 13:21:39.0976,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:21:39.0976,Raven.Database.Server.HttpServer,Debug,Request # 279: GET     -    16 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 13:21:59.2275,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:dsga,
+2012-06-15 13:21:59.2275,Raven.Database.Server.HttpServer,Debug,Request # 280: GET     -     2 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Adsga&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:21:59.2294,Raven.Database.Server.HttpServer,Debug,"	Query: Username:dsga
+	Time: 2 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 13:23:16.6103,Raven.Database.Server.HttpServer,Debug,Request # 281: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=681178980,
+2012-06-15 13:23:16.6103,Raven.Database.Server.HttpServer,Debug,Request # 282: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=650114663,
+2012-06-15 13:23:16.6103,Raven.Database.Server.HttpServer,Debug,Request # 283: GET     -    28 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1421661881,
+2012-06-15 13:23:16.6103,Raven.Database.Server.HttpServer,Debug,Request # 284: GET     -    32 ms - HitThatLine - 200 - /stats?noCache=1839451238,
+2012-06-15 13:23:28.9130,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 13:23:28.9130,Raven.Database.Server.HttpServer,Debug,Request # 285: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 13:23:29.0654,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:23:29.0654,Raven.Database.Server.HttpServer,Debug,Request # 286: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 13:23:38.9873,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:asdf,
+2012-06-15 13:23:38.9873,Raven.Database.Server.HttpServer,Debug,Request # 287: GET     -     3 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:23:38.9873,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 13:24:33.6201,Raven.Database.Server.HttpServer,Debug,Request # 288: GET     -    38 ms - HitThatLine - 200 - /stats?noCache=-464379343,
+2012-06-15 13:24:33.8935,Raven.Database.Server.HttpServer,Debug,Request # 289: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:24:33.8935,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 0 ms
+",
+2012-06-15 13:24:59.2490,Raven.Database.Server.HttpServer,Debug,Request # 290: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=442836820,
+2012-06-15 13:24:59.2490,Raven.Database.Server.HttpServer,Debug,Request # 291: GET     -    31 ms - HitThatLine - 200 - /docs/?start=0&pageSize=64&noCache=1660558242,
+2012-06-15 13:24:59.2832,Raven.Database.Server.HttpServer,Debug,Request # 292: GET     -    65 ms - HitThatLine - 200 - /stats?noCache=-1054665827,
+2012-06-15 13:25:16.6972,Raven.Database.Server.HttpServer,Debug,Request # 293: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=2008369211,
+2012-06-15 13:25:24.8310,Raven.Database.Server.HttpServer,Debug,Request # 294: GET     -    30 ms - HitThatLine - 200 - /stats?noCache=-2019908979,
+2012-06-15 13:25:57.5380,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-15 13:25:57.5380,Raven.Database.Server.HttpServer,Debug,Request # 295: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-15 13:25:57.6533,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-15 13:25:57.6533,Raven.Database.Server.HttpServer,Debug,Request # 296: GET     -    27 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-15 13:25:58.9482,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:asdf,
+2012-06-15 13:25:58.9482,Raven.Database.Server.HttpServer,Debug,Request # 297: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:25:58.9482,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 3 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 13:25:58.9980,Raven.Database.Server.HttpServer,Debug,Request # 298: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:25:58.9980,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 1 ms
+",
+2012-06-15 13:25:59.0126,Raven.Database.Server.HttpServer,Debug,Request # 299: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:25:59.0126,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 0 ms
+",
+2012-06-15 13:26:00.2695,Raven.Database.Server.HttpServer,Debug,Request # 300: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Aasdf&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:00.2695,Raven.Database.Server.HttpServer,Debug,"	Query: Username:asdf
+	Time: 0 ms
+",
+2012-06-15 13:26:22.5458,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:test,
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,Request # 301: GET     -     2 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 2 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 0 returned out of 0 total.
+",
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,Request # 302: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,Request # 303: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:22.5458,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:22.5585,Raven.Database.Server.HttpServer,Debug,Request # 304: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:22.5585,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,Request # 305: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,Request # 306: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,Request # 307: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:53.9853,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:26:53.9951,Raven.Database.Server.HttpServer,Debug,Request # 308: GET     -     0 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Atest&start=0&pageSize=1&aggregation=None,
+2012-06-15 13:26:53.9951,Raven.Database.Server.HttpServer,Debug,"	Query: Username:test
+	Time: 0 ms
+",
+2012-06-15 13:29:17.8964,Raven.Database.Server.HttpServer,Debug,Request # 309: GET     -    70 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-1818788785,
+2012-06-15 13:29:17.8964,Raven.Database.Server.HttpServer,Debug,Request # 310: GET     -    70 ms - HitThatLine - 200 - /stats?noCache=-861281157,
+2012-06-15 13:36:25.7529,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-06-15 13:36:25.7822,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

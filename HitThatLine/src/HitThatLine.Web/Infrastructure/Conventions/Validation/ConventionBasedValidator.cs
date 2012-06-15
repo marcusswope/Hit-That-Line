@@ -9,14 +9,14 @@ using HitThatLine.Web.Infrastructure.Conventions.Attributes;
 
 namespace HitThatLine.Web.Infrastructure.Conventions.Validation
 {
-    public class ConventionBasedValidator<T> : AbstractValidator<T>
+    public class ConventionBasedValidator<T> : AbstractValidator<T> where T : IValidatedCommand
     {
         public ConventionBasedValidator()
         {
-            validateProperties(typeof(T));
+            addValidationRules(typeof(T));
         }
 
-        private void validateProperties(Type type, params PropertyInfo[] precedingProperties)
+        private void addValidationRules(Type type, params PropertyInfo[] precedingProperties)
         {
             foreach (var property in type.GetProperties().Where(x => x.CanRead && x.CanWrite))
             {
@@ -62,7 +62,7 @@ namespace HitThatLine.Web.Infrastructure.Conventions.Validation
                     var allProps = new List<PropertyInfo>(precedingProperties);
                     var propertyList = allProps.ToList();
                     propertyList.Add(property);
-                    validateProperties(property.PropertyType, propertyList.ToArray());
+                    addValidationRules(property.PropertyType, propertyList.ToArray());
                 }
             }
         }

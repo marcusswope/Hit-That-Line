@@ -8,7 +8,7 @@ namespace HitThatLine.Web.Infrastructure
     {
         public RavenDBRegistry()
         {
-            var store = new DocumentStore { ConnectionStringName = "RavenDB" };
+            var store = new DocumentStore { ConnectionStringName = "RavenDB", DefaultDatabase = "HitThatLine" };
             store.Conventions.IdentityPartsSeparator = "-";
             store.Initialize();
 
