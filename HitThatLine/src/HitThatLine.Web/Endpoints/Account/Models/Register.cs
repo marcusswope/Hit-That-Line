@@ -1,5 +1,3 @@
-using FubuMVC.Core.Continuations;
-using FubuMVC.Core.Runtime;
 using HitThatLine.Web.Infrastructure;
 using HitThatLine.Web.Infrastructure.Conventions.Attributes;
 
@@ -44,7 +42,7 @@ namespace HitThatLine.Web.Endpoints.Account.Models
 
     public class RegisterCommand : RegisterViewModel, IValidatedCommand
     {
-        public object TransferOnFailed
+        public object TransferToOnFailed
         {
             get { return new RegisterRequest(this); }
         }

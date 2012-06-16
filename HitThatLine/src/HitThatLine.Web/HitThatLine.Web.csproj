@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Bottles, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bottles.0.9.1.274\lib\Bottles.dll</HintPath>
     </Reference>
@@ -167,24 +170,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FubuMVC.cs" />
-    <Compile Include="Endpoints\Account\AccountEndpoint.cs" />
+    <Compile Include="Endpoints\Account\SummaryEndpoint.cs" />
+    <Compile Include="Endpoints\Account\LoginEndpoint.cs" />
+    <Compile Include="Endpoints\Account\LogoutEndpoint.cs" />
+    <Compile Include="Endpoints\Account\RegisterEndpoint.cs" />
     <Compile Include="Endpoints\Account\Validation\LoginCommandValidator.cs" />
+    <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\IValidatedCommand.cs" />
     <Compile Include="Endpoints\Account\Models\Login.cs" />
     <Compile Include="Endpoints\Account\Models\Logout.cs" />
     <Compile Include="Endpoints\Account\Models\Register.cs" />
     <Compile Include="Endpoints\Account\Models\Summary.cs" />
     <Compile Include="Endpoints\Account\Validation\RegisterCommandValidator.cs" />
-    <Compile Include="Endpoints\Discussion\Models\CreateThreadCommand.cs" />
-    <Compile Include="Endpoints\Discussion\Models\CreateThreadViewModel.cs" />
-    <Compile Include="Endpoints\Discussion\DiscussionEndpoint.cs" />
-    <Compile Include="Endpoints\Discussion\Models\DiscussionThreadViewModel.cs" />
-    <Compile Include="Endpoints\Discussion\Models\DiscussionListSummaryViewModel.cs" />
-    <Compile Include="Endpoints\Discussion\Models\DiscussionHomeInputModel.cs" />
-    <Compile Include="Endpoints\Discussion\Models\NewThreadViewModel.cs" />
     <Compile Include="Endpoints\Home\HomeEndpoint.cs" />
-    <Compile Include="Endpoints\Home\Models\HomeInputModel.cs" />
-    <Compile Include="Endpoints\Home\Models\HomeViewModel.cs" />
+    <Compile Include="Endpoints\Home\Models\Home.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,15 +234,6 @@
       <Project>{1C489335-8FB6-4BDA-9E4C-559072202DBF}</Project>
       <Name>HitThatLine.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Endpoints\Discussion\Views\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Endpoints\Discussion\Views\View.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Endpoints\Discussion\Views\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\styles\styles.asset.config" />

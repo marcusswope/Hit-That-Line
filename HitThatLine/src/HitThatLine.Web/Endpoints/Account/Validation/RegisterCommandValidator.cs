@@ -11,13 +11,9 @@ namespace HitThatLine.Web.Endpoints.Account.Validation
     {
         private readonly IDocumentSession _session;
         public RegisterCommandValidator(IDocumentSession session)
-            : this()
         {
             _session = session;
-        }
-
-        public RegisterCommandValidator()
-        {
+            
             RuleFor(x => x.EmailAddress)
                 .Must(NotBeDuplicateEmail)
                 .WithMessage("already in use");

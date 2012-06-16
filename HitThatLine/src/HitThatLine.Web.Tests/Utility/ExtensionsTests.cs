@@ -1,7 +1,6 @@
 ﻿using FubuMVC.Core.Assets.Files;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
-using FubuMVC.Razor.Rendering;
 using HitThatLine.Web.Utility;
 using Moq;
 using NUnit.Framework;
@@ -13,7 +12,7 @@ namespace HitThatLine.Web.Tests.Utility
         [TestFixture]
         public class When_asked_for_svg_image
         {
-            [Ignore, Test]
+            [Test]
             public void Should_create()
             {
                 var fubuPage = new Mock<IFubuPage>();
@@ -32,7 +31,7 @@ namespace HitThatLine.Web.Tests.Utility
 </object>");
             }
 
-            [Ignore, Test]
+            [Test]
             public void Should_create_with_fallback()
             {
                 var fubuPage = new Mock<IFubuPage>();

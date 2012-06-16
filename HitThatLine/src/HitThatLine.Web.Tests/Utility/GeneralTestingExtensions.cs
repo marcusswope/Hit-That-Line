@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FubuMVC.Core.Continuations;
 using NUnit.Framework;
 
 namespace HitThatLine.Web.Tests.Utility
@@ -161,6 +162,12 @@ namespace HitThatLine.Web.Tests.Utility
         {
             response.ContentType.ShouldEqual("application/pdf");
             response.Headers["content-disposition"].ShouldEqual("inline;filename=ProductDetails.pdf");
+        }
+
+        public static void AssertWasRedirectedTo<T>(this FubuContinuation continuation) 
+            where T : class
+        {
+            continuation.AssertWasRedirectedTo<T>(x => x != null);
         }
 
         public class ShouldBeOfTypeAnd<T>

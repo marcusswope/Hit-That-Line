@@ -1,8 +1,8 @@
 ﻿@using HitThatLine.Web.Endpoints.Account.Models
 @model HitThatLine.Web.Endpoints.Account.Models.SummaryViewModel
-@if(Model.IsLoggedIn)
+@if(Model.LoggedIn)
 {
-    <a href="#">@Model.UserName</a> <text>|</text> @(this.LinkTo<LogoutRequest>().Text("Logout"))
+    <a href="#">@Model.UserUsername</a> <text>|</text> @(this.LinkTo<LogoutRequest>().Text("Logout"))
 }
 else
 {

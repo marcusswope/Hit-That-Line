@@ -9,7 +9,7 @@ namespace HitThatLine.Web.Services
     {
         UserAccount GetLoggedOnUser();
         void Login(UserAccount userAccount);
-        void CreateNew(RegisterCommand model);
+        UserAccount CreateNew(RegisterCommand model);
         void Logout(UserAccount userAccount);
     }
 
@@ -27,7 +27,7 @@ namespace HitThatLine.Web.Services
         public UserAccount GetLoggedOnUser()
         {
             var userId = _cookieStorage.Get(AppSettings.LoginCookieName);
-            if (userId == null) return null;
+            if (string.IsNullOrEmpty(userId)) return null;
 
             return _session.Load<UserAccount>(userId);
         }
@@ -37,7 +37,7 @@ namespace HitThatLine.Web.Services
             _cookieStorage.Set(AppSettings.LoginCookieName, userAccount.Id);
         }
 
-        public void CreateNew(RegisterCommand model)
+        public UserAccount CreateNew(RegisterCommand model)
         {
             var account = new UserAccount
                               {
@@ -47,6 +47,7 @@ namespace HitThatLine.Web.Services
                               };
             _session.Store(account);
             _cookieStorage.Set(AppSettings.LoginCookieName, account.Id);
+            return account;
         }
 
         public void Logout(UserAccount userAccount)

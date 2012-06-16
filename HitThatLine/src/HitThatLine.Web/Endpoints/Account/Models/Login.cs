@@ -35,7 +35,7 @@ namespace HitThatLine.Web.Endpoints.Account.Models
 
     public class LoginCommand : LoginViewModel, IValidatedCommand
     {
-        public object TransferOnFailed
+        public object TransferToOnFailed
         {
             get { return new LoginRequest(this); }
         }

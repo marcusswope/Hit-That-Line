@@ -19,7 +19,7 @@ namespace HitThatLine.Web.Infrastructure.Behaviors
         {
             _request = request;
             _container = container;
-            _director = director;
+            _director = director;   
         }
 
         protected override DoNext performInvoke()
@@ -39,7 +39,7 @@ namespace HitThatLine.Web.Infrastructure.Behaviors
             if (result.IsValid) return DoNext.Continue;
 
             _request.Set(result);
-            _director.TransferTo(model.TransferOnFailed);
+            _director.TransferTo(model.TransferToOnFailed);
             
             return DoNext.Stop;
         }

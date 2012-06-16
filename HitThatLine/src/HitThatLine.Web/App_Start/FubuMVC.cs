@@ -35,6 +35,7 @@ namespace HitThatLine.Web.App_Start
 
                              PackageRegistry.PackageAssemblies.Each(x.Assembly);
                          });
+
             map.For<IContinuationDirector>().Use<ContinuationHandler>();
         }
     }

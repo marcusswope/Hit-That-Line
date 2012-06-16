@@ -1,4 +1,3 @@
-using FubuCore;
 using HitThatLine.Core.Accounts;
 
 namespace HitThatLine.Web.Endpoints.Account.Models
@@ -11,13 +10,7 @@ namespace HitThatLine.Web.Endpoints.Account.Models
 
     public class SummaryViewModel
     {
-        public string UserName { get; set; }
-        public bool IsLoggedIn { get; set; }
-
-        public SummaryViewModel(SummaryRequest request)
-        {
-            IsLoggedIn = request.LoggedIn;
-            request.User.IfNotNull(x => UserName = x.Username);
-        }
+        public string UserUsername { get; set; }
+        public bool LoggedIn { get; set; }
     }
 }

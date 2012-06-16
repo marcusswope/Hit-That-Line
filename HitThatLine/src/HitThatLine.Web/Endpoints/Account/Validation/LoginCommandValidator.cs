@@ -10,20 +10,19 @@ namespace HitThatLine.Web.Endpoints.Account.Validation
     public class LoginCommandValidator : ConventionBasedValidator<LoginCommand>
     {
         private readonly IDocumentSession _session;
+        
         public LoginCommandValidator(IDocumentSession session)
-            : this()
         {
             _session = session;
-        }
 
-        public LoginCommandValidator()
-        {
             RuleFor(x => x.Username)
                 .Must(BeAValidUsername)
+                .When(x => !string.IsNullOrEmpty(x.Username) && !string.IsNullOrEmpty(x.Password))
                 .WithMessage("Username or password is invalid");
 
             RuleFor(x => x.Password)
                 .Must(BeAValidPassword)
+                .When(x => !string.IsNullOrEmpty(x.Username) && !string.IsNullOrEmpty(x.Password))
                 .WithMessage("Username or password is invalid");
         }
 
