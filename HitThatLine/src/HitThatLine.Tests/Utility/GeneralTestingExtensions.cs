@@ -86,9 +86,14 @@ namespace HitThatLine.Tests.Utility
             Assert.Less(dateValue, upper);
         }
 
-        public static void ShouldBeGreaterThan(this double actual, double expected)
+        public static void ShouldBeGreaterThan<T>(this T actual, T expected) where T : IComparable
         {
             Assert.Greater(actual, expected);
+        }
+
+        public static void ShouldBeLessThan<T>(this T actual, T expected) where T : IComparable
+        {
+            Assert.Less(actual, expected);
         }
 
         public static void ShouldBeNull(this object @object)
@@ -169,7 +174,7 @@ namespace HitThatLine.Tests.Utility
             response.Headers["content-disposition"].ShouldEqual("inline;filename=ProductDetails.pdf");
         }
 
-        public static void AssertWasRedirectedTo<T>(this FubuContinuation continuation) 
+        public static void AssertWasRedirectedTo<T>(this FubuContinuation continuation)
             where T : class
         {
             continuation.AssertWasRedirectedTo<T>(x => x != null);

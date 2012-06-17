@@ -110,6 +110,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -135,6 +136,7 @@
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\TaskExecutorTest.cs" />
+    <Compile Include="Services\CookieStorageTest.cs" />
     <Compile Include="Services\UserAccountServiceTest.cs" />
     <Compile Include="Utility\MockActionBehavior.cs" />
     <Compile Include="Infrastructure\Behaviors\RavenBehaviorTest.cs" />

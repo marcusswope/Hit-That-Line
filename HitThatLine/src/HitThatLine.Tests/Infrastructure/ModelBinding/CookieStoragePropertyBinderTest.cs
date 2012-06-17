@@ -1,4 +1,5 @@
-﻿using FubuCore.Binding;
+﻿using System.Web;
+using FubuCore.Binding;
 using FubuMVC.Core.Runtime;
 using HitThatLine.Infrastructure.ModelBinding;
 using HitThatLine.Services;
@@ -27,7 +28,7 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
             var binder = new CookieStoragePropertyBinder();
             var model = new CookieRequestModel();
             var context = new Mock<IBindingContext>();
-            var cookies = new CookieStorage();
+            var cookies = new CookieStorage(new Mock<HttpContextBase>().Object);
 
             context.Setup(x => x.Service<ICookieStorage>()).Returns(cookies);
             context.SetupGet(x => x.Object).Returns(model);

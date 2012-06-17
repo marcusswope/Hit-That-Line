@@ -1,10 +1,11 @@
-﻿@using HitThatLine.Endpoints.Home.Models
+﻿@using HitThatLine.Domain.Accounts
+@using HitThatLine.Endpoints.Home.Models
 @using HitThatLine.Utility
 @using FubuMVC.Core.UI
 @model HitThatLine.Endpoints.Home.Models.HomeViewModel
 <div class="section" id="nav-bar">
     @this.Clear(5)
-    @(this.LinkTo<HomeRequest>().Text("New Thread").Grid().VisibleForRoles("user"))
+    @(this.LinkTo<HomeRequest>().Text("New Thread").Grid().VisibleForRoles(UserAccount.BasicUserRole))
     @(this.LinkTo<HomeRequest>().Text("Tags").Grid())
     @(this.LinkTo<HomeRequest>().Text("Search").Grid())
     @this.Clear(5)

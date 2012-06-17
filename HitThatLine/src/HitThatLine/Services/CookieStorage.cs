@@ -9,20 +9,26 @@ namespace HitThatLine.Services
     {
         bool Contains(string name);
         string Get(string name);
-        void Set(string name, object value);
+        void Set(string name, string value);
         void Remove(string name);
     }
 
     public class CookieStorage : ICookieStorage
     {
+        private readonly HttpContextBase _httpContext;
+        public CookieStorage(HttpContextBase httpContext)
+        {
+            _httpContext = httpContext;
+        }
+
         public bool Contains(string name)
         {
-            return HttpContext.Current.Request.Cookies[name] != null;
+            return _httpContext.Request.Cookies[name] != null;
         }
 
         public string Get(string name)
         {
-            var httpCookie = HttpContext.Current.Request.Cookies[name];
+            var httpCookie = _httpContext.Request.Cookies[name];
             if (httpCookie == null) return null;
 
             var encryptedBytes = Convert.FromBase64String(httpCookie.Value);
@@ -30,16 +36,11 @@ namespace HitThatLine.Services
             return Encoding.UTF8.GetString(decryptedBytes);
         }
 
-        public T Get<T>(string name) where T : struct
+        public void Set(string name, string value)
         {
-            return (T)Convert.ChangeType(Get(name), typeof(T));
-        }
-
-        public void Set(string name, object value)
-        {
-            var plainBytes = Encoding.UTF8.GetBytes(value.ToString());
+            var plainBytes = Encoding.UTF8.GetBytes(value);
             var encryptedBytes = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
-            HttpContext.Current.Response.Cookies.Add(new HttpCookie(name)
+            _httpContext.Response.Cookies.Add(new HttpCookie(name)
                                                          {
                                                              Value = Convert.ToBase64String(encryptedBytes),
                                                              Expires = DateTime.Now.AddYears(20)
@@ -48,7 +49,7 @@ namespace HitThatLine.Services
 
         public void Remove(string name)
         {
-            HttpContext.Current.Response.Cookies.Add(new HttpCookie(name)
+            _httpContext.Response.Cookies.Add(new HttpCookie(name)
             {
                 Expires = DateTime.Now.AddYears(-1)
             });

@@ -7,6 +7,7 @@ namespace HitThatLine.Domain.Accounts
     public class UserAccount
     {
         public const string LoginCookieName = "HTLLogin";
+        public const string BasicUserRole = "user";
 
         public string Username { get; set; }
         public string Password { get; set; }
@@ -32,10 +33,10 @@ namespace HitThatLine.Domain.Accounts
         {
             get
             {
-                return _principal ?? (_principal = new GenericPrincipal(new GenericIdentity(Username), new[] { "user" }));
+                return _principal ?? (_principal = new GenericPrincipal(new GenericIdentity(Username), new[] { BasicUserRole }));
             }
         }
-
+        
         public virtual void Logout(ICookieStorage cookieStorage)
         {
             cookieStorage.Remove(LoginCookieName);
