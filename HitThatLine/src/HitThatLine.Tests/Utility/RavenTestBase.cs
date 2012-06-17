@@ -17,7 +17,7 @@ namespace HitThatLine.Tests.Utility
             DocumentStore = new EmbeddableDocumentStore { RunInMemory = true, UseEmbeddedHttpServer = true }.Initialize();
             Session = DocumentStore.OpenSession();
             DefaultUser = new UserAccount { Username = "user", Password = "password", EmailAddress = "email@email.com" };
-            Session.Store(DefaultUser);
+            Session.Store(DefaultUser, DefaultUser.DocumentKey);
             Session.SaveChanges();
         }
     }

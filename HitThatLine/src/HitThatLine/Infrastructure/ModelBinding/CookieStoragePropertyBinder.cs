@@ -14,8 +14,8 @@ namespace HitThatLine.Infrastructure.ModelBinding
 
         public void Bind(PropertyInfo property, IBindingContext context)
         {
-            var user = context.Service<ICookieStorage>();
-            property.SetValue(context.Object, user, null);
+            var cookies = context.Service<ICookieStorage>();
+            property.SetValue(context.Object, cookies, null);
         }
     }
 }

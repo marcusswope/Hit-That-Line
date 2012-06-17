@@ -1,4 +1,6 @@
-﻿using HitThatLine.Domain.Accounts;
+﻿using System.Security.Principal;
+using System.Web;
+using HitThatLine.Domain.Accounts;
 using HitThatLine.Services;
 using Moq;
 using NUnit.Framework;
@@ -12,14 +14,27 @@ namespace HitThatLine.Tests.Domain.Accounts
         public class Login
         {
             [Test]
-            public void SetCookie()
+            public void SetsCookie()
             {
-                var userAccount = new UserAccount { Id = "34956" };
+                var userAccount = new UserAccount { Username = "34956" };
                 var cookieStorage = new Mock<ICookieStorage>();
+                var httpContext = new Mock<HttpContextBase>();
 
-                userAccount.Login(cookieStorage.Object);
+                userAccount.Login(cookieStorage.Object, httpContext.Object);
 
-                cookieStorage.Verify(x => x.Set(UserAccount.LoginCookieName, userAccount.Id));
+                cookieStorage.Verify(x => x.Set(UserAccount.LoginCookieName, userAccount.DocumentKey));
+            }
+
+            [Test]
+            public void SetsCurrentUser()
+            {
+                var userAccount = new UserAccount { Username = "34956" };
+                var cookieStorage = new Mock<ICookieStorage>();
+                var httpContext = new Mock<HttpContextBase>();
+
+                userAccount.Login(cookieStorage.Object, httpContext.Object);
+
+                httpContext.VerifySet(x => x.User = It.Is<GenericPrincipal>(p => p.Identity.Name == userAccount.Username && p.IsInRole("user")));
             }
         }
 
@@ -37,6 +52,5 @@ namespace HitThatLine.Tests.Domain.Accounts
                 cookieStorage.Verify(x => x.Remove(UserAccount.LoginCookieName));
             }
         }
-
     }
 }

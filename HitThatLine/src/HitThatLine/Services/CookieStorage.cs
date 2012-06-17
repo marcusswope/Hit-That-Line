@@ -9,7 +9,7 @@ namespace HitThatLine.Services
     {
         bool Contains(string name);
         string Get(string name);
-        void Set(string name, string value);
+        void Set(string name, object value);
         void Remove(string name);
     }
 
@@ -30,9 +30,14 @@ namespace HitThatLine.Services
             return Encoding.UTF8.GetString(decryptedBytes);
         }
 
-        public void Set(string name, string value)
+        public T Get<T>(string name) where T : struct
         {
-            var plainBytes = Encoding.UTF8.GetBytes(value);
+            return (T)Convert.ChangeType(Get(name), typeof(T));
+        }
+
+        public void Set(string name, object value)
+        {
+            var plainBytes = Encoding.UTF8.GetBytes(value.ToString());
             var encryptedBytes = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(name)
                                                          {

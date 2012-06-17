@@ -142,6 +142,7 @@
     <Content Include="content\images\select_arrow.gif" />
     <Content Include="content\scripts\adapt.min.js" />
     <Content Include="content\scripts\accountRegistration.js" />
+    <Content Include="content\scripts\login.js" />
     <Content Include="content\scripts\jquery.validate.min.js" />
     <Content Include="content\scripts\jquery.formalize.min.js" />
     <Content Include="content\scripts\site.js" />
@@ -192,6 +193,7 @@
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\BackgroundTask.cs" />
+    <Compile Include="Infrastructure\Behaviors\UserAccountBehavior.cs" />
     <Compile Include="Infrastructure\IValidatedCommand.cs" />
     <Compile Include="Endpoints\Account\Models\Login.cs" />
     <Compile Include="Endpoints\Account\Models\Logout.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Infrastructure\Conventions\Html\InputConventions.cs" />
     <Compile Include="Infrastructure\ModelBinding\CookieStoragePropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\FubuRequestPropertyBinder.cs" />
+    <Compile Include="Infrastructure\ModelBinding\HttpContextPropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinder.cs" />
     <Compile Include="Infrastructure\RavenDBRegistry.cs" />

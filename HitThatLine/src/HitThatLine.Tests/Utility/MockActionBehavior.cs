@@ -6,8 +6,8 @@ namespace HitThatLine.Tests.Utility
 {
     public class MockActionBehavior : IActionBehavior
     {
-        private Action _invokeAction;
-        private Action _invokePartialAction;
+        private Action _invokeAction = () => { };
+        private Action _invokePartialAction = () => { };
         private bool _invoked;
         private bool _partialInvoked;
 

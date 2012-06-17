@@ -17,6 +17,7 @@ namespace HitThatLine.Infrastructure
                 .ToThisAssembly();
 
             Policies
+                .WrapBehaviorChainsWith<UserAccountBehavior>()
                 .WrapBehaviorChainsWith<RavenBehavior>();
 
             Actions

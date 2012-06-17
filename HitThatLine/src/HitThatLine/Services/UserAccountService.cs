@@ -29,8 +29,8 @@ namespace HitThatLine.Services
                                   Password = model.Password,
                                   Username = model.Username
                               };
-            _session.Store(account);
-            _cookieStorage.Set(UserAccount.LoginCookieName, account.Id);
+            _session.Store(account, UserAccount.BuildDocumentKey(account.Username));
+            account.Login(_cookieStorage, model.HttpContext);
             return account;
         }
     }

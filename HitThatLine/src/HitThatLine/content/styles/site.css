@@ -23,40 +23,40 @@ html.range_2 div#main-header object { height: 65px; }
 html.range_1 div#main-header object { height: 60px; }
 html.range_0 div#main-header object { height: 55px; }
 
-select.failed,
-input[type="date"].failed,
-input[type="datetime"].failed,
-input[type="datetime-local"].failed,
-input[type="email"].failed,
-input[type="month"].failed,
-input[type="number"].failed,
-input[type="password"].failed,
-input[type="search"].failed,
-input[type="tel"].failed,
-input[type="text"].failed,
-input[type="time"].failed,
-input[type="url"].failed,
-input[type="week"].failed {
+select.error,
+input[type="date"].error,
+input[type="datetime"].error,
+input[type="datetime-local"].error,
+input[type="email"].error,
+input[type="month"].error,
+input[type="number"].error,
+input[type="password"].error,
+input[type="search"].error,
+input[type="tel"].error,
+input[type="text"].error,
+input[type="time"].error,
+input[type="url"].error,
+input[type="week"].error {
     background-image: url('../images/exclamation.png');
     background-position: 98% 50%;
     background-repeat: no-repeat;
     padding-right: 22px
 }
 
-select.passed,
-input[type="date"].passed,
-input[type="datetime"].passed,
-input[type="datetime-local"].passed,
-input[type="email"].passed,
-input[type="month"].passed,
-input[type="number"].passed,
-input[type="password"].passed,
-input[type="search"].passed,
-input[type="tel"].passed,
-input[type="text"].passed,
-input[type="time"].passed,
-input[type="url"].passed,
-input[type="week"].passed {
+select.valid,
+input[type="date"].valid,
+input[type="datetime"].valid,
+input[type="datetime-local"].valid,
+input[type="email"].valid,
+input[type="month"].valid,
+input[type="number"].valid,
+input[type="password"].valid,
+input[type="search"].valid,
+input[type="tel"].valid,
+input[type="text"].valid,
+input[type="time"].valid,
+input[type="url"].valid,
+input[type="week"].valid {
     background-image: url('../images/accept.png');
     background-position: 98% 50%;
     background-repeat: no-repeat;

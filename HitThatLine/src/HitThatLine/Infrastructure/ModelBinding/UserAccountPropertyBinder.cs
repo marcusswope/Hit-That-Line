@@ -20,15 +20,15 @@ namespace HitThatLine.Infrastructure.ModelBinding
             UserAccount user = null;
             if (context.Service<ICookieStorage>().Contains(UserAccount.LoginCookieName))
             {
-                var userId = context.Service<ICookieStorage>().Get(UserAccount.LoginCookieName);
-                user = context.Service<IDocumentSession>().Load<UserAccount>(userId);
+                var userKey = context.Service<ICookieStorage>().Get(UserAccount.LoginCookieName);
+                user = context.Service<IDocumentSession>().Load<UserAccount>(userKey);
             }
             else
             {
                 var username = context.Data.ValueAs<string>("Username");
                 if (username != null)
                 {
-                    user = context.Service<IDocumentSession>().Query<UserAccount>().FirstOrDefault(x => x.Username == username);
+                    user = context.Service<IDocumentSession>().Load<UserAccount>(UserAccount.BuildDocumentKey(username));
                 }
             }
 

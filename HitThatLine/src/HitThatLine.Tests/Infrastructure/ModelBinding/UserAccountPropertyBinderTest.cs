@@ -26,7 +26,7 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
             var binder = TestableUserAccountPropertyBinder.Build(Session);
 
             binder.Cookies.Setup(x => x.Contains(UserAccount.LoginCookieName)).Returns(true);
-            binder.Cookies.Setup(x => x.Get(UserAccount.LoginCookieName)).Returns(DefaultUser.Id);
+            binder.Cookies.Setup(x => x.Get(UserAccount.LoginCookieName)).Returns(DefaultUser.DocumentKey);
 
             binder.Bind(typeof(UserAccountBindingModel).GetProperty("UserAccount"), binder.Context.Object);
             

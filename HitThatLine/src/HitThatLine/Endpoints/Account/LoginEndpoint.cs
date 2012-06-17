@@ -21,7 +21,7 @@ namespace HitThatLine.Endpoints.Account
 
         public FubuContinuation Login(LoginCommand command)
         {
-            command.UserAccount.Login(command.Cookies);
+            command.UserAccount.Login(command.Cookies, command.HttpContext);
             return FubuContinuation.RedirectTo<HomeRequest>();
         } 
     }

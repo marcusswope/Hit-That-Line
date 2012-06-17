@@ -126,9 +126,11 @@
     <Compile Include="Endpoints\Account\SummaryEndpointTest.cs" />
     <Compile Include="Endpoints\Account\Validation\LoginCommandValidatorTest.cs" />
     <Compile Include="Endpoints\Home\HomeEndpointTest.cs" />
+    <Compile Include="Infrastructure\Behaviors\UserAccountBehaviorTest.cs" />
     <Compile Include="Infrastructure\Behaviors\ValidationBehaviorTest.cs" />
     <Compile Include="Infrastructure\Conventions\Validation\ConventionBasedValidatorTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\CookieStoragePropertyBinderTest.cs" />
+    <Compile Include="Infrastructure\ModelBinding\HttpContextPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\FubuRequestPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinderTest.cs" />

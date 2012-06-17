@@ -1,18 +1,9 @@
-﻿using AutoMapper;
-using MarkdownSharp;
-using StructureMap;
+﻿using MarkdownSharp;
 
 namespace HitThatLine.Utility
 {
     public static class Extensions
     {
-        //TODO: I absolutely hate this and it *HAS* to go away
-        public static TOutputType MapTo<TOutputType>(this object input) where TOutputType : class
-        {
-            return ObjectFactory.GetInstance<IMappingEngine>()
-                                .Map(input, input.GetType(), typeof(TOutputType)) as TOutputType;
-        }
-
         public static bool IsUpperOrNumber(this char value)
         {
             int parser;

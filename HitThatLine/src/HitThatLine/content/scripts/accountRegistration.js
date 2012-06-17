@@ -1,67 +1,53 @@
-﻿var DuplicateValidator = function (control) {
-
-    validateUserName = function () {
-        validateControl($.htl.url.duplicateUsername, { Username: control.val() });
-    };
-
-    validateEmailAddress = function () {
-        validateControl($.htl.url.duplicateEmailAddress, { EmailAddress: control.val() });
-    };
-
-    var validateControl = function (postUrl, postData) {
-        if (!control.val() || control.val() == "") return;
-        
-        control.addClass('waiting');
-        $.ajax({
-            type: "POST",
-            url: postUrl,
-            data: postData,
-            success: function (data) {
-                if (data.IsValid) {
-                    control.addClass('passed');
-                    control.removeClass('failed');
-                    control.removeClass('waiting');
-                }
-                else {
-                    control.addClass('failed');
-                    control.removeClass('passed');
-                    control.removeClass('waiting');
-                }
-            },
-            error: function (data) {
-                alert(data);
-            }
-        });
-    };
-
-    return {
-        validateUserName: validateUserName,
-        validateEmailAddress: validateEmailAddress
-    };
-};
-
-$(function () {
-
-    $('#Username').blur(function () {
-        var validator = new DuplicateValidator($(this));
-        validator.validateUserName();
-    });
-
-    $('#EmailAddress').blur(function () {
-        var validator = new DuplicateValidator($(this));
-        validator.validateEmailAddress();
-    });
+﻿$(function () {
 
     $('#registrationForm').validate({
+        onkeyup: false,
         rules: {
             ConfirmPassword: {
                 equalTo: "#Password"
+            },
+            Username: {
+                remote: function (control) {
+                    return validateDuplicate(control, { Username: $(control).val() }, $.htl.url.duplicateUsername);
+                }
+            },
+            EmailAddress: {
+                remote: function (control) {
+                    return validateDuplicate(control, { EmailAddress: $(control).val() }, $.htl.url.duplicateEmailAddress);
+                }
             }
         },
+
         messages: {
             ConfirmPassword: {
                 equalTo: "password does not match"
+            },
+            Username: {
+                remote: "already in use"
+            },
+            EmailAddress: {
+                remote: "address already in use"
             }
         }
     });
 });
+
+function validateDuplicate(control, postData, url) {
+    $(control).bind("ajaxStart", function () {
+        $(this).addClass('waiting');
+        $(this).unbind('ajaxStart');
+    }).bind("ajaxStop", function () {
+        $(this).removeClass('waiting');
+        $(this).unbind('ajaxStop');
+    });
+    return {
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: postData,
+        dataFilter: function (data) {
+            var isValid = JSON.parse(data).IsValid;
+            return JSON.stringify(isValid);
+        }
+    };
+}

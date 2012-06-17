@@ -6,7 +6,7 @@ namespace HitThatLine.Domain.Discussion
 {
     public class Post
     {
-        public string Id { get; private set; }
+        public string Id { get; set; }
         public string MarkdownText { get; private set; }
         public string DisplayText { get; private set; }
         public long UpVotes { get; private set; }
@@ -15,14 +15,14 @@ namespace HitThatLine.Domain.Discussion
         public double Score { get; private set; }
         public DateTime CreatedOn { get; private set; }
         public DateTime? LastModified { get; private set; }
-        public string UserAccountId { get; private set; }
+        public string UserAccountKey { get; private set; }
         public string ThreadId { get; private set; }
 
         public Post(string markDownText, UserAccount userAccount)
         {
             MarkdownText = markDownText;
             DisplayText = markDownText.Transform();
-            UserAccountId = userAccount.Id;
+            UserAccountKey = userAccount.DocumentKey;
             CreatedOn = DateTime.Now;
         }
 

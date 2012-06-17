@@ -18,12 +18,12 @@ namespace HitThatLine.Tests.Infrastructure
                 Session.Dispose();
                 TaskExecutor.DocumentStore = DocumentStore;
 
-                var task1 = new LongRunningUpdateName(DefaultUser.Id, "1", 1000);
+                var task1 = new LongRunningUpdateName(DefaultUser.Username, "1", 1000);
                 TaskExecutor.ExcuteLater(task1);
                 TaskExecutor.StartExecuting();
                 TaskExecutor.Discard();
 
-                var task2 = new LongRunningUpdateName(DefaultUser.Id, "2", 500);
+                var task2 = new LongRunningUpdateName(DefaultUser.Username, "2", 500);
                 TaskExecutor.ExcuteLater(task2);
                 TaskExecutor.StartExecuting();
                 TaskExecutor.Discard();
@@ -32,27 +32,27 @@ namespace HitThatLine.Tests.Infrastructure
                 task2.Stop(true);
                 Thread.Sleep(5000);
                 Session = DocumentStore.OpenSession();
-                
-                var account = Session.Load<UserAccount>(DefaultUser.Id);
+
+                var account = Session.Load<UserAccount>(DefaultUser.DocumentKey);
                 account.Username.ShouldEqual("user21");
             }
 
             private class LongRunningUpdateName : BackgroundTask
             {
-                private readonly string _id;
+                private readonly string _username;
                 private readonly string _appendValue;
                 private readonly int _timeoutMillis;
 
-                public LongRunningUpdateName(string id, string appendValue, int timeoutMillis)
+                public LongRunningUpdateName(string username, string appendValue, int timeoutMillis)
                 {
-                    _id = id;
+                    _username = username;
                     _appendValue = appendValue;
                     _timeoutMillis = timeoutMillis;
                 }
 
                 public override void Execute()
                 {
-                    var account = Session.Load<UserAccount>(_id);
+                    var account = Session.Load<UserAccount>(UserAccount.BuildDocumentKey(_username));
                     Thread.Sleep(_timeoutMillis);
                     account.Username = account.Username + _appendValue;
                 }
