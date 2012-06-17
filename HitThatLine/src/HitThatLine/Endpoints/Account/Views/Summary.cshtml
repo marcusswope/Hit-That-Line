@@ -1,0 +1,10 @@
+﻿@using HitThatLine.Endpoints.Account.Models
+@model HitThatLine.Endpoints.Account.Models.SummaryViewModel
+@if(Model.LoggedIn)
+{
+    <a href="#">@Model.UserUsername</a> <text>|</text> @(this.LinkTo<LogoutRequest>().Text("Logout"))
+}
+else
+{
+    @(this.LinkTo<LoginRequest>().Text("Login")) <text>|</text> @(this.LinkTo<RegisterRequest>().Text("Register"))
+}

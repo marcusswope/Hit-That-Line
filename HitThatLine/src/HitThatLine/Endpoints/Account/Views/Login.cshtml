@@ -1,0 +1,21 @@
+﻿@using HitThatLine.Endpoints.Account.Models
+@using HitThatLine.Utility
+@model HitThatLine.Endpoints.Account.Models.LoginViewModel
+@{ this.Script("accountRegistrationJs"); }
+<div class="section-title">
+    Login
+</div>
+<div class="section grid_12">
+    @(this.FormFor<LoginCommand>().Id("registrationForm"))
+    @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
+    @this.Clear()
+    @this.InputFor(x => x.Username).Grid(3)
+    @this.Clear(15)
+    @this.LabelFor(x => x.Password).Grid(3)
+    @this.Clear()
+    @this.InputFor(x => x.Password).Grid(3)
+    @this.Clear(20)
+    <div class="grid_2">
+        <input type="submit" value="Login" class="grid" />
+    </div>
+</div>

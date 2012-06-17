@@ -1,0 +1,84 @@
+﻿html { border: 0; margin: 0; padding: 0; vertical-align: baseline; }
+body { background-color: #EAE9E6; border: 0; margin: 0; padding: 0; vertical-align: baseline; height: 100%; font: 12px/18px 'Ubuntu', Helvetica, sans-serif; color: #545454 }
+a { color: black; text-decoration: none }
+a:visited { color: black; }
+a:hover { text-decoration: underline; }
+
+label { font-size: 18px; }
+label.error { font-style: italic;color: #c41e3a;}
+
+div.section { border-radius: 5px;padding: 5px 0px 0px 0px }
+div.section-title { font-size: 32px;margin: 10px;height: 30px;width: 100%;border-bottom: #545454 solid 2px;color: #000000;text-shadow: #CAC9C6 1px 2px -2px }
+
+div#nav-bar a { margin: 5px;font-size: 18px; margin-right:30px }
+div#nav-bar:first-child a { margin-left:15px }
+
+div#main-header { height:95px;width:100%;background-color: #f4f6f5;margin-bottom: 15px;background-image: url('../images/main-header-logo.png');background-repeat: repeat-x }
+#main-logo { height:70px; margin: 5px; float:left }
+#user-summary { height:70px; margin: 30px 30px 0 0; float: right;vertical-align: middle; font-size:20px }
+
+html.range_4 div#main-header object { height: 70px; }
+html.range_3 div#main-header object { height: 70px; }
+html.range_2 div#main-header object { height: 65px; }
+html.range_1 div#main-header object { height: 60px; }
+html.range_0 div#main-header object { height: 55px; }
+
+select.failed,
+input[type="date"].failed,
+input[type="datetime"].failed,
+input[type="datetime-local"].failed,
+input[type="email"].failed,
+input[type="month"].failed,
+input[type="number"].failed,
+input[type="password"].failed,
+input[type="search"].failed,
+input[type="tel"].failed,
+input[type="text"].failed,
+input[type="time"].failed,
+input[type="url"].failed,
+input[type="week"].failed {
+    background-image: url('../images/exclamation.png');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}
+
+select.passed,
+input[type="date"].passed,
+input[type="datetime"].passed,
+input[type="datetime-local"].passed,
+input[type="email"].passed,
+input[type="month"].passed,
+input[type="number"].passed,
+input[type="password"].passed,
+input[type="search"].passed,
+input[type="tel"].passed,
+input[type="text"].passed,
+input[type="time"].passed,
+input[type="url"].passed,
+input[type="week"].passed {
+    background-image: url('../images/accept.png');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}
+
+select.waiting,
+input[type="date"].waiting,
+input[type="datetime"].waiting,
+input[type="datetime-local"].waiting,
+input[type="email"].waiting,
+input[type="month"].waiting,
+input[type="number"].waiting,
+input[type="password"].waiting,
+input[type="search"].waiting,
+input[type="tel"].waiting,
+input[type="text"].waiting,
+input[type="time"].waiting,
+input[type="url"].waiting,
+input[type="week"].waiting {
+    background-image: url('../images/small-ajax-loader.gif');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}

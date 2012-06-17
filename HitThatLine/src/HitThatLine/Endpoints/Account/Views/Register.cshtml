@@ -1,0 +1,29 @@
+﻿@using HitThatLine.Endpoints.Account.Models
+@using HitThatLine.Utility
+@model HitThatLine.Endpoints.Account.Models.RegisterViewModel
+@{ this.Script("accountRegistrationJs"); }
+<div class="section-title">
+    Account Registration
+</div>
+<div class="section grid_12">
+    @(this.FormFor<RegisterCommand>().Id("registrationForm"))
+    @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
+    @this.Clear()
+    @this.InputFor(x => x.Username).Grid(3)
+    @this.Clear(15)
+    @this.LabelFor(x => x.Password).Grid(3)
+    @this.Clear()
+    @this.InputFor(x => x.Password).Grid(3)
+    @this.Clear(15)
+    @this.LabelFor(x => x.ConfirmPassword).Grid(3)
+    @this.Clear()
+    @this.InputFor(x => x.ConfirmPassword).Grid(3)
+    @this.Clear(15)
+    @this.LabelFor(x => x.EmailAddress).Grid(3)
+    @this.Clear()
+    @this.InputFor(x => x.EmailAddress).Grid(3)
+    @this.Clear(20)
+    <div class="grid_2">
+        <input type="submit" value="Register" class="grid"/>    
+    </div>
+</div>

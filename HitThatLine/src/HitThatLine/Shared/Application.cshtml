@@ -1,0 +1,33 @@
+﻿@using FubuMVC.Core.Assets.Files
+@using FubuMVC.Core.UI
+@using HitThatLine.Endpoints.Account.Models
+@using HitThatLine.Utility
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hit That Line</title>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    @{this.Asset("siteStyles");}
+    @{this.Asset("siteScripts");}
+</head>
+    <body>
+        <div id="main-header">
+            @this.SvgImage("hitthatline.svg").Id("main-logo")
+            <div id="user-summary">
+                @Raw(this.Partial<SummaryRequest>())
+            </div>
+        </div>
+        <div id="container" class="container_12">
+            @RenderBody()
+        </div>
+        @this.WriteCssTags()
+        @this.WriteScriptTags()
+        <script type="text/javascript">
+            $.htl.urls({
+                stylesDir: '@Urls.UrlForAsset(AssetFolder.styles, "site.css").TrimEnd("site.css".ToCharArray())',
+                duplicateUsername: '@(Urls.UrlFor<DuplicateUsernameCommand>())',
+                duplicateEmailAddress: '@(Urls.UrlFor<DuplicateEmailAddressCommand>())'
+            });
+        </script>
+    </body>
+</html>
