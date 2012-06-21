@@ -3,6 +3,7 @@ using FubuMVC.Core.Behaviors;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Services;
 using Raven.Client;
+using FubuCore;
 
 namespace HitThatLine.Infrastructure.Behaviors
 {
@@ -27,7 +28,9 @@ namespace HitThatLine.Infrastructure.Behaviors
             {
                 var userKey = _cookieStorage.Get(UserAccount.LoginCookieName);
                 var user = _session.Load<UserAccount>(userKey);
-                _httpContext.User = user.Principal;
+                
+                if (user != null) _httpContext.User = user.Principal;
+                else _cookieStorage.Remove(UserAccount.LoginCookieName);
             }
 
             InsideBehavior.Invoke();

@@ -8,35 +8,43 @@ using HitThatLine.Services;
 using HitThatLine.Tests.Utility;
 using Moq;
 using NUnit.Framework;
+using Raven.Client;
 
 namespace HitThatLine.Tests.Endpoints.Account
 {
     [TestFixture]
     public class LoginEndpointTest
     {
-        [Test]
-        public void GET_MapsRequestToViewModel()
+        [TestFixture]
+        public class Get : RavenTestBase
         {
-            var endpoint = TestableLoginEndpoint.Build();
-            var request = new LoginRequest();
-            var expectedViewModel = new LoginViewModel();
+            [Test]
+            public void MapsRequestToViewModel()
+            {
+                var endpoint = TestableLoginEndpoint.Build(Session);
+                var request = new LoginRequest();
+                var expectedViewModel = new LoginViewModel();
 
-            endpoint.MappingEngine.Setup(x => x.Map<LoginRequest, LoginViewModel>(request)).Returns(expectedViewModel);
-            var viewModel = endpoint.Login(request);
-            viewModel.ShouldEqual(expectedViewModel);
+                endpoint.MappingEngine.Setup(x => x.Map<LoginRequest, LoginViewModel>(request)).Returns(expectedViewModel);
+                var viewModel = endpoint.Login(request);
+                viewModel.ShouldEqual(expectedViewModel);
+            }
         }
 
-        [Test]
-        public void POST_LogsInAndRedirects()
+        [TestFixture]
+        public class Post : RavenTestBase
         {
-            var endpoint = TestableLoginEndpoint.Build();
-            var userAccount = new Mock<UserAccount>();
-            var command = new LoginCommand { UserAccount = userAccount.Object, Cookies = endpoint.CookieStorage, HttpContext = endpoint.HttpContext };
+            [Test]
+            public void LogsInAndRedirects()
+            {
+                var endpoint = TestableLoginEndpoint.Build(Session);
+                var command = new LoginCommand { Username = DefaultUser.Username, Cookies = endpoint.CookieStorage.Object, HttpContext = endpoint.HttpContext };
 
-            var redirect = endpoint.Login(command);
-            
-            userAccount.Verify(x => x.Login(endpoint.CookieStorage, endpoint.HttpContext));
-            redirect.AssertWasRedirectedTo<HomeRequest>(x => x != null);
+                var redirect = endpoint.Login(command);
+
+                endpoint.CookieStorage.Verify(x => x.Set(UserAccount.LoginCookieName, DefaultUser.DocumentKey));
+                redirect.AssertWasRedirectedTo<HomeRequest>(x => x != null);
+            }
         }
     }
 
@@ -45,20 +53,20 @@ namespace HitThatLine.Tests.Endpoints.Account
         public Mock<IUserAccountService> Service { get; private set; }
         public Mock<IMappingEngine> MappingEngine { get; private set; }
         public HttpContextBase HttpContext { get; private set; }
-        public ICookieStorage CookieStorage { get; private set; }
+        public Mock<ICookieStorage> CookieStorage { get; private set; }
 
-        public TestableLoginEndpoint(Mock<IUserAccountService> service, Mock<IMappingEngine> mappingEngine, Mock<ICookieStorage> cookieStorage, HttpContextBase httpContext)
-            : base(mappingEngine.Object)
+        public TestableLoginEndpoint(Mock<IUserAccountService> service, Mock<IMappingEngine> mappingEngine, Mock<ICookieStorage> cookieStorage, HttpContextBase httpContext, IDocumentSession session)
+            : base(mappingEngine.Object, session)
         {
             Service = service;
             MappingEngine = mappingEngine;
             HttpContext = httpContext;
-            CookieStorage = cookieStorage.Object;
+            CookieStorage = cookieStorage;
         }
 
-        public static TestableLoginEndpoint Build()
+        public static TestableLoginEndpoint Build(IDocumentSession session)
         {
-            return new TestableLoginEndpoint(new Mock<IUserAccountService>(), new Mock<IMappingEngine>(), new Mock<ICookieStorage>(), new Mock<HttpContextBase>().Object);
+            return new TestableLoginEndpoint(new Mock<IUserAccountService>(), new Mock<IMappingEngine>(), new Mock<ICookieStorage>(), new Mock<HttpContextBase>().Object, session);
         }
     }
 }

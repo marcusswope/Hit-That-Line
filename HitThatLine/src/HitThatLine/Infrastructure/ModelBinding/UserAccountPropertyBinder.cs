@@ -4,7 +4,6 @@ using FubuCore;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Services;
 using Raven.Client;
-using System.Linq;
 
 namespace HitThatLine.Infrastructure.ModelBinding
 {
@@ -17,22 +16,12 @@ namespace HitThatLine.Infrastructure.ModelBinding
 
         public void Bind(PropertyInfo property, IBindingContext context)
         {
-            UserAccount user = null;
             if (context.Service<ICookieStorage>().Contains(UserAccount.LoginCookieName))
             {
                 var userKey = context.Service<ICookieStorage>().Get(UserAccount.LoginCookieName);
-                user = context.Service<IDocumentSession>().Load<UserAccount>(userKey);
+                var user = context.Service<IDocumentSession>().Load<UserAccount>(userKey);
+                property.SetValue(context.Object, user, null);
             }
-            else
-            {
-                var username = context.Data.ValueAs<string>("Username");
-                if (username != null)
-                {
-                    user = context.Service<IDocumentSession>().Load<UserAccount>(UserAccount.BuildDocumentKey(username));
-                }
-            }
-
-            property.SetValue(context.Object, user, null);
         }
     }
 }

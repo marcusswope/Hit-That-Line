@@ -1,4 +1,6 @@
-﻿using HitThatLine.Domain.Accounts;
+﻿using System.Security.Cryptography;
+using System.Text;
+using HitThatLine.Domain.Accounts;
 using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Utility;
 using Raven.Client;
@@ -7,7 +9,7 @@ namespace HitThatLine.Services
 {
     public interface IUserAccountService
     {
-        UserAccount CreateNew(RegisterCommand model);
+        UserAccount CreateNew(RegisterCommand command);
     }
 
     public class UserAccountService : IUserAccountService
@@ -21,17 +23,33 @@ namespace HitThatLine.Services
             _session = session;
         }
         
-        public UserAccount CreateNew(RegisterCommand model)
+        public UserAccount CreateNew(RegisterCommand command)
         {
             var account = new UserAccount
                               {
-                                  EmailAddress = model.EmailAddress,
-                                  Password = model.Password,
-                                  Username = model.Username
+                                  EmailAddress = command.EmailAddress,
+                                  EmailHash = createEmailhash(command.EmailAddress),
+                                  Password = command.Password,
+                                  Username = command.Username
                               };
+
             _session.Store(account, UserAccount.BuildDocumentKey(account.Username));
-            account.Login(_cookieStorage, model.HttpContext);
+            account.Login(_cookieStorage, command.HttpContext);
             return account;
+        }
+
+        private static string createEmailhash(string email)
+        {
+            using (var md5 = MD5.Create())
+            {
+                var data = md5.ComputeHash(Encoding.UTF8.GetBytes(email));
+                var expectedHash = new StringBuilder();
+                for (var i = 0; i < data.Length; i++)
+                {
+                    expectedHash.Append(data[i].ToString("x2"));
+                }
+                return expectedHash.ToString();
+            }
         }
     }
 }

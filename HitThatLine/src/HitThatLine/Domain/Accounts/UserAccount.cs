@@ -1,6 +1,7 @@
 ﻿using System.Security.Principal;
 using System.Web;
 using HitThatLine.Services;
+using Newtonsoft.Json;
 
 namespace HitThatLine.Domain.Accounts
 {
@@ -12,6 +13,7 @@ namespace HitThatLine.Domain.Accounts
         public string Username { get; set; }
         public string Password { get; set; }
         public string EmailAddress { get; set; }
+        public string EmailHash { get; set; }
 
         public string DocumentKey
         {
@@ -27,8 +29,8 @@ namespace HitThatLine.Domain.Accounts
             cookieStorage.Set(LoginCookieName, DocumentKey);
             context.User = Principal;
         }
-
-        private GenericPrincipal _principal;
+        
+        [JsonIgnore]
         public virtual GenericPrincipal Principal
         {
             get
@@ -36,7 +38,14 @@ namespace HitThatLine.Domain.Accounts
                 return _principal ?? (_principal = new GenericPrincipal(new GenericIdentity(Username), new[] { BasicUserRole }));
             }
         }
-        
+        private GenericPrincipal _principal;
+
+        [JsonIgnore]
+        public string ProfilePictureUrl
+        {
+            get { return string.Format("http://www.gravatar.com/avatar/{0}?d=identicon&r=pg&s=70", EmailHash); }
+        }
+
         public virtual void Logout(ICookieStorage cookieStorage)
         {
             cookieStorage.Remove(LoginCookieName);

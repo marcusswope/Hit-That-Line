@@ -136,9 +136,10 @@ namespace HitThatLine.Tests.Infrastructure.Conventions.Validation
         public string PhoneNumber { get; set; }
         public string SocialSecurityNumber { get; set; }
 
+        private AllConventionsCommand _transferTo;
         public object TransferToOnFailed
         {
-            get { return new AllConventionsCommand(); }
+            get { return _transferTo ?? (_transferTo = new AllConventionsCommand()); }
         }
     }
 

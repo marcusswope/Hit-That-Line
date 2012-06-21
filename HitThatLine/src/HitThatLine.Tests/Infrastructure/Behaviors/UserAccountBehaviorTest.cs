@@ -40,6 +40,20 @@ namespace HitThatLine.Tests.Infrastructure.Behaviors
         }
 
         [Test]
+        public void LogsOutIfCantFindUser()
+        {
+            var behavior = TestableUserAccountBehavior.Build();
+            behavior.Cookies.Setup(x => x.Contains(UserAccount.LoginCookieName)).Returns(true);
+            behavior.Cookies.Setup(x => x.Get(UserAccount.LoginCookieName)).Returns(behavior.User.DocumentKey);
+            behavior.Session.Setup(x => x.Load<UserAccount>(behavior.User.DocumentKey)).Returns(null as UserAccount);
+            
+            behavior.Invoke();
+
+            behavior.Cookies.Verify(x => x.Remove(UserAccount.LoginCookieName));
+            behavior.MockInsideBehavior.VerifyInvoked();
+        }
+
+        [Test]
         public void DoesNothingOnPartialInvoke()
         {
             var behavior = TestableUserAccountBehavior.Build();

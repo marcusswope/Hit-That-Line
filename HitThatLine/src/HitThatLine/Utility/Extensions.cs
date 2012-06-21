@@ -1,4 +1,5 @@
-﻿using MarkdownSharp;
+﻿using System;
+using MarkdownSharp;
 
 namespace HitThatLine.Utility
 {
@@ -54,6 +55,12 @@ namespace HitThatLine.Utility
             }
 
             return newString;
+        }
+
+        public static void IfNotNull<T>(this T target, Action<T> work)
+        {
+            if (target == null) return;
+            work(target);
         }
     }
 

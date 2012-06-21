@@ -33,21 +33,6 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
             binder.Model.UserAccount.ShouldEqual(DefaultUser);
         }
 
-
-        [Test]
-        public void AttemptsToSetUserFromUsernameProperty()
-        {
-            var binder = TestableUserAccountPropertyBinder.Build(Session);
-
-            binder.Cookies.Setup(x => x.Contains(UserAccount.LoginCookieName)).Returns(false);
-            binder.ContextValues.Setup(x => x.ValueAs<string>("Username")).Returns(DefaultUser.Username);
-
-            binder.Bind(typeof(UserAccountBindingModel).GetProperty("UserAccount"), binder.Context.Object);
-            
-            binder.Model.UserAccount.ShouldEqual(DefaultUser);
-        }
-
-
         private class TestableUserAccountPropertyBinder : UserAccountPropertyBinder
         {
             public Mock<IBindingContext> Context { get; private set; }

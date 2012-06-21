@@ -4,6 +4,7 @@ using HitThatLine.Domain.Accounts;
 using HitThatLine.Services;
 using Moq;
 using NUnit.Framework;
+using HitThatLine.Tests.Utility;
 
 namespace HitThatLine.Tests.Domain.Accounts
 {
@@ -52,5 +53,17 @@ namespace HitThatLine.Tests.Domain.Accounts
                 cookieStorage.Verify(x => x.Remove(UserAccount.LoginCookieName));
             }
         }
+
+        [TestFixture]
+        public class ProfilePicture
+        {
+            [Test]
+            public void ReturnsGravatarUrlWithEmailHash()
+            {
+                var account = new UserAccount { EmailHash = "someHash" };
+                account.ProfilePictureUrl.ShouldEqual("http://www.gravatar.com/avatar/someHash?d=identicon&r=pg&s=70");
+            }
+        }
+
     }
 }

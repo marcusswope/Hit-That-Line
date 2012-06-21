@@ -45,6 +45,7 @@ function validateDuplicate(control, postData, url) {
         url: url,
         dataType: "json",
         data: postData,
+        cache: false,
         dataFilter: function (data) {
             var isValid = JSON.parse(data).IsValid;
             return JSON.stringify(isValid);

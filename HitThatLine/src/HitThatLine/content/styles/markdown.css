@@ -1,4 +1,8 @@
-﻿.wmd-panel
+﻿li.wmd-button {
+    margin-left: 0px;
+}
+
+.wmd-panel
 {
 	margin-left: 25%;
 	margin-right: 25%;
@@ -14,15 +18,18 @@
 
 .wmd-input 
 { 
-	height: 300px;
-	width: 400px;
-	background-color: Gainsboro;
-	border: 1px solid DarkGray;
+	min-height:250px
 }
 
 .wmd-preview 
 { 
-	background-color: #c0e0ff; 
+    padding: 10px
+}
+
+.wmd-preview-container {
+    min-height: 100px;
+    border-style: dotted;
+    border-width: 2px;
 }
 
 .wmd-button-row 

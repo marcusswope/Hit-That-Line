@@ -13,33 +13,42 @@ namespace HitThatLine.Tests.Endpoints.Account
     [TestFixture]
     public class RegisterEndpointTest
     {
-        [Test]
-        public void GET_MapRequestToModel()
+        [TestFixture]
+        public class Get
         {
-            var endpoint = TestableRegisterEndpoint.Build(new Mock<IDocumentSession>().Object);
-            var request = new RegisterRequest();
-            var expectedViewModel = new RegisterViewModel();
+            [Test]
+            public void MapsRequestToModel()
+            {
+                var endpoint = TestableRegisterEndpoint.Build(new Mock<IDocumentSession>().Object);
+                var request = new RegisterRequest();
+                var expectedViewModel = new RegisterViewModel();
 
-            endpoint.Mapper.Setup(x => x.Map<RegisterRequest, RegisterViewModel>(request)).Returns(expectedViewModel);
+                endpoint.Mapper.Setup(x => x.Map<RegisterRequest, RegisterViewModel>(request)).Returns(expectedViewModel);
 
-            var model = endpoint.Register(request);
+                var model = endpoint.Register(request);
 
-            model.ShouldEqual(expectedViewModel);
+                model.ShouldEqual(expectedViewModel);
+            }
         }
 
-        [Test]
-        public void POST_CreateNewAccountAndRedirect()
+        [TestFixture]
+        public class Post
         {
-            var endpoint = TestableRegisterEndpoint.Build(new Mock<IDocumentSession>().Object);
-            var command = new RegisterCommand();
+            [Test]
+            public void CreatesNewAccountAndRedirects()
+            {
+                var endpoint = TestableRegisterEndpoint.Build(new Mock<IDocumentSession>().Object);
+                var command = new RegisterCommand();
 
-            var continuation = endpoint.Register(command);
+                var continuation = endpoint.Register(command);
 
-            endpoint.Service.Verify(x => x.CreateNew(command));
-            continuation.AssertWasRedirectedTo<HomeRequest>();
+                endpoint.Service.Verify(x => x.CreateNew(command));
+                continuation.AssertWasRedirectedTo<HomeRequest>();
+            }
         }
 
-        private class ValidatesDuplicateUsernames : RavenTestBase
+        [TestFixture]
+        public class ValidatesDuplicateUsernames : RavenTestBase
         {
             [Test]
             public void ThatExist()
@@ -60,7 +69,8 @@ namespace HitThatLine.Tests.Endpoints.Account
             }
         }
 
-        private class ValidatesDuplicateEmails : RavenTestBase
+        [TestFixture]
+        public class ValidatesDuplicateEmails : RavenTestBase
         {
             [Test]
             public void ThatExist()

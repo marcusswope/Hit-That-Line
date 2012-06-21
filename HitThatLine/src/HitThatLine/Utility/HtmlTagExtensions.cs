@@ -53,5 +53,15 @@ namespace HitThatLine.Utility
         {
             return tag.Attr("autofocus", "autofocus");
         }
+
+        public static HtmlTag Placeholder(this HtmlTag tag, string placeholderText)
+        {
+            return tag.Attr("placeholder", placeholderText);
+        }
+
+        public static HtmlTag TextBoxOnRight(this HtmlTag tag)
+        {
+            return tag.Grid().AddClass("textbox-on-right");
+        }
     }
 }

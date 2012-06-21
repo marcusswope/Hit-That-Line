@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FubuMVC.Core;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Continuations;
@@ -13,13 +14,15 @@ namespace HitThatLine.Infrastructure.Behaviors
         private readonly IFubuRequest _request;
         private readonly IContainer _container;
         private readonly IContinuationDirector _director;
+        private readonly IMappingEngine _mapper;
 
-        public ValidationBehavior(IFubuRequest request, IContainer container, IContinuationDirector director)
+        public ValidationBehavior(IFubuRequest request, IContainer container, IContinuationDirector director, IMappingEngine mapper)
             : base(PartialBehavior.Ignored)
         {
             _request = request;
             _container = container;
-            _director = director;   
+            _director = director;
+            _mapper = mapper;
         }
 
         protected override DoNext performInvoke()
@@ -34,13 +37,16 @@ namespace HitThatLine.Infrastructure.Behaviors
                 validator = _container.GetInstance<ConventionBasedValidator<T>>();
             }
 
-            var model = _request.Get<T>();
-            var result = validator.Validate(model);
+            var inputModel = _request.Get<T>();
+            var result = validator.Validate(inputModel);
             if (result.IsValid) return DoNext.Continue;
-
-            _request.Set(result);
-            _director.TransferTo(model.TransferToOnFailed);
             
+            var transferToModel = inputModel.TransferToOnFailed;
+            transferToModel = _mapper.Map(inputModel, transferToModel, inputModel.GetType(), transferToModel.GetType());
+            
+            _request.Set(result);
+            _director.TransferTo(transferToModel);
+
             return DoNext.Stop;
         }
     }

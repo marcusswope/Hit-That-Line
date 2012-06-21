@@ -1,0 +1,26 @@
+﻿@using HitThatLine.Endpoints.Thread.Models
+@using FubuMVC.Core.UI
+@using HitThatLine.Utility
+@model HitThatLine.Endpoints.Thread.Models.NewThreadViewModel
+@{this.Asset("newThread");}
+@{this.Asset("markdownStyles");}
+<div class="section-title">
+    Create New Thread
+</div>
+@this.Clear(15)
+@(this.FormFor<NewThreadCommand>())
+@this.LabelFor(x => x.Title).TextBoxOnRight()
+@this.InputFor(x => x.Title).Grid(10).Placeholder("new thread title")
+@this.Clear(15)
+<div id="wmd-button-bar" class="grid">
+</div>
+@this.InputFor(x => x.Body).Id("wmd-input").AddClass("wmd-input").Grid(12)
+@this.Clear(15)
+<div class="wmd-preview-container grid_12">
+    <div id="wmd-preview" class="wmd-preview"></div>
+</div>
+@this.Clear(15)
+<div>
+    <input type="submit" class="grid_2" />    
+</div>
+@this.Clear(15)

@@ -12,5 +12,6 @@ namespace HitThatLine.Endpoints.Account.Models
     {
         public string UserUsername { get; set; }
         public bool LoggedIn { get; set; }
+        public string UserProfilePictureUrl { get; set; }
     }
 }

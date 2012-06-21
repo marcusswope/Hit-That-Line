@@ -10,13 +10,14 @@ namespace HitThatLine.Tests.Utility
         protected IDocumentSession Session;
         protected IDocumentStore DocumentStore;
         protected UserAccount DefaultUser;
-
+        
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
             DocumentStore = new EmbeddableDocumentStore { RunInMemory = true, UseEmbeddedHttpServer = true }.Initialize();
             Session = DocumentStore.OpenSession();
             DefaultUser = new UserAccount { Username = "user", Password = "password", EmailAddress = "email@email.com" };
+            
             Session.Store(DefaultUser, DefaultUser.DocumentKey);
             Session.SaveChanges();
         }

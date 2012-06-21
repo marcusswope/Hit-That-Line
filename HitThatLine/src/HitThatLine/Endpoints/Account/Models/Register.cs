@@ -15,15 +15,6 @@ namespace HitThatLine.Endpoints.Account.Models
         public string ConfirmPassword { get; set; }
         [Required]
         public string EmailAddress { get; set; }
-
-        public RegisterRequest(RegisterCommand command)
-        {
-            Username = command.Username;
-            EmailAddress = command.EmailAddress;
-        }
-
-        public RegisterRequest()
-        { }
     }
 
     public class RegisterViewModel : RegisterRequest
@@ -35,7 +26,7 @@ namespace HitThatLine.Endpoints.Account.Models
         public HttpContextBase HttpContext { get; set; }
         public object TransferToOnFailed
         {
-            get { return new RegisterRequest(this); }
+            get { return new RegisterRequest(); }
         }
     }
 }
