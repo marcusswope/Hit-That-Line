@@ -1,4 +1,6 @@
-﻿using HitThatLine.Infrastructure;
+﻿using System.Collections.Generic;
+using FubuMVC.Core;
+using HitThatLine.Infrastructure;
 using HitThatLine.Infrastructure.Conventions.Attributes;
 
 namespace HitThatLine.Endpoints.Thread.Models
@@ -8,7 +10,9 @@ namespace HitThatLine.Endpoints.Thread.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        public string Body { get; set; } 
+        public string Body { get; set; }
+        [Required]
+        public string Tags { get; set; }
     }
 
     public class NewThreadViewModel : NewThreadRequest
@@ -22,5 +26,15 @@ namespace HitThatLine.Endpoints.Thread.Models
         {
             get { return new NewThreadRequest(); }
         }
+    }
+
+    public class TagCountRequest : JsonMessage
+    {
+        public List<ThreadCountByTag> Tags { get; set; }
+    }
+
+    public class TagCountResponse : JsonMessage
+    {
+        public List<ThreadCountByTag> Tags { get; set; }
     }
 }

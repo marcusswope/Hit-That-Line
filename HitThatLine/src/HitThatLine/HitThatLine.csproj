@@ -192,7 +192,9 @@
     <Compile Include="Endpoints\Home\HomeEndpoint.cs" />
     <Compile Include="Endpoints\Home\Models\Home.cs" />
     <Compile Include="Endpoints\Thread\Models\NewThread.cs" />
+    <Compile Include="Endpoints\Thread\Models\ViewThread.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpoint.cs" />
+    <Compile Include="Endpoints\Thread\ViewThreadEndpoint.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\BackgroundTask.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinder.cs" />
     <Compile Include="Infrastructure\RavenDBRegistry.cs" />
+    <Compile Include="Infrastructure\Threads_TagCount.cs" />
     <Compile Include="Infrastructure\TaskExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CookieStorage.cs" />

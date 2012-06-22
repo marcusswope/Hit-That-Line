@@ -7,6 +7,7 @@ using FubuMVC.Core.Runtime;
 using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Infrastructure.Behaviors;
 using HitThatLine.Tests.Infrastructure.Conventions.Validation;
+using HitThatLine.Tests.Utility;
 using Moq;
 using NUnit.Framework;
 using StructureMap;
@@ -54,15 +55,15 @@ namespace HitThatLine.Tests.Infrastructure.Behaviors
             public Mock<IMappingEngine> Mapper { get; private set; }
             public AllConventionsCommand Model { get; private set; }
 
-            public TestableValidationBehavior(Mock<IFubuRequest> request, IContainer container, Mock<IContinuationDirector> director, Mock<IMappingEngine> mapper, AllConventionsCommand model)
-                : base(request.Object, container, director.Object, mapper.Object)
+            public TestableValidationBehavior(Mock<IFubuRequest> request, IContainer container, Mock<IContinuationDirector> director, TestableMappingEngine mapper, AllConventionsCommand model)
+                : base(request.Object, container, director.Object, mapper)
             {
                 ValidationResult = new ValidationResult();
                 MockInsideBehavior = new Mock<IActionBehavior>();
                 InsideBehavior = MockInsideBehavior.Object;
                 Request = request;
                 Director = director;
-                Mapper = mapper;
+                Mapper = mapper.Mapper;
                 Model = model;
             }
 
@@ -72,7 +73,7 @@ namespace HitThatLine.Tests.Infrastructure.Behaviors
                 var container = new Mock<IContainer>();
                 var director = new Mock<IContinuationDirector>();
                 var structureMapModel = new Mock<IModel>();
-                var mapper = new Mock<IMappingEngine>();
+                var mapper = new TestableMappingEngine();
                 var validator = new Mock<IValidator<AllConventionsCommand>>();
                 var model = new AllConventionsCommand();
 
@@ -80,7 +81,8 @@ namespace HitThatLine.Tests.Infrastructure.Behaviors
                 structureMapModel.Setup(x => x.HasDefaultImplementationFor(typeof(IValidator<AllConventionsCommand>))).Returns(true);
                 container.Setup(x => x.GetInstance(typeof(IValidator<AllConventionsCommand>))).Returns(validator.Object);
                 request.Setup(x => x.Get<AllConventionsCommand>()).Returns(model);
-                mapper.Setup(x => x.Map(model, model.TransferToOnFailed, model.GetType(), model.TransferToOnFailed.GetType())).Returns(model.TransferToOnFailed);
+                mapper.Mapper.Setup(x => x.Map(model, model.TransferToOnFailed, model.GetType(), model.TransferToOnFailed.GetType())).Returns(model.TransferToOnFailed);
+                mapper.ConfigurationProvider.CreateMap<AllConventionsCommand, AllConventionsCommand>();
 
                 var behavior = new TestableValidationBehavior(request, container.Object, director, mapper, model);
                 validator.Setup(x => x.Validate(model)).Returns(behavior.ValidationResult);

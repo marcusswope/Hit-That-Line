@@ -97,16 +97,16 @@ namespace HitThatLine.Tests.Endpoints.Account
         public Mock<IUserAccountService> Service { get; private set; }
         public Mock<IMappingEngine> Mapper { get; private set; }
 
-        public TestableRegisterEndpoint(Mock<IUserAccountService> service, Mock<IMappingEngine> mapper, IDocumentSession session)
-            : base(service.Object, mapper.Object, session)
+        public TestableRegisterEndpoint(Mock<IUserAccountService> service, TestableMappingEngine mapper, IDocumentSession session)
+            : base(service.Object, mapper, session)
         {
             Service = service;
-            Mapper = mapper;
+            Mapper = mapper.Mapper;
         }
 
         public static TestableRegisterEndpoint Build(IDocumentSession session)
         {
-            return new TestableRegisterEndpoint(new Mock<IUserAccountService>(), new Mock<IMappingEngine>(), session);
+            return new TestableRegisterEndpoint(new Mock<IUserAccountService>(), new TestableMappingEngine(), session);
         }
     }
 }

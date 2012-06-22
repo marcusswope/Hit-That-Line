@@ -47,7 +47,9 @@ input[type="tel"].error,
 input[type="text"].error,
 input[type="time"].error,
 input[type="url"].error,
-input[type="week"].error {
+input[type="week"].error,
+input[type="textarea"].error,
+textarea.error {
     background-image: url('../images/exclamation.png');
     background-position: 98% 50%;
     background-repeat: no-repeat;

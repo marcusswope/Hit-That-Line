@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HitThatLine.Utility;
+using System.Linq;
 
 namespace HitThatLine.Domain.Discussion
 {
@@ -21,14 +22,16 @@ namespace HitThatLine.Domain.Discussion
         public long NetVotes { get { return UpVotes - DownVotes; } }
         public double Score { get; private set; }
 
-        public DiscussionThread(string title, string body)
+        public DiscussionThread(string title, string body, IEnumerable<string> tags)
         {
+            Id = "threads/";
             Title = title;
             MarkdownBody = body;
             DisplayBody = body.Transform();
             CreatedOn = DateTime.Now;
             LastActivity = DateTime.Now;
             UpVotes = 1;
+            Tags = tags.ToList();
             calculateScore();
         }
 

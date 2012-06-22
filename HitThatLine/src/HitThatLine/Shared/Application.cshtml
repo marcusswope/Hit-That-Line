@@ -1,6 +1,7 @@
 ﻿@using FubuMVC.Core.Assets.Files
 @using FubuMVC.Core.UI
 @using HitThatLine.Endpoints.Account.Models
+@using HitThatLine.Endpoints.Thread.Models
 @using HitThatLine.Utility
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,8 @@
         $.htl.urls({
             stylesDir: '@Urls.UrlForAsset(AssetFolder.styles, "site.css").TrimEnd("site.css".ToCharArray())',
             duplicateUsername: '@(Urls.UrlFor<DuplicateUsernameCommand>())',
-            duplicateEmailAddress: '@(Urls.UrlFor<DuplicateEmailAddressCommand>())'
+            duplicateEmailAddress: '@(Urls.UrlFor<DuplicateEmailAddressCommand>())',
+            tagCounts: '@(Urls.UrlFor<TagCountRequest>())'
         });
     </script>
 </body>

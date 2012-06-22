@@ -55,18 +55,18 @@ namespace HitThatLine.Tests.Endpoints.Account
         public HttpContextBase HttpContext { get; private set; }
         public Mock<ICookieStorage> CookieStorage { get; private set; }
 
-        public TestableLoginEndpoint(Mock<IUserAccountService> service, Mock<IMappingEngine> mappingEngine, Mock<ICookieStorage> cookieStorage, HttpContextBase httpContext, IDocumentSession session)
-            : base(mappingEngine.Object, session)
+        public TestableLoginEndpoint(Mock<IUserAccountService> service, TestableMappingEngine mappingEngine, Mock<ICookieStorage> cookieStorage, HttpContextBase httpContext, IDocumentSession session)
+            : base(mappingEngine, session)
         {
             Service = service;
-            MappingEngine = mappingEngine;
+            MappingEngine = mappingEngine.Mapper;
             HttpContext = httpContext;
             CookieStorage = cookieStorage;
         }
 
         public static TestableLoginEndpoint Build(IDocumentSession session)
         {
-            return new TestableLoginEndpoint(new Mock<IUserAccountService>(), new Mock<IMappingEngine>(), new Mock<ICookieStorage>(), new Mock<HttpContextBase>().Object, session);
+            return new TestableLoginEndpoint(new Mock<IUserAccountService>(), new TestableMappingEngine(), new Mock<ICookieStorage>(), new Mock<HttpContextBase>().Object, session);
         }
     }
 }

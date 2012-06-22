@@ -1,0 +1,1580 @@
+time,logger,level,message,exception
+2012-06-21 19:48:57.5068,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-21 19:48:57.5302,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-21 19:48:58.8349,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-21 19:48:58.8505,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-06-21 19:48:58.8779,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-21 19:48:58.9296,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-21 19:48:59.0019,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-21 19:48:59.0019,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-21 19:49:47.6416,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:49:47.7050,Raven.Database.Server.HttpServer,Debug,Request #   1: GET     -    74 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:49:47.7246,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:49:47.7841,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-21 19:49:47.7841,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-21 19:49:48.5878,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-21 19:49:48.6230,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:49:48.6230,Raven.Database.Server.HttpServer,Debug,Request #   2: GET     -    88 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:49:48.6250,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:49:48.7656,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByEmailAddress:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByEmailAddress : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByEmailAddress()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { EmailAddress = doc.EmailAddress }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { EmailAddress = doc.EmailAddress, __document_id = doc.__document_id });
+		this.AddField(""EmailAddress"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""EmailAddress"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""EmailAddress"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-21 19:49:48.8750,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-21 19:49:48.8750,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-06-21 19:49:48.8750,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-21 19:49:48.9921,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Temp/UserAccounts/ByEmailAddress,
+2012-06-21 19:49:49.1083,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByEmailAddress,
+2012-06-21 19:49:49.1093,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Temp/UserAccounts/ByUsername,
+2012-06-21 19:49:49.1093,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByUsername,
+2012-06-21 19:49:49.1279,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-21 19:49:49.1425,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByEmailAddress,
+2012-06-21 19:49:49.1425,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: DELETE INDEX Temp/UserAccounts/ByEmailAddress,
+2012-06-21 19:49:49.1425,Raven.Database.Indexing.IndexStorage,Info,Deleting index Temp/UserAccounts/ByUsername,
+2012-06-21 19:49:49.1611,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: DELETE INDEX Temp/UserAccounts/ByUsername,
+2012-06-21 19:49:49.1611,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2012-06-21 19:49:49.1611,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: IndexingExecuter, will wait for additional work",
+2012-06-21 19:49:49.1611,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:49:49.1611,Raven.Database.Server.HttpServer,Debug,"Request #   3: GET     - 1,444 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations",
+2012-06-21 19:49:49.1611,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:49:49.1611,Raven.Database.Server.HttpServer,Debug,Request #   4: GET     -   543 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 19:50:12.5488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:50:12.5488,Raven.Database.Server.HttpServer,Debug,Request #   5: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 19:50:12.5488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:50:12.5488,Raven.Database.Server.HttpServer,Debug,Request #   6: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:50:13.3681,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:50:13.3681,Raven.Database.Server.HttpServer,Debug,Request #   7: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 19:50:13.3681,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:50:13.3681,Raven.Database.Server.HttpServer,Debug,Request #   8: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:51:28.8710,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:51:28.8710,Raven.Database.Server.HttpServer,Debug,Request #   9: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 19:51:28.8710,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:51:28.8710,Raven.Database.Server.HttpServer,Debug,Request #  10: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:51:29.6826,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 19:51:29.6826,Raven.Database.Server.HttpServer,Debug,Request #  11: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 19:51:29.6826,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 19:51:29.6826,Raven.Database.Server.HttpServer,Debug,Request #  12: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:04:24.4316,Raven.Database.Server.HttpServer,Debug,Request #  13: GET     -   166 ms - <default>  - 200 - /docs?pageSize=0&noCache=1109645220,
+2012-06-21 20:04:24.5478,Raven.Database.Server.HttpServer,Debug,Request #  14: GET     -    19 ms - HitThatLine - 200 - /license/status?noCache=1910840955,
+2012-06-21 20:04:24.5820,Raven.Database.Server.HttpServer,Debug,Request #  15: GET     -    36 ms - HitThatLine - 200 - /docs/?start=0&pageSize=25&noCache=290352768,
+2012-06-21 20:04:24.7187,Raven.Database.Server.HttpServer,Debug,Request #  16: GET     -   124 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=119543920,
+2012-06-21 20:04:24.7187,Raven.Database.Server.HttpServer,Debug,Request #  17: GET     -     5 ms - HitThatLine - 200 - /build/version?noCache=1304503300,
+2012-06-21 20:04:24.9003,Raven.Database.Server.HttpServer,Debug,Request #  18: GET     -   279 ms - HitThatLine - 200 - /stats?noCache=2072346935,
+2012-06-21 20:04:26.9980,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:04:26.9980,Raven.Database.Server.HttpServer,Debug,Request #  19: GET     -    51 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:04:27.0214,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:04:27.0214,Raven.Database.Server.HttpServer,Debug,Request #  20: GET     -    75 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:04:31.1718,Raven.Database.Server.HttpServer,Debug,Request #  21: GET     -    38 ms - HitThatLine - 200 - /stats?noCache=-644142870,
+2012-06-21 20:04:34.7382,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:34.7382,Raven.Database.Server.HttpServer,Debug,Request #  22: GET     -    27 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:04:37.4541,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:37.4541,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:37.4541,Raven.Database.Server.HttpServer,Debug,Request #  23: GET     -    41 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:04:37.4541,Raven.Database.Server.HttpServer,Debug,Request #  24: GET     -    41 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:04:37.5625,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:37.5625,Raven.Database.Server.HttpServer,Debug,Request #  25: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:04:37.7382,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:37.7382,Raven.Database.Server.HttpServer,Debug,Request #  26: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:04:37.7382,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:04:37.7382,Raven.Database.Server.HttpServer,Debug,Request #  27: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:04:47.4570,Raven.Database.Server.HttpServer,Debug,Request #  28: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=1141008000,
+2012-06-21 20:04:57.6904,Raven.Database.Server.HttpServer,Debug,Request #  29: GET     -    48 ms - HitThatLine - 200 - /stats?noCache=-337230480,
+2012-06-21 20:05:03.7226,Raven.Database.Server.HttpServer,Debug,Request #  30: GET     -    31 ms - HitThatLine - 200 - /stats?noCache=-1555763148,
+2012-06-21 20:05:08.9228,Raven.Database.Server.HttpServer,Debug,Request #  31: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=-1822250012,
+2012-06-21 20:06:05.0507,Raven.Database.Server.HttpServer,Debug,Request #  32: GET     -    43 ms - HitThatLine - 200 - /stats?noCache=-944592941,
+2012-06-21 20:06:10.1386,Raven.Database.Server.HttpServer,Debug,Request #  33: GET     -    52 ms - HitThatLine - 200 - /stats?noCache=1145278710,
+2012-06-21 20:06:32.4873,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:06:32.4873,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:06:32.4873,Raven.Database.Server.HttpServer,Debug,Request #  34: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:06:32.4873,Raven.Database.Server.HttpServer,Debug,Request #  35: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:06:33.4052,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:06:33.4052,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:06:33.4052,Raven.Database.Server.HttpServer,Debug,Request #  36: GET     -    59 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:06:33.4062,Raven.Database.Server.HttpServer,Debug,Request #  37: GET     -    59 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:06:47.3076,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:06:47.3076,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:06:47.3076,Raven.Database.Server.HttpServer,Debug,Request #  38: GET     -     1 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:06:47.3076,Raven.Database.Server.HttpServer,Debug,Request #  39: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:06:48.1542,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:06:48.1542,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:06:48.1542,Raven.Database.Server.HttpServer,Debug,Request #  40: GET     -     8 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:06:48.1542,Raven.Database.Server.HttpServer,Debug,Request #  41: GET     -     8 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:07:27.8251,Raven.Database.Server.HttpServer,Debug,Request #  42: GET     -    28 ms - HitThatLine - 200 - /stats?noCache=-831276414,
+2012-06-21 20:08:45.7705,Raven.Database.Server.HttpServer,Debug,Request #  43: GET     -    93 ms - HitThatLine - 200 - /stats?noCache=-1800292861,
+2012-06-21 20:09:02.4892,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:09:02.4892,Raven.Database.Server.HttpServer,Debug,Request #  44: GET     -     1 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:09:36.9667,Raven.Database.Server.HttpServer,Debug,Request #  45: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=1834450915,
+2012-06-21 20:09:42.1250,Raven.Database.Server.HttpServer,Debug,Request #  46: GET     -    41 ms - HitThatLine - 200 - /stats?noCache=-1407148685,
+2012-06-21 20:10:26.7226,Raven.Database.Server.HttpServer,Debug,Request #  47: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=911124443,
+2012-06-21 20:10:27.7568,Raven.Database.Server.HttpServer,Debug,Request #  48: GET     -    48 ms - HitThatLine - 200 - /stats?noCache=1760809133,
+2012-06-21 20:10:31.2500,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:10:31.2500,Raven.Database.Server.HttpServer,Debug,Request #  49: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:10:31.3623,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:10:31.3623,Raven.Database.Server.HttpServer,Debug,Request #  50: GET     -    22 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:10:33.6162,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:33.6162,Raven.Database.Server.HttpServer,Debug,Request #  51: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:10:35.6787,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:35.6787,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:35.6787,Raven.Database.Server.HttpServer,Debug,Request #  52: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:35.6787,Raven.Database.Server.HttpServer,Debug,Request #  53: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:35.8105,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:35.8105,Raven.Database.Server.HttpServer,Debug,Request #  54: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:35.8417,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:35.8417,Raven.Database.Server.HttpServer,Debug,Request #  55: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:35.8437,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:35.8437,Raven.Database.Server.HttpServer,Debug,Request #  56: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:46.1757,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:10:46.1757,Raven.Database.Server.HttpServer,Debug,Request #  57: GET     -    38 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:10:46.2832,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/DiscussionThreads' was not found,
+2012-06-21 20:10:46.2832,Raven.Database.Server.HttpServer,Debug,Request #  58: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:10:46.4814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/DiscussionThreads', update: False, ",
+2012-06-21 20:10:46.4814,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: PUT Raven/Hilo/DiscussionThreads,
+2012-06-21 20:10:46.4814,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/DiscussionThreads with etag 00000000-0000-1000-0000-000000000001,
+2012-06-21 20:10:46.4814,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:10:46.4843,Raven.Database.Server.HttpServer,Debug,Request #  59: PUT     -    56 ms - HitThatLine - 201 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:10:46.5400,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'DiscussionThreads-1', update: False, ",
+2012-06-21 20:10:46.5400,Raven.Database.DocumentDatabase,Debug,Put document DiscussionThreads-1 with etag 00000000-0000-1000-0000-000000000002,
+2012-06-21 20:10:46.5400,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-0f00-0000-000000000006,
+2012-06-21 20:10:46.5468,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: PUT DiscussionThreads-1,
+2012-06-21 20:10:46.5468,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0210907,
+2012-06-21 20:10:46.5468,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:10:46.5644,Raven.Database.Server.HttpServer,Debug,Request #  60: POST    -    39 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:10:46.5644,Raven.Database.Server.HttpServer,Debug,"	PUT DiscussionThreads-1
+",
+2012-06-21 20:10:46.6855,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 20:10:46.6855,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-06-21 20:10:46.6962,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-1000-0000-000000000001, 6/22/2012 1:10:46 AM",
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 5 because: WORK BY IndexingExecuter,
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000001,
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000001",
+2012-06-21 20:10:46.7050,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (DiscussionThreads-1),
+2012-06-21 20:10:46.9082,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on DiscussionThreads-1 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: discussionthreads-1
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622011046540
+",
+2012-06-21 20:10:47.0488,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 20:10:47.0488,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 6 because: WORK BY IndexingExecuter,
+2012-06-21 20:10:47.0488,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:10:47.0488,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:11:51.0605,Raven.Database.Server.HttpServer,Debug,Request #  61: GET     -     1 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=/&noCache=1886987350,
+2012-06-21 20:11:51.9843,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:11:51.9843,Raven.Database.Server.HttpServer,Debug,Request #  62: GET     -     0 ms - HitThatLine - 200 - /docs/DiscussionThreads-1?noCache=-1029001418,
+2012-06-21 20:11:52.0742,Raven.Database.Server.HttpServer,Debug,Request #  63: GET     -     1 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&startsWith=DiscussionThreads-1-&noCache=-1829394821,
+2012-06-21 20:11:53.0361,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:11:58.0830,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:03.1435,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:08.2099,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:13.2998,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:18.3857,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:23.4228,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:28.4824,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:33.5644,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:38.6132,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:43.6777,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:48.7412,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:53.8154,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:12:58.8671,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:03.9111,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:08.9794,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:14.0576,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:19.0917,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:24.1386,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:29.2060,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:34.2451,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:39.3427,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:44.3955,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:49.4501,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:54.5292,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:13:59.5761,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:04.6435,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:09.7031,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:14.7558,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:19.8466,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:24.8925,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:29.9472,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:35.0263,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:40.0830,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:45.1435,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:50.2060,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:14:55.2568,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:00.3330,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:05.3994,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:10.4628,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:15.5507,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:20.6328,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:25.7060,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:30.7529,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:35.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:40.8808,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was found,
+2012-06-21 20:15:43.9414,Raven.Database.Server.HttpServer,Debug,Request #  64: GET     -    31 ms - HitThatLine - 200 - /stats?noCache=-251465151,
+2012-06-21 20:16:01.3173,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-1 and etag ,
+2012-06-21 20:16:01.3398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was deleted,
+2012-06-21 20:16:01.3623,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 7 because: DEL DiscussionThreads-1,
+2012-06-21 20:16:01.3623,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0575858,
+2012-06-21 20:16:01.3623,Raven.Database.Server.HttpServer,Debug,Request #  65: POST    -    59 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:16:01.3623,Raven.Database.Server.HttpServer,Debug,"	DELETE DiscussionThreads-1
+",
+2012-06-21 20:16:01.3818,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:16:01.3818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: DiscussionThreads-1",
+2012-06-21 20:16:01.4707,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-1' was not found,
+2012-06-21 20:16:01.4843,Raven.Database.Server.HttpServer,Debug,Request #  66: GET     -    99 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-436300640,
+2012-06-21 20:16:01.5000,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-1) from Raven/DocumentsByEntityName,
+2012-06-21 20:16:01.5156,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 8 because: WORK BY IndexingExecuter,
+2012-06-21 20:16:01.5156,Raven.Database.Server.HttpServer,Debug,Request #  67: GET     -    87 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1328648285,
+2012-06-21 20:16:01.5156,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:16:01.5156,Raven.Database.Server.HttpServer,Debug,Request #  68: GET     -    91 ms - HitThatLine - 200 - /stats?noCache=-79358574,
+2012-06-21 20:16:01.5410,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:16:22.6406,Raven.Database.Server.HttpServer,Debug,Request #  69: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=-567712547,
+2012-06-21 20:16:54.4560,Raven.Database.Server.HttpServer,Debug,Request #  70: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-797182622,
+2012-06-21 20:16:54.4560,Raven.Database.Server.HttpServer,Debug,Request #  71: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1855929809,
+2012-06-21 20:16:54.4853,Raven.Database.Server.HttpServer,Debug,Request #  72: GET     -    59 ms - HitThatLine - 200 - /stats?noCache=1782380121,
+2012-06-21 20:17:00.5039,Raven.Database.Server.HttpServer,Debug,Request #  73: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=-1138234938,
+2012-06-21 20:17:20.9521,Raven.Database.Server.HttpServer,Debug,Request #  74: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=28482246,
+2012-06-21 20:17:31.3007,Raven.Database.Server.HttpServer,Debug,Request #  75: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-198118596,
+2012-06-21 20:17:31.3007,Raven.Database.Server.HttpServer,Debug,Request #  76: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1767695889,
+2012-06-21 20:17:31.3007,Raven.Database.Server.HttpServer,Debug,Request #  77: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=1540811332,
+2012-06-21 20:17:41.4843,Raven.Database.Server.HttpServer,Debug,Request #  78: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=2070823562,
+2012-06-21 20:18:01.9736,Raven.Database.Server.HttpServer,Debug,Request #  79: GET     -    63 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1521279169,
+2012-06-21 20:18:01.9736,Raven.Database.Server.HttpServer,Debug,Request #  80: GET     -    63 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=1374026743,
+2012-06-21 20:18:02.0166,Raven.Database.Server.HttpServer,Debug,Request #  81: GET     -   107 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=308710439,
+2012-06-21 20:18:02.0166,Raven.Database.Server.HttpServer,Debug,Request #  82: GET     -   112 ms - HitThatLine - 200 - /stats?noCache=1335065807,
+2012-06-21 20:18:23.4902,Raven.Database.Server.HttpServer,Debug,Request #  83: GET     -    29 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=2093840195,
+2012-06-21 20:18:23.4902,Raven.Database.Server.HttpServer,Debug,Request #  84: GET     -    32 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1766069859,
+2012-06-21 20:18:23.5039,Raven.Database.Server.HttpServer,Debug,Request #  85: GET     -    42 ms - HitThatLine - 200 - /stats?noCache=-282988612,
+2012-06-21 20:18:36.2324,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:18:36.2324,Raven.Database.Server.HttpServer,Debug,Request #  86: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:18:36.3544,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:18:36.3544,Raven.Database.Server.HttpServer,Debug,Request #  87: GET     -    30 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:18:38.6093,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:38.6093,Raven.Database.Server.HttpServer,Debug,Request #  88: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:18:40.7294,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:40.7294,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:40.7294,Raven.Database.Server.HttpServer,Debug,Request #  89: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:18:40.7294,Raven.Database.Server.HttpServer,Debug,Request #  90: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:18:40.8105,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:40.8105,Raven.Database.Server.HttpServer,Debug,Request #  91: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:18:40.8974,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:40.8974,Raven.Database.Server.HttpServer,Debug,Request #  92: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:18:40.8974,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:18:40.8974,Raven.Database.Server.HttpServer,Debug,Request #  93: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:02.7470,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:02.7470,Raven.Database.Server.HttpServer,Debug,Request #  94: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:14.3427,Raven.Database.Server.HttpServer,Debug,Request #  95: GET     -    69 ms - HitThatLine - 200 - /stats?noCache=-550360844,
+2012-06-21 20:19:19.4111,Raven.Database.Server.HttpServer,Debug,Request #  96: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-1204013801,
+2012-06-21 20:19:19.4111,Raven.Database.Server.HttpServer,Debug,Request #  97: GET     -    28 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=944166150,
+2012-06-21 20:19:19.4267,Raven.Database.Server.HttpServer,Debug,Request #  98: GET     -    44 ms - HitThatLine - 200 - /stats?noCache=1027459400,
+2012-06-21 20:19:30.6181,Raven.Database.Server.HttpServer,Debug,Request #  99: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=1660536257,
+2012-06-21 20:19:30.6181,Raven.Database.Server.HttpServer,Debug,Request # 100: GET     -    30 ms - HitThatLine - 200 - /docs/?start=0&pageSize=8&noCache=-258507281,
+2012-06-21 20:19:30.6181,Raven.Database.Server.HttpServer,Debug,Request # 101: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=1143218852,
+2012-06-21 20:19:35.8242,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:19:35.8242,Raven.Database.Server.HttpServer,Debug,Request # 102: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:19:35.9423,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:19:35.9423,Raven.Database.Server.HttpServer,Debug,Request # 103: GET     -    24 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:19:38.3945,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:38.3945,Raven.Database.Server.HttpServer,Debug,Request # 104: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:19:40.1708,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:40.1708,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:40.1708,Raven.Database.Server.HttpServer,Debug,Request # 105: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:40.1718,Raven.Database.Server.HttpServer,Debug,Request # 106: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:40.2500,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:40.2500,Raven.Database.Server.HttpServer,Debug,Request # 107: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:40.2841,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:40.2841,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:19:40.2841,Raven.Database.Server.HttpServer,Debug,Request # 108: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:19:40.2841,Raven.Database.Server.HttpServer,Debug,Request # 109: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:09.3603,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:09.3603,Raven.Database.Server.HttpServer,Debug,Request # 110: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:10.2246,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:10.2246,Raven.Database.Server.HttpServer,Debug,Request # 111: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:11.0175,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:11.0175,Raven.Database.Server.HttpServer,Debug,Request # 112: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:11.7460,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:11.7460,Raven.Database.Server.HttpServer,Debug,Request # 113: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:12.1035,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:12.1035,Raven.Database.Server.HttpServer,Debug,Request # 114: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:12.5917,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:12.5917,Raven.Database.Server.HttpServer,Debug,Request # 115: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:18.2812,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:20:18.2812,Raven.Database.Server.HttpServer,Debug,Request # 116: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:20:18.3906,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:20:18.3906,Raven.Database.Server.HttpServer,Debug,Request # 117: GET     -    26 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:20:20.6904,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:20.6904,Raven.Database.Server.HttpServer,Debug,Request # 118: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:20:22.5693,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:22.5693,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:22.5693,Raven.Database.Server.HttpServer,Debug,Request # 119: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:22.5693,Raven.Database.Server.HttpServer,Debug,Request # 120: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:22.6484,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:22.6484,Raven.Database.Server.HttpServer,Debug,Request # 121: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:22.6777,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:22.6777,Raven.Database.Server.HttpServer,Debug,Request # 122: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:22.6777,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:22.6777,Raven.Database.Server.HttpServer,Debug,Request # 123: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:31.2734,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:20:31.2734,Raven.Database.Server.HttpServer,Debug,Request # 124: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:20:31.3261,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/DiscussionThreads' was found,
+2012-06-21 20:20:31.3261,Raven.Database.Server.HttpServer,Debug,Request # 125: GET     -     0 ms - HitThatLine - 200 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:20:31.3437,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/DiscussionThreads', update: True, ",
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 9 because: PUT Raven/Hilo/DiscussionThreads,
+2012-06-21 20:20:31.3437,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/DiscussionThreads with etag 00000000-0000-1000-0000-000000000003,
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000002,
+2012-06-21 20:20:31.3437,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-1000-0000-000000000003, 6/22/2012 1:20:31 AM",
+2012-06-21 20:20:31.3437,Raven.Database.Server.HttpServer,Debug,Request # 126: PUT     -     2 ms - HitThatLine - 201 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 10 because: WORK BY IndexingExecuter,
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 10, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:20:31.3437,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 10, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:20:31.3828,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'DiscussionThreads-33', update: False, ",
+2012-06-21 20:20:31.3828,Raven.Database.DocumentDatabase,Debug,Put document DiscussionThreads-33 with etag 00000000-0000-1000-0000-000000000004,
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 11 because: PUT DiscussionThreads-33,
+2012-06-21 20:20:31.3828,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0041077,
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 11, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000003,
+2012-06-21 20:20:31.3828,Raven.Database.Server.HttpServer,Debug,Request # 127: POST    -     5 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000003",
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (DiscussionThreads-33),
+2012-06-21 20:20:31.3828,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on DiscussionThreads-33 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: discussionthreads-33
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622012031382
+",
+2012-06-21 20:20:31.3828,Raven.Database.Server.HttpServer,Debug,"	PUT DiscussionThreads-33
+",
+2012-06-21 20:20:31.3935,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 20:20:31.4140,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 12 because: WORK BY IndexingExecuter,
+2012-06-21 20:20:31.4140,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 12, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:20:31.4140,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 12, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:20:52.4599,Raven.Database.Server.HttpServer,Debug,Request # 128: GET     -    66 ms - HitThatLine - 200 - /stats?noCache=-914144354,
+2012-06-21 20:21:24.5048,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:21:24.5048,Raven.Database.Server.HttpServer,Debug,Request # 129: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:21:24.6201,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:21:24.6201,Raven.Database.Server.HttpServer,Debug,Request # 130: GET     -    24 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:21:26.9003,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:26.9003,Raven.Database.Server.HttpServer,Debug,Request # 131: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:21:28.9326,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:28.9326,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:28.9326,Raven.Database.Server.HttpServer,Debug,Request # 132: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:21:28.9326,Raven.Database.Server.HttpServer,Debug,Request # 133: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:21:29.0078,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:29.0078,Raven.Database.Server.HttpServer,Debug,Request # 134: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:21:29.0390,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:29.0390,Raven.Database.Server.HttpServer,Debug,Request # 135: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:21:29.0390,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:21:29.0390,Raven.Database.Server.HttpServer,Debug,Request # 136: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:02.7685,Raven.Database.Server.HttpServer,Debug,Request # 137: GET     -    32 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=390599862,
+2012-06-21 20:22:16.5087,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:22:16.5087,Raven.Database.Server.HttpServer,Debug,Request # 138: GET     -     7 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:22:16.6181,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:22:16.6181,Raven.Database.Server.HttpServer,Debug,Request # 139: GET     -    20 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:22:18.9111,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:18.9111,Raven.Database.Server.HttpServer,Debug,Request # 140: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:22:19.2177,Raven.Database.Server.HttpServer,Debug,Request # 141: GET     -    27 ms - HitThatLine - 200 - /stats?noCache=-1764833994,
+2012-06-21 20:22:20.9384,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:20.9384,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:20.9384,Raven.Database.Server.HttpServer,Debug,Request # 142: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:20.9384,Raven.Database.Server.HttpServer,Debug,Request # 143: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:21.0410,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:21.0410,Raven.Database.Server.HttpServer,Debug,Request # 144: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:21.1933,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:21.1933,Raven.Database.Server.HttpServer,Debug,Request # 145: GET     -     5 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:21.2031,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:21.2031,Raven.Database.Server.HttpServer,Debug,Request # 146: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:22:24.2880,Raven.Database.Server.HttpServer,Debug,Request # 147: GET     -    33 ms - HitThatLine - 200 - /stats?noCache=-432641196,
+2012-06-21 20:22:45.9208,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:22:45.9208,Raven.Database.Server.HttpServer,Debug,Request # 148: GET     -     4 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:23:00.1601,Raven.Database.Server.HttpServer,Debug,Request # 149: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=391020180,
+2012-06-21 20:24:02.4238,Raven.Database.Server.HttpServer,Debug,Request # 150: GET     -    30 ms - HitThatLine - 200 - /stats?noCache=1606967752,
+2012-06-21 20:25:09.7412,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:25:09.7412,Raven.Database.Server.HttpServer,Debug,Request # 151: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:25:09.8593,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:25:09.8593,Raven.Database.Server.HttpServer,Debug,Request # 152: GET     -    20 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:25:12.0820,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:12.0820,Raven.Database.Server.HttpServer,Debug,Request # 153: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:25:13.8447,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:13.8447,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:13.8447,Raven.Database.Server.HttpServer,Debug,Request # 154: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:25:13.8447,Raven.Database.Server.HttpServer,Debug,Request # 155: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:25:13.9248,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:13.9248,Raven.Database.Server.HttpServer,Debug,Request # 156: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:25:14.0898,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:14.0898,Raven.Database.Server.HttpServer,Debug,Request # 157: GET     -     3 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:25:14.0976,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:14.0976,Raven.Database.Server.HttpServer,Debug,Request # 158: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:25:23.9521,Raven.Database.Server.HttpServer,Debug,Request # 159: GET     -    42 ms - HitThatLine - 200 - /stats?noCache=750893723,
+2012-06-21 20:25:35.0830,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:25:35.0830,Raven.Database.Server.HttpServer,Debug,Request # 160: GET     -     1 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:26:55.6162,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:26:55.6162,Raven.Database.Server.HttpServer,Debug,Request # 161: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:26:55.7373,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:26:55.7373,Raven.Database.Server.HttpServer,Debug,Request # 162: GET     -    25 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:26:58.0273,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:58.0273,Raven.Database.Server.HttpServer,Debug,Request # 163: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:26:59.7675,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:59.7675,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:59.7675,Raven.Database.Server.HttpServer,Debug,Request # 164: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:26:59.7675,Raven.Database.Server.HttpServer,Debug,Request # 165: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:26:59.8447,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:59.8447,Raven.Database.Server.HttpServer,Debug,Request # 166: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:26:59.9843,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:59.9843,Raven.Database.Server.HttpServer,Debug,Request # 167: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:26:59.9843,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:26:59.9843,Raven.Database.Server.HttpServer,Debug,Request # 168: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:27:01.3544,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:27:01.3544,Raven.Database.Server.HttpServer,Debug,Request # 169: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:28:47.1005,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:28:47.1005,Raven.Database.Server.HttpServer,Debug,Request # 170: GET     -    10 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:28:47.1865,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:28:47.1865,Raven.Database.Server.HttpServer,Debug,Request # 171: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:28:49.3769,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:49.3769,Raven.Database.Server.HttpServer,Debug,Request # 172: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:28:51.1660,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:51.1660,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:51.1660,Raven.Database.Server.HttpServer,Debug,Request # 173: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:28:51.1660,Raven.Database.Server.HttpServer,Debug,Request # 174: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:28:51.2500,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:51.2500,Raven.Database.Server.HttpServer,Debug,Request # 175: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:28:51.3759,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:51.3759,Raven.Database.Server.HttpServer,Debug,Request # 176: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:28:51.4199,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:28:51.4199,Raven.Database.Server.HttpServer,Debug,Request # 177: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:29:45.9384,Raven.Database.Server.HttpServer,Debug,Request # 178: GET     -    29 ms - HitThatLine - 200 - /stats?noCache=-749681817,
+2012-06-21 20:30:59.4248,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:30:59.4248,Raven.Database.Server.HttpServer,Debug,Request # 179: GET     -    10 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:31:04.1103,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:31:04.1103,Raven.Database.Server.HttpServer,Debug,Request # 180: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:12.2890,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:32:12.2890,Raven.Database.Server.HttpServer,Debug,Request # 181: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:32:12.3847,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:32:12.3847,Raven.Database.Server.HttpServer,Debug,Request # 182: GET     -     2 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:32:14.5908,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:14.5908,Raven.Database.Server.HttpServer,Debug,Request # 183: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:32:16.3720,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:16.3720,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:16.3720,Raven.Database.Server.HttpServer,Debug,Request # 184: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:16.3720,Raven.Database.Server.HttpServer,Debug,Request # 185: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:16.4501,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:16.4501,Raven.Database.Server.HttpServer,Debug,Request # 186: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:16.5488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:16.5488,Raven.Database.Server.HttpServer,Debug,Request # 187: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:16.5488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:16.5488,Raven.Database.Server.HttpServer,Debug,Request # 188: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:32:20.3632,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:32:20.3632,Raven.Database.Server.HttpServer,Debug,Request # 189: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:33:57.1347,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:33:57.1347,Raven.Database.Server.HttpServer,Debug,Request # 190: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:33:57.2119,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:33:57.2119,Raven.Database.Server.HttpServer,Debug,Request # 191: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:04.1416,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:34:04.1416,Raven.Database.Server.HttpServer,Debug,Request # 192: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:34:04.2578,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:34:04.2578,Raven.Database.Server.HttpServer,Debug,Request # 193: GET     -    20 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:34:06.4599,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:06.4599,Raven.Database.Server.HttpServer,Debug,Request # 194: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:34:07.2744,Raven.Database.Server.HttpServer,Debug,Request # 195: GET     -    49 ms - HitThatLine - 200 - /stats?noCache=1959809199,
+2012-06-21 20:34:08.2109,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:08.2109,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:08.2109,Raven.Database.Server.HttpServer,Debug,Request # 196: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:08.2109,Raven.Database.Server.HttpServer,Debug,Request # 197: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:08.2910,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:08.2910,Raven.Database.Server.HttpServer,Debug,Request # 198: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:08.3212,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:08.3212,Raven.Database.Server.HttpServer,Debug,Request # 199: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:08.3212,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:08.3212,Raven.Database.Server.HttpServer,Debug,Request # 200: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:10.0058,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:10.0058,Raven.Database.Server.HttpServer,Debug,Request # 201: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:17.5185,Raven.Database.Server.HttpServer,Debug,Request # 202: GET     -    26 ms - HitThatLine - 200 - /stats?noCache=609776814,
+2012-06-21 20:34:30.4277,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:34:30.4277,Raven.Database.Server.HttpServer,Debug,Request # 203: GET     -     1 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:34:57.9550,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 20:34:57.9550,Raven.Database.Server.HttpServer,Debug,Request # 204: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 20:34:58.0712,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 20:34:58.0712,Raven.Database.Server.HttpServer,Debug,Request # 205: GET     -    21 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 20:35:00.3105,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:00.3105,Raven.Database.Server.HttpServer,Debug,Request # 206: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 20:35:02.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:02.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:02.0566,Raven.Database.Server.HttpServer,Debug,Request # 207: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:02.0566,Raven.Database.Server.HttpServer,Debug,Request # 208: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:02.1298,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:02.1298,Raven.Database.Server.HttpServer,Debug,Request # 209: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:02.2617,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:02.2617,Raven.Database.Server.HttpServer,Debug,Request # 210: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:02.2675,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:02.2675,Raven.Database.Server.HttpServer,Debug,Request # 211: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:03.5185,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:03.5185,Raven.Database.Server.HttpServer,Debug,Request # 212: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:17.7324,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:17.7324,Raven.Database.Server.HttpServer,Debug,Request # 213: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:30.6914,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:30.6914,Raven.Database.Server.HttpServer,Debug,Request # 214: GET     -    15 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:30.7851,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/DiscussionThreads' was found,
+2012-06-21 20:35:30.7851,Raven.Database.Server.HttpServer,Debug,Request # 215: GET     -     0 ms - HitThatLine - 200 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:35:30.8017,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/DiscussionThreads', update: True, ",
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 13 because: PUT Raven/Hilo/DiscussionThreads,
+2012-06-21 20:35:30.8017,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/DiscussionThreads with etag 00000000-0000-1000-0000-000000000005,
+2012-06-21 20:35:30.8017,Raven.Database.Server.HttpServer,Debug,Request # 216: PUT     -     4 ms - HitThatLine - 201 - /docs/Raven/Hilo/DiscussionThreads,
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000004,
+2012-06-21 20:35:30.8017,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-1000-0000-000000000005, 6/22/2012 1:35:30 AM",
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 13, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:30.8017,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 14 because: WORK BY IndexingExecuter,
+2012-06-21 20:35:30.8291,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 14, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:30.8525,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 14, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:35:30.9980,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'DiscussionThreads-65', update: False, ",
+2012-06-21 20:35:30.9980,Raven.Database.DocumentDatabase,Debug,Put document DiscussionThreads-65 with etag 00000000-0000-1000-0000-000000000006,
+2012-06-21 20:35:30.9980,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 15 because: PUT DiscussionThreads-65,
+2012-06-21 20:35:30.9980,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0134597,
+2012-06-21 20:35:30.9980,Raven.Database.Server.HttpServer,Debug,Request # 217: POST    -    14 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000005,
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000005",
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (DiscussionThreads-65),
+2012-06-21 20:35:31.0000,Raven.Database.Server.HttpServer,Debug,"	PUT DiscussionThreads-65
+",
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on DiscussionThreads-65 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: discussionthreads-65
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622013530998
+",
+2012-06-21 20:35:31.0000,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 15, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:31.0156,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 20:35:31.0351,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 16 because: WORK BY IndexingExecuter,
+2012-06-21 20:35:31.0351,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 16, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:31.0351,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 16, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:35:31.0478,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:31.0478,Raven.Database.Server.HttpServer,Debug,Request # 218: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:31.5673,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:31.5673,Raven.Database.Server.HttpServer,Debug,Request # 219: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:31.5673,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:35:31.5673,Raven.Database.Server.HttpServer,Debug,Request # 220: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:35:46.4169,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-33 and etag ,
+2012-06-21 20:35:46.4169,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-33' was deleted,
+2012-06-21 20:35:46.4169,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 17 because: DEL DiscussionThreads-33,
+2012-06-21 20:35:46.4169,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0029182,
+2012-06-21 20:35:46.4169,Raven.Database.Server.HttpServer,Debug,Request # 221: POST    -     4 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:35:46.4169,Raven.Database.Server.HttpServer,Debug,"	DELETE DiscussionThreads-33
+",
+2012-06-21 20:35:46.4375,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 17, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:46.4375,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: DiscussionThreads-33",
+2012-06-21 20:35:46.4541,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-33' was not found,
+2012-06-21 20:35:46.4541,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-33) from Raven/DocumentsByEntityName,
+2012-06-21 20:35:46.4541,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 18 because: WORK BY IndexingExecuter,
+2012-06-21 20:35:46.4541,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 18, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:35:46.4765,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 18, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:35:46.5224,Raven.Database.Server.HttpServer,Debug,Request # 222: GET     -    44 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-1059550248,
+2012-06-21 20:37:47.3212,Raven.Database.Server.HttpServer,Debug,Request # 223: GET     -    26 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-521352941,
+2012-06-21 20:38:24.4853,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:38:24.4853,Raven.Database.Server.HttpServer,Debug,Request # 224: GET     -     5 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:38:42.8925,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:38:42.8925,Raven.Database.Server.HttpServer,Debug,Request # 225: GET     -    34 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:38:42.8925,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'DiscussionThreads-66', update: False, ",
+2012-06-21 20:38:42.8925,Raven.Database.DocumentDatabase,Debug,Put document DiscussionThreads-66 with etag 00000000-0000-1000-0000-000000000007,
+2012-06-21 20:38:42.9062,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 19 because: PUT DiscussionThreads-66,
+2012-06-21 20:38:42.9062,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0133893,
+2012-06-21 20:38:42.9062,Raven.Database.Server.HttpServer,Debug,Request # 226: POST    -    14 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:38:42.9062,Raven.Database.Server.HttpServer,Debug,"	PUT DiscussionThreads-66
+",
+2012-06-21 20:38:42.9277,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:38:42.9277,Raven.Database.Server.HttpServer,Debug,Request # 227: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:38:42.9277,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 19, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:38:43.0097,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000006,
+2012-06-21 20:38:43.0097,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 20:38:43.0097,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000006",
+2012-06-21 20:38:43.0097,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (DiscussionThreads-66),
+2012-06-21 20:38:43.0097,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on DiscussionThreads-66 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: discussionthreads-66
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622013842900
+",
+2012-06-21 20:38:43.0800,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 20:38:43.0800,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 20 because: WORK BY IndexingExecuter,
+2012-06-21 20:38:43.0800,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 20, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:38:43.0800,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 20, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:38:46.3076,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:38:46.3076,Raven.Database.Server.HttpServer,Debug,Request # 228: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:39:01.9160,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:39:01.9160,Raven.Database.Server.HttpServer,Debug,Request # 229: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:39:01.9228,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'DiscussionThreads-67', update: False, ",
+2012-06-21 20:39:01.9228,Raven.Database.DocumentDatabase,Debug,Put document DiscussionThreads-67 with etag 00000000-0000-1000-0000-000000000008,
+2012-06-21 20:39:01.9228,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 21 because: PUT DiscussionThreads-67,
+2012-06-21 20:39:01.9228,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0053027,
+2012-06-21 20:39:01.9228,Raven.Database.Server.HttpServer,Debug,Request # 230: POST    -     6 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 20:39:01.9228,Raven.Database.Server.HttpServer,Debug,"	PUT DiscussionThreads-67
+",
+2012-06-21 20:39:01.9404,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 20:39:01.9404,Raven.Database.Server.HttpServer,Debug,Request # 231: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000007,
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000007",
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (DiscussionThreads-67),
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 21, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:39:01.9560,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on DiscussionThreads-67 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: discussionthreads-67
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622013901921
+",
+2012-06-21 20:39:02.0439,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 20:39:02.0478,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 22 because: WORK BY IndexingExecuter,
+2012-06-21 20:39:02.0478,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 22, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:39:02.0478,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 22, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:39:16.0781,Raven.Database.Server.HttpServer,Debug,Request # 232: GET     -    58 ms - HitThatLine - 200 - /stats?noCache=-1492892281,
+2012-06-21 20:39:47.7490,Raven.Database.Server.HttpServer,Debug,Request # 233: GET     -    27 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-445984317,
+2012-06-21 20:48:59.0214,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-21 20:48:59.0214,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-21 20:49:00.5566,Raven.Database.Server.HttpServer,Debug,Request # 234: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=-1289939291,
+2012-06-21 20:49:50.7509,Raven.Database.Server.HttpServer,Debug,Request # 235: GET     -    44 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=810752034,
+2012-06-21 20:53:52.2158,Raven.Database.Server.HttpServer,Debug,Request # 236: GET     -    56 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-157357185,
+2012-06-21 20:57:31.9404,Raven.Database.Server.HttpServer,Debug,Request # 237: GET     -    32 ms - HitThatLine - 200 - /stats?noCache=-1233980044,
+2012-06-21 20:58:18.4042,Raven.Database.Server.HttpServer,Debug,Request # 238: GET     -    37 ms - HitThatLine - 200 - /stats?noCache=-100583889,
+2012-06-21 20:59:10.0703,Raven.Database.Server.HttpServer,Debug,Request # 239: GET     -    36 ms - HitThatLine - 200 - /stats?noCache=-1733716368,
+2012-06-21 21:00:11.3662,Raven.Database.Server.HttpServer,Debug,Request # 240: GET     -    36 ms - HitThatLine - 200 - /stats?noCache=-409970063,
+2012-06-21 21:01:42.3281,Raven.Database.Server.HttpServer,Debug,Request # 241: GET     -    43 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&noCache=-1567538948,
+2012-06-21 21:01:42.3281,Raven.Database.Server.HttpServer,Debug,Request # 242: GET     -    43 ms - HitThatLine - 200 - /docs/?start=0&pageSize=15&noCache=-1410671385,
+2012-06-21 21:02:43.1962,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:02:43.1962,Raven.Database.Server.HttpServer,Debug,Request # 243: GET     -    24 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:02:43.2460,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:02:43.2460,Raven.Database.Server.HttpServer,Debug,Request # 244: GET     -    74 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:02:44.0820,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:02:44.0820,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:02:44.0820,Raven.Database.Server.HttpServer,Debug,Request # 245: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:02:44.0820,Raven.Database.Server.HttpServer,Debug,Request # 246: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:02:44.2031,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:02:44.2031,Raven.Database.Server.HttpServer,Debug,Request # 247: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:02:44.2031,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:02:44.2031,Raven.Database.Server.HttpServer,Debug,Request # 248: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:02:44.2714,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:02:44.2714,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:02:44.2714,Raven.Database.Server.HttpServer,Debug,Request # 249: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:02:44.2714,Raven.Database.Server.HttpServer,Debug,Request # 250: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:04:31.0683,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:04:31.0683,Raven.Database.Server.HttpServer,Debug,Request # 251: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:04:31.0966,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:04:31.0966,Raven.Database.Server.HttpServer,Debug,Request # 252: GET     -    12 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:04:31.9404,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:04:31.9404,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:04:31.9404,Raven.Database.Server.HttpServer,Debug,Request # 253: GET     -     6 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:04:31.9404,Raven.Database.Server.HttpServer,Debug,Request # 254: GET     -     7 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:04:35.0751,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:04:35.0751,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:04:35.0751,Raven.Database.Server.HttpServer,Debug,Request # 255: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:04:35.0751,Raven.Database.Server.HttpServer,Debug,Request # 256: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:04:35.4218,Raven.Database.Server.HttpServer,Debug,Request # 257: HEAD    -     0 ms - HitThatLine - 404 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:04:35.8076,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index ThreadCountByTagIndex:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_ThreadCountByTagIndex : AbstractViewGenerator
+{
+	public Index_ThreadCountByTagIndex()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_ThreadCountByTagIndex : AbstractViewGenerator
+{
+	public Index_ThreadCountByTagIndex()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+",
+2012-06-21 21:04:35.8193,Raven.Database.Indexing.IndexStorage,Info,Creating index ThreadCountByTagIndex with encoded name ThreadCountByTagIndex,
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for ThreadCountByTagIndex,
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 23 because: PUT INDEX ThreadCountByTagIndex,
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 6 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-21 21:04:35.8281,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-21 21:04:35.8281,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 4 documents remained",
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: ThreadCountByTagIndex, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-06-21 21:04:35.8281,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: ThreadCountByTagIndex. (DiscussionThreads-65,DiscussionThreads-66,DiscussionThreads-67)",
+2012-06-21 21:04:35.8281,Raven.Database.Server.HttpServer,Debug,Request # 258: PUT     -   274 ms - HitThatLine - 201 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:04:35.8437,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 23, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:04:35.9023,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'ThreadCountByTagIndex' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:04:35.9355,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'ThreadCountByTagIndex' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:04:35.9443,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'ThreadCountByTagIndex' doc 'DiscussionThreads-66': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:04:35.9443,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'ThreadCountByTagIndex' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:04:35.9443,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'ThreadCountByTagIndex' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""hogs"",
+  ""Count"": 1
+}'",
+2012-06-21 21:04:35.9599,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 5 documents for ThreadCountByTagIndex,
+2012-06-21 21:04:35.9599,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 24 because: WORK BY IndexingExecuter,
+2012-06-21 21:04:35.9599,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 24, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:04:35.9687,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 5 mapped results for keys [test, tags, hogs] for index ThreadCountByTagIndex",
+2012-06-21 21:04:36.0107,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 3 reduce keys for index ThreadCountByTagIndex,
+2012-06-21 21:04:36.0156,Raven.Database.Tasks.ReduceTask,Debug,Read 3 reduce keys in 00:00:00.0012112 with 5 results for index ThreadCountByTagIndex,
+2012-06-21 21:04:36.0156,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index ThreadCountByTagIndex gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:04:36.0312,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on tags result in index ThreadCountByTagIndex gave document: 	__reduce_key I-: tags
+	Tag IS: tags
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:04:36.0312,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on hogs result in index ThreadCountByTagIndex gave document: 	__reduce_key I-: hogs
+	Tag IS: hogs
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:04:36.0576,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 3 entries for ThreadCountByTagIndex for reduce keys: test, tags, hogs",
+2012-06-21 21:04:36.0576,Raven.Database.Tasks.ReduceTask,Debug,Indexed 3 reduce keys in 00:00:00.0417807 with 5 results for index ThreadCountByTagIndex,
+2012-06-21 21:04:36.0576,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 25 because: WORK BY ReducingExecuter,
+2012-06-21 21:04:36.0576,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 25, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:04:36.0576,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 25, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:04:36.6748,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:04:36.6748,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:04:36.6748,Raven.Database.Server.HttpServer,Debug,Request # 259: GET     -     1 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:04:36.6748,Raven.Database.Server.HttpServer,Debug,Request # 260: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:04:36.6748,Raven.Database.Server.HttpServer,Debug,Request # 261: HEAD    -     0 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:04:36.6914,Raven.Database.Server.HttpServer,Debug,Request # 262: PUT     -     5 ms - HitThatLine - 201 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:14:21.8945,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:14:21.8945,Raven.Database.Server.HttpServer,Debug,Request # 263: GET     -    11 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:14:21.9863,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:14:21.9863,Raven.Database.Server.HttpServer,Debug,Request # 264: GET     -    13 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:14:24.4355,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:24.4355,Raven.Database.Server.HttpServer,Debug,Request # 265: GET     -     1 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:14:54.5097,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:14:54.5097,Raven.Database.Server.HttpServer,Debug,Request # 266: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:14:54.6181,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:14:54.6181,Raven.Database.Server.HttpServer,Debug,Request # 267: GET     -    18 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:14:54.7617,Raven.Database.Server.HttpServer,Debug,Request # 268: HEAD    -     0 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:14:54.8271,Raven.Database.Server.HttpServer,Debug,Request # 269: PUT     -     1 ms - HitThatLine - 201 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:14:57.1035,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:57.1035,Raven.Database.Server.HttpServer,Debug,Request # 270: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:14:59.3564,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:59.3564,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:59.3564,Raven.Database.Server.HttpServer,Debug,Request # 271: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:14:59.3564,Raven.Database.Server.HttpServer,Debug,Request # 272: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:14:59.4443,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:59.4443,Raven.Database.Server.HttpServer,Debug,Request # 273: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:14:59.5839,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:59.5839,Raven.Database.Server.HttpServer,Debug,Request # 274: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:14:59.5839,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:14:59.5839,Raven.Database.Server.HttpServer,Debug,Request # 275: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:15:04.4541,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:15:04.4541,Raven.Database.Server.HttpServer,Debug,Request # 276: GET     -     1 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:15:04.4707,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:15:04.4707,Raven.Database.Server.HttpServer,Debug,Request # 277: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:15:04.5673,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index ThreadCountByTagIndex for all documents,
+2012-06-21 21:15:04.6279,Raven.Database.Server.HttpServer,Debug,Request # 278: GET     -    88 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex?query=&start=0&pageSize=128&aggregation=None,
+2012-06-21 21:15:04.6279,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 73 ms
+	Index: ThreadCountByTagIndex
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:15:14.7880,Raven.Database.Server.HttpServer,Debug,Request # 279: GET     -     6 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex?definition=yes&noCache=-68368684,
+2012-06-21 21:15:14.8437,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index ThreadCountByTagIndex for all documents,
+2012-06-21 21:15:14.8437,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: ThreadCountByTagIndex
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:15:16.0625,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index ThreadCountByTagIndex for all documents,
+2012-06-21 21:15:16.0625,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: ThreadCountByTagIndex
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:15:57.5732,Raven.Database.Server.HttpServer,Debug,Request # 280: GET     -    38 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=1671113115,
+2012-06-21 21:16:14.8671,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:16:14.8671,Raven.Database.Server.HttpServer,Debug,Request # 281: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:16:14.8671,Raven.Database.Server.HttpServer,Debug,Request # 282: GET     -     0 ms - HitThatLine - 304 - /indexes/ThreadCountByTagIndex?query=&start=0&pageSize=128&aggregation=None,
+2012-06-21 21:16:14.8671,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 0 ms
+",
+2012-06-21 21:16:35.2480,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:16:35.2480,Raven.Database.Server.HttpServer,Debug,Request # 283: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:16:42.7343,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:16:42.7343,Raven.Database.Server.HttpServer,Debug,Request # 284: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:16:42.7343,Raven.Database.Server.HttpServer,Debug,Request # 285: GET     -     0 ms - HitThatLine - 304 - /indexes/ThreadCountByTagIndex?query=&start=0&pageSize=128&aggregation=None,
+2012-06-21 21:16:42.7343,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 0 ms
+",
+2012-06-21 21:18:04.7119,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:18:04.7119,Raven.Database.Server.HttpServer,Debug,Request # 286: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:18:04.8056,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:18:04.8056,Raven.Database.Server.HttpServer,Debug,Request # 287: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:18:04.9062,Raven.Database.Server.HttpServer,Debug,Request # 288: HEAD    -     0 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:18:04.9550,Raven.Database.Server.HttpServer,Debug,Request # 289: PUT     -     1 ms - HitThatLine - 201 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:18:07.2050,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:07.2050,Raven.Database.Server.HttpServer,Debug,Request # 290: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:18:08.9716,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:08.9716,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:08.9716,Raven.Database.Server.HttpServer,Debug,Request # 291: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:18:08.9716,Raven.Database.Server.HttpServer,Debug,Request # 292: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:18:09.0634,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:09.0634,Raven.Database.Server.HttpServer,Debug,Request # 293: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:18:09.2158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:09.2158,Raven.Database.Server.HttpServer,Debug,Request # 294: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:18:09.2158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:18:09.2158,Raven.Database.Server.HttpServer,Debug,Request # 295: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:18:20.1738,Raven.Database.Server.HttpServer,Debug,Request # 296: GET     -     0 ms - HitThatLine - 200 - /indexes/ThreadCountByTagIndex?definition=yes&noCache=-1046277941,
+2012-06-21 21:18:20.1738,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index ThreadCountByTagIndex for all documents,
+2012-06-21 21:18:20.1875,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: ThreadCountByTagIndex
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:18:21.6484,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index ThreadCountByTagIndex for all documents,
+2012-06-21 21:18:21.6484,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: ThreadCountByTagIndex
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:18:58.0087,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:18:58.0087,Raven.Database.Server.HttpServer,Debug,Request # 297: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:18:58.0224,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:18:58.0224,Raven.Database.Server.HttpServer,Debug,Request # 298: GET     -    26 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:18:58.2919,Raven.Database.Server.HttpServer,Debug,Request # 299: HEAD    -     0 ms - HitThatLine - 404 - /indexes/DiscussionThreads/TagCount,
+2012-06-21 21:18:58.5478,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index DiscussionThreads%2fTagCount:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_DiscussionThreads_2fTagCount : AbstractViewGenerator
+{
+	public Index_DiscussionThreads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_DiscussionThreads_2fTagCount : AbstractViewGenerator
+{
+	public Index_DiscussionThreads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+",
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.IndexStorage,Info,Creating index DiscussionThreads/TagCount with encoded name DiscussionThreads/TagCount,
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for DiscussionThreads/TagCount,
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 26 because: PUT INDEX DiscussionThreads/TagCount,
+2012-06-21 21:18:58.5478,Raven.Database.Server.HttpServer,Debug,Request # 300: PUT     -   123 ms - HitThatLine - 201 - /indexes/DiscussionThreads/TagCount,
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 26, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 6 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-21 21:18:58.5478,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 21:18:58.5478,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 4 documents remained",
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: DiscussionThreads/TagCount, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-06-21 21:18:58.5478,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: DiscussionThreads/TagCount. (DiscussionThreads-65,DiscussionThreads-66,DiscussionThreads-67)",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'DiscussionThreads/TagCount' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'DiscussionThreads/TagCount' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'DiscussionThreads/TagCount' doc 'DiscussionThreads-66': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'DiscussionThreads/TagCount' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'DiscussionThreads/TagCount' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""hogs"",
+  ""Count"": 1
+}'",
+2012-06-21 21:18:58.5937,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 5 documents for DiscussionThreads/TagCount,
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 27 because: WORK BY IndexingExecuter,
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 27, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 5 mapped results for keys [test, tags, hogs] for index DiscussionThreads/TagCount",
+2012-06-21 21:18:58.6132,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 3 reduce keys for index DiscussionThreads/TagCount,
+2012-06-21 21:18:58.6132,Raven.Database.Tasks.ReduceTask,Debug,Read 3 reduce keys in 00:00:00.0000938 with 5 results for index DiscussionThreads/TagCount,
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index DiscussionThreads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on tags result in index DiscussionThreads/TagCount gave document: 	__reduce_key I-: tags
+	Tag IS: tags
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:18:58.6132,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on hogs result in index DiscussionThreads/TagCount gave document: 	__reduce_key I-: hogs
+	Tag IS: hogs
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:18:58.6328,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 3 entries for DiscussionThreads/TagCount for reduce keys: test, tags, hogs",
+2012-06-21 21:18:58.6328,Raven.Database.Tasks.ReduceTask,Debug,Indexed 3 reduce keys in 00:00:00.0180299 with 5 results for index DiscussionThreads/TagCount,
+2012-06-21 21:18:58.6328,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 28 because: WORK BY ReducingExecuter,
+2012-06-21 21:18:58.6328,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 28, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:18:58.6328,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 28, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:18:59.3808,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:18:59.3808,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:18:59.3808,Raven.Database.Server.HttpServer,Debug,Request # 301: GET     -    25 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:18:59.3808,Raven.Database.Server.HttpServer,Debug,Request # 302: GET     -    27 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:18:59.3808,Raven.Database.Server.HttpServer,Debug,Request # 303: HEAD    -     0 ms - HitThatLine - 200 - /indexes/DiscussionThreads/TagCount,
+2012-06-21 21:18:59.3925,Raven.Database.Server.HttpServer,Debug,Request # 304: PUT     -     1 ms - HitThatLine - 201 - /indexes/DiscussionThreads/TagCount,
+2012-06-21 21:20:44.0419,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:20:44.0419,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:20:44.0419,Raven.Database.Server.HttpServer,Debug,Request # 305: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:20:44.0419,Raven.Database.Server.HttpServer,Debug,Request # 306: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:20:44.3398,Raven.Database.Server.HttpServer,Debug,Request # 307: HEAD    -     0 ms - HitThatLine - 404 - /indexes/Threads/TagCount,
+2012-06-21 21:20:44.5820,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Threads%2fTagCount:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int64>)(x => ((System.Int64)(((long)x.Count))))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+",
+2012-06-21 21:20:44.5820,Raven.Database.Indexing.IndexStorage,Info,Creating index Threads/TagCount with encoded name Threads/TagCount,
+2012-06-21 21:20:44.5820,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Threads/TagCount,
+2012-06-21 21:20:44.5820,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 29 because: PUT INDEX Threads/TagCount,
+2012-06-21 21:20:44.5820,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 29, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:20:44.5820,Raven.Database.Server.HttpServer,Debug,Request # 308: PUT     -   120 ms - HitThatLine - 201 - /indexes/Threads/TagCount,
+2012-06-21 21:20:44.5820,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 6 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2012-06-21 21:20:44.5820,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2012-06-21 21:20:44.5937,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/DiscussionThreads,
+2012-06-21 21:20:44.5937,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 4 documents remained",
+2012-06-21 21:20:44.5937,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2012-06-21 21:20:44.5937,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: Threads/TagCount. (DiscussionThreads-65,DiscussionThreads-66,DiscussionThreads-67)",
+2012-06-21 21:20:44.6269,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:20:44.6269,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'DiscussionThreads-65': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:20:44.6269,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'DiscussionThreads-66': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:20:44.6269,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""tags"",
+  ""Count"": 1
+}'",
+2012-06-21 21:20:44.6269,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'DiscussionThreads-67': '{
+  ""Tag"": ""hogs"",
+  ""Count"": 1
+}'",
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 5 documents for Threads/TagCount,
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 30 because: WORK BY IndexingExecuter,
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 30, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 5 mapped results for keys [test, tags, hogs] for index Threads/TagCount",
+2012-06-21 21:20:44.6435,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 3 reduce keys for index Threads/TagCount,
+2012-06-21 21:20:44.6435,Raven.Database.Tasks.ReduceTask,Debug,Read 3 reduce keys in 00:00:00.0001023 with 5 results for index Threads/TagCount,
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on tags result in index Threads/TagCount gave document: 	__reduce_key I-: tags
+	Tag IS: tags
+	Count IS: 2
+	Count_Range IS: 2
+",
+2012-06-21 21:20:44.6435,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on hogs result in index Threads/TagCount gave document: 	__reduce_key I-: hogs
+	Tag IS: hogs
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:20:44.6591,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 3 entries for Threads/TagCount for reduce keys: test, tags, hogs",
+2012-06-21 21:20:44.6591,Raven.Database.Tasks.ReduceTask,Debug,Indexed 3 reduce keys in 00:00:00.0154611 with 5 results for index Threads/TagCount,
+2012-06-21 21:20:44.6591,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 31 because: WORK BY ReducingExecuter,
+2012-06-21 21:20:44.6591,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 31, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:20:44.6591,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 31, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:20:45.3750,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:20:45.3750,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:20:45.3750,Raven.Database.Server.HttpServer,Debug,Request # 309: GET     -    20 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:20:45.3750,Raven.Database.Server.HttpServer,Debug,Request # 310: GET     -    21 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:20:45.3750,Raven.Database.Server.HttpServer,Debug,Request # 311: HEAD    -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount,
+2012-06-21 21:20:45.3750,Raven.Database.Server.HttpServer,Debug,Request # 312: PUT     -     0 ms - HitThatLine - 201 - /indexes/Threads/TagCount,
+2012-06-21 21:20:46.6464,Raven.Database.Indexing.IndexStorage,Info,Deleting index ThreadCountByTagIndex,
+2012-06-21 21:20:46.6464,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 32 because: DELETE INDEX ThreadCountByTagIndex,
+2012-06-21 21:20:46.6621,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 32, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:20:46.6621,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 32, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:20:46.6464,Raven.Database.Server.HttpServer,Debug,Request # 313: DELETE  -     5 ms - HitThatLine - 204 - /indexes/ThreadCountByTagIndex,
+2012-06-21 21:20:54.0185,Raven.Database.Server.HttpServer,Debug,Request # 314: GET     -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount?definition=yes&noCache=-1890318681,
+2012-06-21 21:20:54.0185,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:20:54.0185,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: Threads/TagCount
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:20:55.3818,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:20:55.3818,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: Threads/TagCount
+	Results: 3 returned out of 3 total.
+",
+2012-06-21 21:21:15.2255,Raven.Database.Indexing.IndexStorage,Info,Deleting index DiscussionThreads/TagCount,
+2012-06-21 21:21:15.2255,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 33 because: DELETE INDEX DiscussionThreads/TagCount,
+2012-06-21 21:21:15.2255,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 33, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:15.2255,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 33, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:15.2255,Raven.Database.Server.HttpServer,Debug,Request # 315: DELETE  -     4 ms - HitThatLine - 204 - /indexes/DiscussionThreads/TagCount,
+2012-06-21 21:21:20.6748,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-67 and etag ,
+2012-06-21 21:21:20.6748,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-67' was deleted,
+2012-06-21 21:21:20.6748,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 34 because: DEL DiscussionThreads-67,
+2012-06-21 21:21:20.6748,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0027727,
+2012-06-21 21:21:20.6748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: DiscussionThreads-67",
+2012-06-21 21:21:20.6748,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 34, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:20.6748,Raven.Database.Server.HttpServer,Debug,Request # 316: POST    -     3 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 21:21:20.6748,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-67' was not found,
+2012-06-21 21:21:20.6748,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-67) from Raven/DocumentsByEntityName,
+2012-06-21 21:21:20.6748,Raven.Database.Server.HttpServer,Debug,"	DELETE DiscussionThreads-67
+",
+2012-06-21 21:21:20.7041,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Threads/TagCount, Keys: DiscussionThreads-67",
+2012-06-21 21:21:20.7041,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-67' was not found,
+2012-06-21 21:21:20.7226,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-67) from Threads/TagCount,
+2012-06-21 21:21:20.7402,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 35 because: WORK BY IndexingExecuter,
+2012-06-21 21:21:20.7402,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 35, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:20.7402,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Executing Raven.Database.Tasks.ReduceTask,
+2012-06-21 21:21:20.7402,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 2 reduce keys for index Threads/TagCount,
+2012-06-21 21:21:20.7402,Raven.Database.Tasks.ReduceTask,Debug,Read 2 reduce keys in 00:00:00.0000465 with 1 results for index Threads/TagCount,
+2012-06-21 21:21:20.7402,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on tags result in index Threads/TagCount gave document: 	__reduce_key I-: tags
+	Tag IS: tags
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:21:20.7617,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 1 entries for Threads/TagCount for reduce keys: tags, hogs",
+2012-06-21 21:21:20.7617,Raven.Database.Tasks.ReduceTask,Debug,Indexed 2 reduce keys in 00:00:00.0157866 with 1 results for index Threads/TagCount,
+2012-06-21 21:21:20.7617,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 36 because: WORK BY ReducingExecuter,
+2012-06-21 21:21:20.7617,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 36, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:20.7617,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 36, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:23.2480,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-66 and etag ,
+2012-06-21 21:21:23.2558,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-66' was deleted,
+2012-06-21 21:21:23.3085,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 37 because: DEL DiscussionThreads-66,
+2012-06-21 21:21:23.3085,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0610006,
+2012-06-21 21:21:23.3085,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: DiscussionThreads-66",
+2012-06-21 21:21:23.3085,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-66' was not found,
+2012-06-21 21:21:23.3085,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-66) from Raven/DocumentsByEntityName,
+2012-06-21 21:21:23.3085,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 37, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:23.3085,Raven.Database.Server.HttpServer,Debug,Request # 317: POST    -    62 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 21:21:23.3085,Raven.Database.Server.HttpServer,Debug,"	DELETE DiscussionThreads-66
+",
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Threads/TagCount, Keys: DiscussionThreads-66",
+2012-06-21 21:21:23.3212,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-66' was not found,
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-66) from Threads/TagCount,
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 38 because: WORK BY IndexingExecuter,
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 38, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Executing Raven.Database.Tasks.ReduceTask,
+2012-06-21 21:21:23.3212,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 1 reduce keys for index Threads/TagCount,
+2012-06-21 21:21:23.3212,Raven.Database.Tasks.ReduceTask,Debug,Read 1 reduce keys in 00:00:00.0000413 with 1 results for index Threads/TagCount,
+2012-06-21 21:21:23.3212,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:21:23.3750,Raven.Database.Indexing.Index.Indexing,Debug,Reduce resulted in 1 entries for Threads/TagCount for reduce keys: test,
+2012-06-21 21:21:23.3750,Raven.Database.Tasks.ReduceTask,Debug,Indexed 1 reduce keys in 00:00:00.0490380 with 1 results for index Threads/TagCount,
+2012-06-21 21:21:23.3750,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 39 because: WORK BY ReducingExecuter,
+2012-06-21 21:21:23.3750,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 39, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:23.3750,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 39, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:26.7177,Raven.Database.DocumentDatabase,Debug,Delete a document with key: DiscussionThreads-65 and etag ,
+2012-06-21 21:21:26.7177,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-65' was deleted,
+2012-06-21 21:21:26.7187,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 40 because: DEL DiscussionThreads-65,
+2012-06-21 21:21:26.7187,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0017291,
+2012-06-21 21:21:26.7187,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Raven/DocumentsByEntityName, Keys: DiscussionThreads-65",
+2012-06-21 21:21:26.7187,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-65' was not found,
+2012-06-21 21:21:26.7187,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 40, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:26.7187,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-65) from Raven/DocumentsByEntityName,
+2012-06-21 21:21:26.7187,Raven.Database.Server.HttpServer,Debug,Request # 318: POST    -     3 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 21:21:26.7187,Raven.Database.Server.HttpServer,Debug,"	DELETE DiscussionThreads-65
+",
+2012-06-21 21:21:26.7451,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Executing Index: Threads/TagCount, Keys: DiscussionThreads-65",
+2012-06-21 21:21:26.7451,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'DiscussionThreads-65' was not found,
+2012-06-21 21:21:26.7451,Raven.Database.Indexing.Index.Indexing,Debug,Deleting (DiscussionThreads-65) from Threads/TagCount,
+2012-06-21 21:21:26.7451,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 41 because: WORK BY IndexingExecuter,
+2012-06-21 21:21:26.7451,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Executing Raven.Database.Tasks.ReduceTask,
+2012-06-21 21:21:26.7451,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 2 reduce keys for index Threads/TagCount,
+2012-06-21 21:21:26.7451,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 41, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:26.7451,Raven.Database.Tasks.ReduceTask,Debug,Read 2 reduce keys in 00:00:00.0000046 with 0 results for index Threads/TagCount,
+2012-06-21 21:21:26.7548,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 0 entries for Threads/TagCount for reduce keys: test, tags",
+2012-06-21 21:21:26.7548,Raven.Database.Tasks.ReduceTask,Debug,Indexed 2 reduce keys in 00:00:00.0068920 with 0 results for index Threads/TagCount,
+2012-06-21 21:21:26.7548,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 42 because: WORK BY ReducingExecuter,
+2012-06-21 21:21:26.7548,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 42, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:21:26.7548,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 42, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:21:28.5810,Raven.Database.Server.HttpServer,Debug,Request # 319: GET     -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount?definition=yes&noCache=-183943057,
+2012-06-21 21:21:28.5810,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:21:28.5810,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 0 ms
+	Index: Threads/TagCount
+	Results: 0 returned out of 0 total.
+",
+2012-06-21 21:21:29.8056,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:21:29.8056,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: Threads/TagCount
+	Results: 0 returned out of 0 total.
+",
+2012-06-21 21:28:56.9814,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2012-06-21 21:28:56.9814,Raven.Database.Server.HttpServer,Debug,Request # 320: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2012-06-21 21:28:57.0742,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-21 21:28:57.0742,Raven.Database.Server.HttpServer,Debug,Request # 321: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2012-06-21 21:28:57.1767,Raven.Database.Server.HttpServer,Debug,Request # 322: HEAD    -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount,
+2012-06-21 21:28:57.2197,Raven.Database.Server.HttpServer,Debug,Request # 323: PUT     -     1 ms - HitThatLine - 201 - /indexes/Threads/TagCount,
+2012-06-21 21:28:59.5361,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:28:59.5361,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:28:59.5361,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:28:59.5361,Raven.Database.Server.HttpServer,Debug,Request # 324: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:28:59.5361,Raven.Database.Server.HttpServer,Debug,Request # 326: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:28:59.5361,Raven.Database.Server.HttpServer,Debug,Request # 325: GET     -     0 ms - HitThatLine - 200 - /docs/users/test,
+2012-06-21 21:28:59.6679,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:28:59.6679,Raven.Database.Server.HttpServer,Debug,Request # 327: GET     -     1 ms - HitThatLine - 200 - /indexes/Threads/TagCount?query=&start=0&pageSize=128&aggregation=None,
+2012-06-21 21:28:59.6679,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 0 ms
+	Index: Threads/TagCount
+	Results: 0 returned out of 0 total.
+",
+2012-06-21 21:28:59.7617,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/1' was not found,
+2012-06-21 21:28:59.7617,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'threads/1', update: False, ",
+2012-06-21 21:28:59.7617,Raven.Database.DocumentDatabase,Debug,Put document threads/1 with etag 00000000-0000-1000-0000-000000000018,
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 43 because: PUT threads/1,
+2012-06-21 21:28:59.7617,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0201243,
+2012-06-21 21:28:59.7617,Raven.Database.Server.HttpServer,Debug,Request # 328: POST    -    21 ms - HitThatLine - 200 - /bulk_docs,
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-1000-0000-000000000008,
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 43, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-1000-0000-000000000008",
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-1000-0000-000000000008",
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (threads/1),
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Threads/TagCount. (threads/1),
+2012-06-21 21:28:59.7617,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/1 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threads/1
+	Tag I-: DiscussionThreads
+	LastModified I-: 20120622022859761
+",
+2012-06-21 21:28:59.7617,Raven.Database.Server.HttpServer,Debug,"	PUT threads/1
+",
+2012-06-21 21:28:59.7685,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/1': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2012-06-21 21:28:59.7685,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 1 documents for Threads/TagCount,
+2012-06-21 21:28:59.7685,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2012-06-21 21:28:59.7822,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 44 because: WORK BY IndexingExecuter,
+2012-06-21 21:28:59.7822,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 44, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:28:59.7822,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found 1 mapped results for keys [test] for index Threads/TagCount,
+2012-06-21 21:28:59.7822,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 1 reduce keys for index Threads/TagCount,
+2012-06-21 21:28:59.7822,Raven.Database.Tasks.ReduceTask,Debug,Read 1 reduce keys in 00:00:00.0000550 with 1 results for index Threads/TagCount,
+2012-06-21 21:28:59.7822,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 1
+	Count_Range IS: 1
+",
+2012-06-21 21:28:59.8056,Raven.Database.Indexing.Index.Indexing,Debug,Reduce resulted in 1 entries for Threads/TagCount for reduce keys: test,
+2012-06-21 21:28:59.8056,Raven.Database.Tasks.ReduceTask,Debug,Indexed 1 reduce keys in 00:00:00.0135267 with 1 results for index Threads/TagCount,
+2012-06-21 21:28:59.8056,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 45 because: WORK BY ReducingExecuter,
+2012-06-21 21:28:59.8056,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 45, for: IndexingExecuter, will wait for additional work",
+2012-06-21 21:28:59.8056,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 45, for: ReducingExecuter, will wait for additional work",
+2012-06-21 21:28:59.8339,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:28:59.8339,Raven.Database.Server.HttpServer,Debug,Request # 329: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:29:01.6640,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:29:01.6640,Raven.Database.Server.HttpServer,Debug,Request # 330: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:29:01.6640,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:29:01.6640,Raven.Database.Server.HttpServer,Debug,Request # 331: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:29:01.7158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:29:01.7158,Raven.Database.Server.HttpServer,Debug,Request # 332: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:29:01.7763,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2012-06-21 21:29:01.7763,Raven.Database.Server.HttpServer,Debug,Request # 333: GET     -     0 ms - HitThatLine - 304 - /docs/users/test,
+2012-06-21 21:29:52.3789,Raven.Database.Server.HttpServer,Debug,Request # 334: GET     -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount?definition=yes&noCache=-1734754908,
+2012-06-21 21:29:52.3789,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:29:52.3789,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: Threads/TagCount
+	Results: 1 returned out of 1 total.
+",
+2012-06-21 21:29:54.0966,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Threads/TagCount for all documents,
+2012-06-21 21:29:54.0966,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+	Index: Threads/TagCount
+	Results: 1 returned out of 1 total.
+",
+2012-06-21 21:31:29.7617,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-06-21 21:31:29.8095,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

@@ -1,5 +1,6 @@
 using AutoMapper;
 using AutoMapper.Mappers;
+using HitThatLine.Domain.Discussion;
 using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Endpoints.Thread.Models;
 using StructureMap.Configuration.DSL;
@@ -17,12 +18,13 @@ namespace HitThatLine.Infrastructure
             ConfigureStructureMap(configStore);
         }
 
-        public static void ConfigureMaps(ConfigurationStore configStore)
+        public static void ConfigureMaps(IConfiguration configStore)
         {
             configStore.CreateMap<SummaryRequest, SummaryViewModel>();
             configStore.CreateMap<LoginRequest, LoginViewModel>();
             configStore.CreateMap<RegisterRequest, RegisterViewModel>();
             configStore.CreateMap<NewThreadRequest, NewThreadViewModel>();
+            configStore.CreateMap<DiscussionThread, ViewThreadRequest>();
             
             configStore.CreateMap<LoginCommand, LoginRequest>()
                 .ForMember(x => x.Password, opt => opt.Ignore());

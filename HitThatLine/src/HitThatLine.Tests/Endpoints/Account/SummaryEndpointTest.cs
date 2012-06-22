@@ -10,17 +10,21 @@ namespace HitThatLine.Tests.Endpoints.Account
     [TestFixture]
     public class SummaryEndpointTest
     {
-        [Test]
-        public void GET_MapsRequestToViewModel()
+        [TestFixture]
+        public class Get
         {
-            var mappingEngine = new Mock<IMappingEngine>();
-            var endpoint = new SummaryEndpoint(mappingEngine.Object);
-            var request = new SummaryRequest();
-            var expectedViewModel = new SummaryViewModel();
+            [Test]
+            public void MapsRequestToViewModel()
+            {
+                var mappingEngine = new TestableMappingEngine();
+                var endpoint = new SummaryEndpoint(mappingEngine);
+                var request = new SummaryRequest();
+                var expectedViewModel = new SummaryViewModel();
 
-            mappingEngine.Setup(x => x.Map<SummaryRequest, SummaryViewModel>(request)).Returns(expectedViewModel);
-            var viewModel = endpoint.Summary(request);
-            viewModel.ShouldEqual(expectedViewModel);
+                mappingEngine.Mapper.Setup(x => x.Map<SummaryRequest, SummaryViewModel>(request)).Returns(expectedViewModel);
+                var viewModel = endpoint.Summary(request);
+                viewModel.ShouldEqual(expectedViewModel);
+            }
         }
     }
 }

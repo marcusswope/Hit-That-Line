@@ -139,6 +139,7 @@
     <Compile Include="Infrastructure\TaskExecutorTest.cs" />
     <Compile Include="Services\CookieStorageTest.cs" />
     <Compile Include="Services\UserAccountServiceTest.cs" />
+    <Compile Include="Utility\TestableMappingEngine.cs" />
     <Compile Include="Utility\MockActionBehavior.cs" />
     <Compile Include="Infrastructure\Behaviors\RavenBehaviorTest.cs" />
     <Compile Include="Utility\RavenTestBase.cs" />
