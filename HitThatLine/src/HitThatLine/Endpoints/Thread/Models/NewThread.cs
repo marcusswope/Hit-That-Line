@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using FubuMVC.Core;
 using HitThatLine.Infrastructure;
-using HitThatLine.Infrastructure.Conventions.Attributes;
+using HitThatLine.Infrastructure.Raven;
+using HitThatLine.Infrastructure.Validation;
+using HitThatLine.Infrastructure.Validation.Attributes;
 
 namespace HitThatLine.Endpoints.Thread.Models
 {

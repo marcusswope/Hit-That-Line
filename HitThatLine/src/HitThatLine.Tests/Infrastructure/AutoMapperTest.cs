@@ -1,4 +1,5 @@
 ﻿using HitThatLine.Infrastructure;
+using HitThatLine.Infrastructure.AutoMapper;
 using NUnit.Framework;
 
 namespace HitThatLine.Tests.Infrastructure

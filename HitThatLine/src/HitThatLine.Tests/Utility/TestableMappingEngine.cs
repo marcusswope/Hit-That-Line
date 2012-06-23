@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using AutoMapper;
 using HitThatLine.Infrastructure;
+using HitThatLine.Infrastructure.AutoMapper;
 using Moq;
 using NUnit.Framework;
 

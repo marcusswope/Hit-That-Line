@@ -42,7 +42,7 @@ namespace HitThatLine.Tests.Endpoints.Account
 
                 var redirect = endpoint.Login(command);
 
-                endpoint.CookieStorage.Verify(x => x.Set(UserAccount.LoginCookieName, DefaultUser.DocumentKey));
+                endpoint.Service.Verify(x => x.Login(DefaultUser));
                 redirect.AssertWasRedirectedTo<HomeRequest>(x => x != null);
             }
         }
@@ -56,7 +56,7 @@ namespace HitThatLine.Tests.Endpoints.Account
         public Mock<ICookieStorage> CookieStorage { get; private set; }
 
         public TestableLoginEndpoint(Mock<IUserAccountService> service, TestableMappingEngine mappingEngine, Mock<ICookieStorage> cookieStorage, HttpContextBase httpContext, IDocumentSession session)
-            : base(mappingEngine, session)
+            : base(mappingEngine, session, service.Object)
         {
             Service = service;
             MappingEngine = mappingEngine.Mapper;

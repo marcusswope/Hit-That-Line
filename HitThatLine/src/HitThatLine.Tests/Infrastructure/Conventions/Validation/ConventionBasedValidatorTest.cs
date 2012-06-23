@@ -1,7 +1,7 @@
 ﻿using System;
 using HitThatLine.Infrastructure;
-using HitThatLine.Infrastructure.Conventions.Attributes;
-using HitThatLine.Infrastructure.Conventions.Validation;
+using HitThatLine.Infrastructure.Validation;
+using HitThatLine.Infrastructure.Validation.Attributes;
 using HitThatLine.Tests.Utility;
 using NUnit.Framework;
 using FluentValidation.TestHelper;

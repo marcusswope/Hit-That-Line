@@ -1,5 +1,8 @@
-﻿using System.Security.Principal;
+﻿using System.Collections.Generic;
+using System.Security.Principal;
 using System.Web;
+using FubuMVC.Core.Security;
+using HitThatLine.Infrastructure.Security;
 using HitThatLine.Services;
 using Newtonsoft.Json;
 
@@ -24,18 +27,12 @@ namespace HitThatLine.Domain.Accounts
             return "users/" + username;
         }
 
-        public virtual void Login(ICookieStorage cookieStorage, HttpContextBase context)
-        {
-            cookieStorage.Set(LoginCookieName, DocumentKey);
-            context.User = Principal;
-        }
-        
         [JsonIgnore]
         public virtual GenericPrincipal Principal
         {
             get
             {
-                return _principal ?? (_principal = new GenericPrincipal(new GenericIdentity(Username), new[] { BasicUserRole }));
+                return _principal ?? (_principal = new HTLPrincipal(this));
             }
         }
         private GenericPrincipal _principal;
@@ -46,9 +43,11 @@ namespace HitThatLine.Domain.Accounts
             get { return string.Format("http://www.gravatar.com/avatar/{0}?d=identicon&r=pg&s=70", EmailHash); }
         }
 
-        public virtual void Logout(ICookieStorage cookieStorage)
+        public List<string> Roles { get; set; }
+
+        public UserAccount()
         {
-            cookieStorage.Remove(LoginCookieName);
+            Roles = new List<string>();
         }
     }
 }

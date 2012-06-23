@@ -1,9 +1,8 @@
 using FubuMVC.Core;
 using FubuMVC.Razor;
-using HitThatLine.Infrastructure.Behaviors;
-using HitThatLine.Infrastructure.Conventions;
-using HitThatLine.Infrastructure.Conventions.Html;
-using HitThatLine.Infrastructure.Conventions.Validation;
+using HitThatLine.Infrastructure.Raven;
+using HitThatLine.Infrastructure.Security;
+using HitThatLine.Infrastructure.Validation;
 
 namespace HitThatLine.Infrastructure
 {
@@ -17,6 +16,7 @@ namespace HitThatLine.Infrastructure
                 .ToThisAssembly();
 
             Policies
+                .Add<AccessAuthorizationConvention>()
                 .WrapBehaviorChainsWith<UserAccountBehavior>()
                 .WrapBehaviorChainsWith<RavenBehavior>();
 

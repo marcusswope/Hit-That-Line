@@ -1,5 +1,4 @@
-﻿using HitThatLine.Domain.Accounts;
-using HitThatLine.Endpoints.Account;
+﻿using HitThatLine.Endpoints.Account;
 using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Endpoints.Home.Models;
 using HitThatLine.Services;
@@ -15,13 +14,12 @@ namespace HitThatLine.Tests.Endpoints.Account
         [Test]
         public void LogsOutAndRedirects()
         {
-            var cookieStorage = new Mock<ICookieStorage>();
-            var endpoint = new LogoutEndpoint();
-            var userAccount = new Mock<UserAccount>();
-            var request = new LogoutRequest { UserAccount = userAccount.Object, Cookies = cookieStorage.Object };
+            var service = new Mock<IUserAccountService>();
+            var endpoint = new LogoutEndpoint(service.Object);
+            var request = new LogoutRequest();
 
             var continuation = endpoint.Logout(request);
-            userAccount.Verify(x => x.Logout(cookieStorage.Object));
+            service.Verify(x => x.Logout());
             continuation.AssertWasRedirectedTo<HomeRequest>();
         }
     }

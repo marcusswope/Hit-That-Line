@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Endpoints.Account.Models;
-using HitThatLine.Infrastructure.Conventions.Validation;
+using HitThatLine.Infrastructure.Validation;
 using Raven.Client;
 using System.Linq;
 

@@ -61,7 +61,7 @@ namespace HitThatLine.Tests.Services
         public Mock<IDocumentSession> Session { get; private set; }
 
         public TestableUserAccountService(Mock<ICookieStorage> cookieStorage, Mock<IDocumentSession> session, Mock<HttpContextBase> httpContext)
-            : base(cookieStorage.Object, session.Object)
+            : base(cookieStorage.Object, session.Object, httpContext.Object)
         {
             HttpContext = httpContext;
             CookieStorage = cookieStorage;

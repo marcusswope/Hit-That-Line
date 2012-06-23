@@ -1,15 +1,22 @@
 ﻿using FubuMVC.Core.Continuations;
 using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Endpoints.Home.Models;
-using HitThatLine.Utility;
+using HitThatLine.Services;
 
 namespace HitThatLine.Endpoints.Account
 {
     public class LogoutEndpoint
     {
+        private readonly IUserAccountService _service;
+
+        public LogoutEndpoint(IUserAccountService service)
+        {
+            _service = service;
+        }
+
         public FubuContinuation Logout(LogoutRequest request)
         {
-            request.UserAccount.IfNotNull(x => x.Logout(request.Cookies));
+            _service.Logout();
             return FubuContinuation.RedirectTo<HomeRequest>();
         } 
     }

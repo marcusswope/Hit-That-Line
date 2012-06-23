@@ -1,7 +1,8 @@
 using System.Web;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Infrastructure;
-using HitThatLine.Infrastructure.Conventions.Attributes;
+using HitThatLine.Infrastructure.Validation;
+using HitThatLine.Infrastructure.Validation.Attributes;
 using HitThatLine.Services;
 
 namespace HitThatLine.Endpoints.Account.Models

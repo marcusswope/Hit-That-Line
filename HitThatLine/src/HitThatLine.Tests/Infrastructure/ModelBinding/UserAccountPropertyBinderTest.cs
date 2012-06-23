@@ -1,6 +1,8 @@
-﻿using FubuCore.Binding;
+﻿using System.Web;
+using FubuCore.Binding;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Infrastructure.ModelBinding;
+using HitThatLine.Infrastructure.Security;
 using HitThatLine.Services;
 using HitThatLine.Tests.Utility;
 using Moq;
@@ -21,7 +23,19 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
         }
 
         [Test]
-        public void FirstAttemptsToSetUserFromUserAccountService()
+        public void FirstAttemptsToReadFromHttpContext()
+        {
+            var binder = TestableUserAccountPropertyBinder.Build(Session);
+
+            binder.HttpContext.SetupGet(x => x.User).Returns(new HTLPrincipal(DefaultUser));
+
+            binder.Bind(typeof(UserAccountBindingModel).GetProperty("UserAccount"), binder.Context.Object);
+
+            binder.Model.UserAccount.ShouldEqual(DefaultUser);
+        }
+
+        [Test]
+        public void ThenAttemptsToSetUserFromUserAccountService()
         {
             var binder = TestableUserAccountPropertyBinder.Build(Session);
 
@@ -38,6 +52,7 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
             public Mock<IBindingContext> Context { get; private set; }
             public Mock<IContextValues> ContextValues { get; private set; }
             public Mock<ICookieStorage> Cookies { get; private set; }
+            public Mock<HttpContextBase> HttpContext { get; private set; }
             public UserAccountBindingModel Model { get; private set; }
             
             public TestableUserAccountPropertyBinder(IDocumentSession session)
@@ -46,9 +61,11 @@ namespace HitThatLine.Tests.Infrastructure.ModelBinding
                 ContextValues = new Mock<IContextValues>();
                 Cookies = new Mock<ICookieStorage>();
                 Model = new UserAccountBindingModel();
-                
+                HttpContext = new Mock<HttpContextBase>();
+
                 Context.Setup(x => x.Service<ICookieStorage>()).Returns(Cookies.Object);
                 Context.Setup(x => x.Service<IDocumentSession>()).Returns(session);
+                Context.Setup(x => x.Service<HttpContextBase>()).Returns(HttpContext.Object);
                 Context.SetupGet(x => x.Object).Returns(Model);
                 Context.SetupGet(x => x.Data).Returns(ContextValues.Object);
             }

@@ -1,5 +1,5 @@
 ﻿using FubuMVC.Core.Behaviors;
-using HitThatLine.Infrastructure.Behaviors;
+using HitThatLine.Infrastructure.Raven;
 using HitThatLine.Tests.Utility;
 using Moq;
 using NUnit.Framework;

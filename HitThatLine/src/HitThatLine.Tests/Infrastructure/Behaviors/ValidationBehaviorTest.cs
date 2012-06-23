@@ -5,7 +5,7 @@ using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Continuations;
 using FubuMVC.Core.Runtime;
 using HitThatLine.Endpoints.Account.Models;
-using HitThatLine.Infrastructure.Behaviors;
+using HitThatLine.Infrastructure.Validation;
 using HitThatLine.Tests.Infrastructure.Conventions.Validation;
 using HitThatLine.Tests.Utility;
 using Moq;
