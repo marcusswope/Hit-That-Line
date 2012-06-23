@@ -7,7 +7,7 @@
 </div>
 <div class="section grid_12">
     @(this.FormFor<RegisterCommand>().Id("registrationForm"))
-    @this.LabelFor(x => x.Username).Grid(3).AutoFocus()
+    @this.LabelFor(x => x.Username).Grid(3).Autofocus()
     @this.Clear()
     @this.InputFor(x => x.Username).Grid(3)
     @this.Clear(15)

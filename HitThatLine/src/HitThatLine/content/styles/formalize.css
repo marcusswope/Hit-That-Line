@@ -151,7 +151,8 @@ input[type="tel"],
 input[type="text"],
 input[type="time"],
 input[type="url"],
-input[type="week"] {
+input[type="week"],
+div.textbox {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -179,6 +180,35 @@ input[type="week"] {
   *padding-bottom: 1px;
   *height: auto;
 }
+
+div.textbox {
+    height: 30px;
+    position: relative
+}
+
+div.textbox:focus {
+  -webkit-box-shadow: #0066ff 0 0 5px 0;
+  -moz-box-shadow: #0066ff 0 0 5px 0;
+  box-shadow: #0066ff 0 0 5px 0;
+  z-index: 1;
+}
+
+div.textbox input[type="text"] {
+    border: 0px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+div.textbox input[type="text"]:focus
+{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  z-index: 1;
+}
+
 textarea[disabled],
 select[disabled],
 input[type="date"][disabled],

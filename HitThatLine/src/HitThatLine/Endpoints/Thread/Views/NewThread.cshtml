@@ -10,14 +10,16 @@
 @this.Clear(15)
 @(this.FormFor<NewThreadCommand>().Id("threadForm"))
 @this.LabelFor(x => x.Title).TextBoxOnRight()
-@this.InputFor(x => x.Title).Grid(10).Placeholder("new thread title")
+@this.InputFor(x => x.Title).Grid(10).Placeholder("new thread title").Autofocus()
 @this.Clear(15)
 <div id="wmd-button-bar" class="grid">
 </div>
 @this.InputFor(x => x.Body).Id("wmd-input").AddClass("wmd-input").Grid(12)
 @this.Clear(10)
 @this.LabelFor(x => x.Tags).TextBoxOnRight()
-@this.InputFor(x => x.TagInput).Grid(10).Attr("position", "relative").Attr("autocomplete", "off").Placeholder("at least one tag is required").Id("taginput")
+<div class="textbox grid_10" id="tagInputContainer">
+    @this.InputFor(x => x.TagInput).Attr("width", "100%").Autocomplete(false).Placeholder("at least one tag is required").Id("tagInput")
+</div>
 @this.InputFor(x => x.Tags).Attr("type", "hidden").Id("tags")
 @this.Clear(10)
 <div class="wmd-preview-container grid_12">

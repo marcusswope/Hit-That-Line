@@ -49,7 +49,7 @@ namespace HitThatLine.Utility
             return objectTag;
         }
 
-        public static HtmlTag AutoFocus(this HtmlTag tag)
+        public static HtmlTag Autofocus(this HtmlTag tag)
         {
             return tag.Attr("autofocus", "autofocus");
         }
@@ -62,6 +62,11 @@ namespace HitThatLine.Utility
         public static HtmlTag TextBoxOnRight(this HtmlTag tag)
         {
             return tag.Grid().AddClass("textbox-on-right");
+        }
+
+        public static HtmlTag Autocomplete(this HtmlTag tag, bool turnedOn)
+        {
+            return tag.Attr("autocomplete", turnedOn ? "on" : "off");
         }
     }
 }

@@ -9,10 +9,11 @@
         }
     });
 
-    $('#taginput').tagEditor();
+    $('#tagInputContainer').tagEditor();
 });
 
-var RichTagEditor = function (inputElement) {
+var RichTagEditor = function (inputContainerElement, inputElement) {
+    var inputContainer = $(inputContainerElement);
     var input = $(inputElement);
     var tagEditorId = "tagEditor";
 
@@ -27,7 +28,7 @@ var RichTagEditor = function (inputElement) {
                 buildSelector(data.Tags);
             },
             error: function (ea) {
-                
+
             }
         });
     };
@@ -46,14 +47,19 @@ var RichTagEditor = function (inputElement) {
             editor.append(tagSelector);
         }
 
-        editor.insertAfter(input);
+        if (tagCounts.length == 0) {
+            removeDropDown();
+        }
+        else {
+            editor.insertAfter(inputContainer);
+        }
     };
 
     var buildTagWrapper = function () {
         var editor = $('<div class="tagEditor" id="{0}"></div>'.f(tagEditorId));
-        editor.width(input.outerWidth() - 2);
-        var inputOffset = input.offset();
-        editor.offset({ top: inputOffset.top + input.outerHeight(), left: inputOffset.left });
+        editor.width(input.outerWidth());
+        var inputOffset = inputContainer.offset();
+        editor.offset({ top: inputOffset.top + inputContainer.outerHeight(), left: inputOffset.left });
         return editor;
     };
 
@@ -70,18 +76,20 @@ var RichTagEditor = function (inputElement) {
 };
 
 $.fn.tagEditor = function () {
-    var editor = new RichTagEditor(this.get(0));
+    var inputElement = $(this).children("#tagInput")[0];
+    var editor = new RichTagEditor(this.get(0), inputElement);
     this.keyup(function () {
-        if (!$(this).val() || $(this).val() == "") {
+        var input = $($(this).children("#tagInput")[0]);
+        if (!input.val() || input.val() == "") {
             editor.removeDropDown();
         }
         else {
             editor.populateDropDown();
         }
     });
-    this.blur(function (e) {
-        window.setTimeout(editor.removeDropDown, 200);
-    });
+    //    this.blur(function (e) {
+    //        window.setTimeout(editor.removeDropDown, 200);
+    //    });
     $('.tagSelector').live('click', function () {
         editor.selectTag($(this));
     });
