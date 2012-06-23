@@ -10,7 +10,9 @@
   "IsCompiled": false,
   "IsTemp": false,
   "Stores": {},
-  "Indexes": {},
+  "Indexes": {
+    "Tag": "Analyzed"
+  },
   "SortOptions": {},
   "Analyzers": {},
   "Fields": [],

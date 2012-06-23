@@ -12,6 +12,7 @@ namespace HitThatLine.Endpoints.Thread.Models
         [Required]
         public string Body { get; set; }
         [Required]
+        public string TagInput { get; set; }
         public string Tags { get; set; }
     }
 
@@ -28,9 +29,9 @@ namespace HitThatLine.Endpoints.Thread.Models
         }
     }
 
-    public class TagCountRequest : JsonMessage
+    public class TagCountCommand
     {
-        public List<ThreadCountByTag> Tags { get; set; }
+        public string TagQuery { get; set; }
     }
 
     public class TagCountResponse : JsonMessage

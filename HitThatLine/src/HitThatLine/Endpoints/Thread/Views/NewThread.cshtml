@@ -17,13 +17,14 @@
 @this.InputFor(x => x.Body).Id("wmd-input").AddClass("wmd-input").Grid(12)
 @this.Clear(10)
 @this.LabelFor(x => x.Tags).TextBoxOnRight()
-@this.InputFor(x => x.Tags).Grid(10).Placeholder("at least one tag is required").Id("tags")
+@this.InputFor(x => x.TagInput).Grid(10).Attr("position", "relative").Attr("autocomplete", "off").Placeholder("at least one tag is required").Id("taginput")
+@this.InputFor(x => x.Tags).Attr("type", "hidden").Id("tags")
 @this.Clear(10)
 <div class="wmd-preview-container grid_12">
     <div id="wmd-preview" class="wmd-preview"></div>
 </div>
 @this.Clear(15)
-<div>
+<div class="grid_2">
     <input type="submit" class="grid_2" />    
 </div>
 @this.Clear(15)

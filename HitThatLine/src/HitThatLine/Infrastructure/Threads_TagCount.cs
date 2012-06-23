@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using HitThatLine.Domain.Discussion;
+using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
 namespace HitThatLine.Infrastructure
@@ -29,6 +33,7 @@ namespace HitThatLine.Infrastructure
                                     Tag = g.Key,
                                     Count = g.Sum(x => x.Count)
                                 };
+            Indexes.Add(x => x.Tag, FieldIndexing.Analyzed);
         }
     }
 }

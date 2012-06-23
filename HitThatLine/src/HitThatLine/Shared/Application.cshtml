@@ -29,7 +29,7 @@
             stylesDir: '@Urls.UrlForAsset(AssetFolder.styles, "site.css").TrimEnd("site.css".ToCharArray())',
             duplicateUsername: '@(Urls.UrlFor<DuplicateUsernameCommand>())',
             duplicateEmailAddress: '@(Urls.UrlFor<DuplicateEmailAddressCommand>())',
-            tagCounts: '@(Urls.UrlFor<TagCountRequest>())'
+            tagCounts: '@(Urls.UrlFor<TagCountCommand>())'
         });
     </script>
 </body>

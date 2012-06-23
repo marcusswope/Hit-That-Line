@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using FubuMVC.Core;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Continuations;
 using FubuMVC.Core.Runtime;
@@ -9,15 +8,16 @@ using StructureMap;
 
 namespace HitThatLine.Infrastructure.Behaviors
 {
-    public class ValidationBehavior<T> : BasicBehavior where T : class, IValidatedCommand
+    public class ValidationBehavior<T> : IActionBehavior where T : class, IValidatedCommand
     {
         private readonly IFubuRequest _request;
         private readonly IContainer _container;
         private readonly IContinuationDirector _director;
         private readonly IMappingEngine _mapper;
 
+        public IActionBehavior InsideBehavior { get; set; }
+
         public ValidationBehavior(IFubuRequest request, IContainer container, IContinuationDirector director, IMappingEngine mapper)
-            : base(PartialBehavior.Ignored)
         {
             _request = request;
             _container = container;
@@ -25,12 +25,12 @@ namespace HitThatLine.Infrastructure.Behaviors
             _mapper = mapper;
         }
 
-        protected override DoNext performInvoke()
+        public void Invoke()
         {
             IValidator<T> validator;
-            if (_container.Model.HasDefaultImplementationFor(typeof (IValidator<>).MakeGenericType(typeof (T))))
+            if (_container.Model.HasDefaultImplementationFor(typeof(IValidator<>).MakeGenericType(typeof(T))))
             {
-                validator = _container.GetInstance(typeof (IValidator<>).MakeGenericType(typeof (T))) as IValidator<T>;
+                validator = _container.GetInstance(typeof(IValidator<>).MakeGenericType(typeof(T))) as IValidator<T>;
             }
             else
             {
@@ -39,15 +39,22 @@ namespace HitThatLine.Infrastructure.Behaviors
 
             var inputModel = _request.Get<T>();
             var result = validator.Validate(inputModel);
-            if (result.IsValid) return DoNext.Continue;
-            
-            var transferToModel = inputModel.TransferToOnFailed;
-            transferToModel = _mapper.Map(inputModel, transferToModel, inputModel.GetType(), transferToModel.GetType());
-            
-            _request.Set(result);
-            _director.TransferTo(transferToModel);
+            if (!result.IsValid)
+            {
+                var transferToModel = inputModel.TransferToOnFailed;
+                transferToModel = _mapper.Map(inputModel, transferToModel, inputModel.GetType(), transferToModel.GetType());
 
-            return DoNext.Stop;
+                _request.Set(result);
+                _director.TransferTo(transferToModel);
+                return;
+            }
+
+            InsideBehavior.Invoke();
+        }
+
+        public void InvokePartial()
+        {
+            InsideBehavior.InvokePartial();
         }
     }
 }
