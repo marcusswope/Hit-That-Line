@@ -30,19 +30,9 @@ namespace HitThatLine.Endpoints.Thread
         
         public FubuContinuation NewThread(NewThreadCommand command)
         {
-            var thread = new DiscussionThread(command.Title, command.Body, command.TagInput.Split(','));
+            var thread = new DiscussionThread(command.Title, command.Body, command.Tags.Split(','));
             _session.Store(thread);
             return FubuContinuation.RedirectTo(new HomeRequest());
-        }
-
-        public TagCountResponse ThreadsByTag(TagCountCommand command)
-        {
-            var tags = _session.Advanced.LuceneQuery<ThreadCountByTag, Threads_TagCount>()
-                            .Where(string.Format("Tag: *{0}*", command.TagQuery))
-                            .OrderBy("-Count").Take(6)
-                            .ToList();
-
-            return new TagCountResponse { Tags = tags };
         }
     }
 }

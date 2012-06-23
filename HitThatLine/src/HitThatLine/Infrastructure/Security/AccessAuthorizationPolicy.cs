@@ -42,8 +42,8 @@ namespace HitThatLine.Infrastructure.Security
         {
             return typeof (THandler)
                 .GetCustomAttributes(false)
-                .Where(x => x is OnlyAllowRoleAttribute)
-                .Cast<OnlyAllowRoleAttribute>()
+                .Where(x => x is OnlyAllowRolesAttribute)
+                .Cast<OnlyAllowRolesAttribute>()
                 .SelectMany(x => x.Roles).ToList();
         }
 

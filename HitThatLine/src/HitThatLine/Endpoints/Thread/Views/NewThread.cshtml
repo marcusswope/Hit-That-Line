@@ -18,7 +18,7 @@
 @this.Clear(10)
 @this.LabelFor(x => x.Tags).TextBoxOnRight()
 <div class="textbox grid_10" id="tagInputContainer">
-    @this.InputFor(x => x.TagInput).Attr("width", "100%").Autocomplete(false).Placeholder("at least one tag is required").Id("tagInput")
+    @this.InputFor(x => x.TagInput).Attr("width", "100%").Autocomplete(false).Id("tagInput")
 </div>
 @this.InputFor(x => x.Tags).Attr("type", "hidden").Id("tags")
 @this.Clear(10)

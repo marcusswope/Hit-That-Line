@@ -1,7 +1,7 @@
 ﻿@using FubuMVC.Core.Assets.Files
 @using FubuMVC.Core.UI
 @using HitThatLine.Endpoints.Account.Models
-@using HitThatLine.Endpoints.Thread.Models
+@using HitThatLine.Endpoints.Tags.Models
 @using HitThatLine.Utility
 @using Raven.Client.MvcIntegration
 <!DOCTYPE html>
@@ -14,7 +14,6 @@
     @{this.Asset("siteScripts");}
 </head>
     <body>
-        @RavenProfiler.CurrentRequestSessions()
         <div id="main-header">
             @this.SvgImage("hitthatline.svg").Id("main-logo")
             <div id="user-summary">
@@ -26,12 +25,14 @@
         </div>
         @this.WriteCssTags()
         @this.WriteScriptTags()
+        @RavenProfiler.CurrentRequestSessions()
         <script type="text/javascript">
             $.htl.urls({
                 stylesDir: '@Urls.UrlForAsset(AssetFolder.styles, "site.css").TrimEnd("site.css".ToCharArray())',
                 duplicateUsername: '@(Urls.UrlFor<DuplicateUsernameCommand>())',
                 duplicateEmailAddress: '@(Urls.UrlFor<DuplicateEmailAddressCommand>())',
-                tagCounts: '@(Urls.UrlFor<TagCountCommand>())'
+                tagCounts: '@(Urls.UrlFor<TagCountCommand>())',
+                removeTagImage: '@this.ImageUrl("cancel.png")'
             });
         </script>
     </body>

@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\images\accept.png" />
+    <Content Include="content\images\cancel.png" />
     <Content Include="content\images\small-ajax-loader.gif" />
     <Content Include="content\images\button.png" />
     <Content Include="content\images\exclamation.png" />
@@ -192,6 +193,8 @@
     <Compile Include="Endpoints\Account\Validation\LoginCommandValidator.cs" />
     <Compile Include="Endpoints\Home\HomeEndpoint.cs" />
     <Compile Include="Endpoints\Home\Models\Home.cs" />
+    <Compile Include="Endpoints\Tags\Models\TagCount.cs" />
+    <Compile Include="Endpoints\Tags\TagStatisticsEndpoint.cs" />
     <Compile Include="Endpoints\Thread\Models\NewThread.cs" />
     <Compile Include="Endpoints\Thread\Models\ViewThread.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpoint.cs" />
@@ -234,7 +237,7 @@
     <Compile Include="Infrastructure\Raven\RavenDBRegistry.cs" />
     <Compile Include="Infrastructure\Security\AccessAuthorizationPolicy.cs" />
     <Compile Include="Infrastructure\Security\HTLPrincipal.cs" />
-    <Compile Include="Infrastructure\Security\OnlyAllowRoleAttribute.cs" />
+    <Compile Include="Infrastructure\Security\OnlyAllowRolesAttribute.cs" />
     <Compile Include="Infrastructure\Raven\Threads_TagCount.cs" />
     <Compile Include="Infrastructure\TaskExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using FubuMVC.Core;
-using HitThatLine.Infrastructure;
-using HitThatLine.Infrastructure.Raven;
-using HitThatLine.Infrastructure.Validation;
+﻿using HitThatLine.Infrastructure.Validation;
 using HitThatLine.Infrastructure.Validation.Attributes;
 
 namespace HitThatLine.Endpoints.Thread.Models
@@ -13,7 +9,6 @@ namespace HitThatLine.Endpoints.Thread.Models
         public string Title { get; set; }
         [Required]
         public string Body { get; set; }
-        [Required]
         public string TagInput { get; set; }
         public string Tags { get; set; }
     }
@@ -29,15 +24,5 @@ namespace HitThatLine.Endpoints.Thread.Models
         {
             get { return new NewThreadRequest(); }
         }
-    }
-
-    public class TagCountCommand
-    {
-        public string TagQuery { get; set; }
-    }
-
-    public class TagCountResponse : JsonMessage
-    {
-        public List<ThreadCountByTag> Tags { get; set; }
     }
 }

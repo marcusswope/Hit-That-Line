@@ -2,11 +2,11 @@
 
 namespace HitThatLine.Infrastructure.Security
 {
-    public class OnlyAllowRoleAttribute : Attribute
+    public class OnlyAllowRolesAttribute : Attribute
     {
         public string[] Roles { get; private set; }
 
-        public OnlyAllowRoleAttribute(params string[] roles)
+        public OnlyAllowRolesAttribute(params string[] roles)
         {
             Roles = roles;
         }

@@ -183,7 +183,8 @@ div.textbox {
 
 div.textbox {
     height: 30px;
-    position: relative
+    position: relative;
+    padding-bottom: 28px
 }
 
 div.textbox:focus {

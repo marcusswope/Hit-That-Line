@@ -10,8 +10,8 @@ namespace HitThatLine.Infrastructure.Security
         public void Configure(BehaviorGraph graph)
         {
             graph.Actions()
-                 .Where(action => action.HandlerType.HasAttribute<OnlyAllowRoleAttribute>() || 
-                                  action.Method.HasAttribute<OnlyAllowRoleAttribute>())
+                 .Where(action => action.HandlerType.HasAttribute<OnlyAllowRolesAttribute>() || 
+                                  action.Method.HasAttribute<OnlyAllowRolesAttribute>())
                  .Each(action => action
                      .ParentChain().Authorization
                      .AddPolicy(typeof(AccessAuthorizationPolicy<>).MakeGenericType(action.HandlerType)));
