@@ -198,10 +198,12 @@
     <Compile Include="Endpoints\Thread\Models\NewThread.cs" />
     <Compile Include="Endpoints\Thread\Models\ViewThread.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpoint.cs" />
+    <Compile Include="Endpoints\Thread\Validation\NewThreadCommandValidator.cs" />
     <Compile Include="Endpoints\Thread\ViewThreadEndpoint.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\BackgroundTask.cs" />
+    <Compile Include="Infrastructure\ModelBinding\TimeZoneInfoPropertyBinder.cs" />
     <Compile Include="Infrastructure\Security\AccessAuthorizationConvention.cs" />
     <Compile Include="Infrastructure\Security\UserAccountBehavior.cs" />
     <Compile Include="Infrastructure\Validation\IValidatedCommand.cs" />
@@ -245,6 +247,7 @@
     <Compile Include="Services\UserAccountService.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="Utility\HtmlTagExtensions.cs" />
+    <Compile Include="Utility\TimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\scripts\scripts.script.config" />
@@ -275,6 +278,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Endpoints\Thread\Views\NewThread.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Home\Views\ThreadSummary.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

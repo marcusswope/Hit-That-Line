@@ -23,7 +23,7 @@ namespace HitThatLine.Domain.Discussion
             MarkdownText = markDownText;
             DisplayText = markDownText.Transform();
             UserAccountKey = userAccount.DocumentKey;
-            CreatedOn = DateTime.Now;
+            CreatedOn = DateTime.UtcNow;
         }
 
         public void VoteUp()

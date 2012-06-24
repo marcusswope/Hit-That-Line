@@ -37,6 +37,7 @@ html.range_0 div#main-header object { height: 55px; }
 div.tagEditor { border: 1px solid black;position: absolute;background-color: #F6F5F4; }
 div.tagSelector:hover { background-color: #E24660; cursor:pointer }
 div.selectedTag { background-color: #E24660; border-radius: 7px; border: 2px solid #96172D;padding: 0px 2px 0px 4px;margin: 2px 2px 0px 2px;float: left;z-index: 999; }
+div.selectedTag a { color: whitesmoke;font-weight: bold; }
 img.removeTag { margin: -3px 0px 1px 3px;height: 16px;width: 16px; cursor:pointer }
 
 select.error,

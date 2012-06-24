@@ -12,5 +12,8 @@
     @this.Clear(5)
 </div>
 <div id="threads">
-    
+    @foreach(var thread in Model.Threads)
+    {
+        @Raw(this.PartialFor(thread))
+    }
 </div>

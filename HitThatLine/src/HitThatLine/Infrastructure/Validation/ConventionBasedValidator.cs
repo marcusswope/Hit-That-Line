@@ -38,7 +38,7 @@ namespace HitThatLine.Infrastructure.Validation
                 {
                     AddRule(new DateAfterTodayRule(propertyChain));
                 }
-                if (property.Name.Contains("Email") && property.PropertyType == typeof(string))
+                if (property.Name.Contains("Email") && property.PropertyType == typeof(string) && !property.Name.Contains("Hash"))
                 {
                     AddRule(new EmailAddressRule(propertyChain));
                 }

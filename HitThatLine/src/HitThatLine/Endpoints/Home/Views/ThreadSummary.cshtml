@@ -1,0 +1,48 @@
+﻿@using HitThatLine.Domain.Accounts
+@using HitThatLine.Endpoints.Home.Models
+@using HitThatLine.Endpoints.Thread.Models
+@using HitThatLine.Utility
+@using FubuMVC.Core.UI
+@model HitThatLine.Endpoints.Home.Models.ThreadSummaryViewModel
+<style>
+    .threadSummaryWrapper {
+        margin: 15px 15px 0px 15px;
+        padding: 10px 0px 0px 0px;
+        border-top: 1px solid gray;
+    }
+    .threadSummaryTitle {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+    .threadSummaryBody {
+        max-height: 75px;
+        overflow: hidden;
+    }
+    a.username {
+        font-weight: bold;
+        color: #c41e3a;
+        cursor: pointer;
+    }
+</style>
+<div class="threadSummaryWrapper grid_12">
+    <div class="grid_2" style="text-align:center">
+        <img src="@Model.AuthorProfilePictureUrl"/>
+    </div>
+    <div class="threadSummaryBody grid_9">
+        <a href="#" class="threadSummaryTitle">@Model.Title</a>
+        @this.Clear()
+        <div>@Raw(Model.DisplayBody)</div>
+    </div>
+    @this.Clear(5)
+    <div class="grid_9 prefix_2">
+        @foreach(var tag in Model.Tags)
+        {
+            <div class="selectedTag"><a href="#">@tag</a></div>
+        }
+    </div>
+    @this.Clear(5)
+    <div class="grid_9 prefix_2">
+        by <a href="#" class="username">@Model.AuthorUsername</a> @Model.TimePostedDifference
+    </div>
+</div>

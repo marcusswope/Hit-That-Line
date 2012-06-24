@@ -8,6 +8,9 @@
             error.insertAfter(element);
         }
     });
+    if ($('label[for="TagInput"]').length > 0) {
+        $('#tagInput').addClass('error');
+    }
 
     $('#tagInputContainer').tagEditor('#tags');
 });

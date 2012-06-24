@@ -6,6 +6,7 @@ using FluentValidation.Results;
 using FluentValidation.Validators;
 using FubuCore.Reflection;
 using HitThatLine.Utility;
+using FubuCore;
 
 namespace HitThatLine.Infrastructure.Validation
 {
@@ -28,7 +29,7 @@ namespace HitThatLine.Infrastructure.Validation
             var regex = new Regex(_validator.Expression);
             if (!regex.IsMatch(rawValue.ToString()))
             {
-                yield return new ValidationFailure(_propertyChain.Name, string.Format("{0} is not a valid email address", context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString()));
+                yield return new ValidationFailure(_propertyChain.Name, "{0} is not a valid email address".ToFormat(context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString()));
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 using HitThatLine.Services;
 using Moq;
 using NUnit.Framework;
@@ -42,10 +43,10 @@ namespace HitThatLine.Tests.Services
 
                 var responseCookie = storage.ResponseCookies["test"];
                 responseCookie.Name.ShouldEqual("test");
-                responseCookie.Expires.ShouldBeWithinOneSecondFrom(DateTime.Now.AddYears(20));
+                responseCookie.Expires.ShouldBeWithinOneSecondFrom(DateTime.UtcNow.AddYears(20));
 
-                var encryptedBytes1 = Convert.FromBase64String(responseCookie.Value);
-                var decryptedBytes = ProtectedData.Unprotect(encryptedBytes1, null, DataProtectionScope.CurrentUser);
+                var encryptedBytes = Convert.FromBase64String(responseCookie.Value);
+                var decryptedBytes = ProtectedData.Unprotect(encryptedBytes, null, DataProtectionScope.CurrentUser);
                 Encoding.UTF8.GetString(decryptedBytes).ShouldEqual("testValue");
             }
         }

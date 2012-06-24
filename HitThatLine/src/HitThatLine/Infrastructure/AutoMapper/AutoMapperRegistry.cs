@@ -2,6 +2,7 @@ using AutoMapper;
 using AutoMapper.Mappers;
 using HitThatLine.Domain.Discussion;
 using HitThatLine.Endpoints.Account.Models;
+using HitThatLine.Endpoints.Home.Models;
 using HitThatLine.Endpoints.Thread.Models;
 using StructureMap.Configuration.DSL;
 
@@ -24,7 +25,10 @@ namespace HitThatLine.Infrastructure.AutoMapper
             configStore.CreateMap<LoginRequest, LoginViewModel>();
             configStore.CreateMap<RegisterRequest, RegisterViewModel>();
             configStore.CreateMap<NewThreadRequest, NewThreadViewModel>();
+            configStore.CreateMap<NewThreadCommand, NewThreadRequest>();
             configStore.CreateMap<DiscussionThread, ViewThreadRequest>();
+            configStore.CreateMap<DiscussionThread, ThreadSummaryViewModel>()
+                .ForMember(x => x.TimeZoneOffset, opt => opt.Ignore());
             
             configStore.CreateMap<LoginCommand, LoginRequest>()
                 .ForMember(x => x.Password, opt => opt.Ignore());

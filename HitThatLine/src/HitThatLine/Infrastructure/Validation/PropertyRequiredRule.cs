@@ -5,6 +5,7 @@ using FluentValidation.Results;
 using FluentValidation.Validators;
 using FubuCore.Reflection;
 using HitThatLine.Utility;
+using FubuCore;
 
 namespace HitThatLine.Infrastructure.Validation
 {
@@ -19,7 +20,7 @@ namespace HitThatLine.Infrastructure.Validation
         public IEnumerable<ValidationFailure> Validate(ValidationContext context)
         {
             var rawValue = _property.GetValue(context.InstanceToValidate);
-            var validationFailure = new ValidationFailure(_property.Name, string.Format("{0} is required", context.PropertyChain.BuildPropertyName(_property.Name).ToPrettyString()));
+            var validationFailure = new ValidationFailure(_property.Name, "{0} is required".ToFormat(context.PropertyChain.BuildPropertyName(_property.Name).ToPrettyString()));
 
             if (_property.PropertyType == typeof(string) && string.IsNullOrWhiteSpace((string)rawValue))
             {

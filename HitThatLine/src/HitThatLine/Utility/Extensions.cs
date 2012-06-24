@@ -62,6 +62,12 @@ namespace HitThatLine.Utility
             if (target == null) return;
             work(target);
         }
+
+        public static int ToInt(this string value)
+        {
+            int intValue;
+            return int.TryParse(value, out intValue) ? intValue : 0;
+        }
     }
 
     public static class MarkdownExtensions

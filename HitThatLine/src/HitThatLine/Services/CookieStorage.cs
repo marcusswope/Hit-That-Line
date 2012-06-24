@@ -2,13 +2,14 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using FubuCore;
 
 namespace HitThatLine.Services
 {
     public interface ICookieStorage
     {
         bool Contains(string name);
-        string Get(string name);
+        string Get(string name, bool encrypted = true);
         void Set(string name, string value);
         void Remove(string name);
     }
@@ -26,14 +27,18 @@ namespace HitThatLine.Services
             return _httpContext.Request.Cookies[name] != null;
         }
 
-        public string Get(string name)
+        public string Get(string name, bool encrypted = true)
         {
-            var httpCookie = _httpContext.Request.Cookies[name];
-            if (httpCookie == null) return null;
+            if (encrypted)
+            {
+                var httpCookie = _httpContext.Request.Cookies[name];
+                if (httpCookie == null) return null;
 
-            var encryptedBytes = Convert.FromBase64String(httpCookie.Value);
-            var decryptedBytes = ProtectedData.Unprotect(encryptedBytes, null, DataProtectionScope.CurrentUser);
-            return Encoding.UTF8.GetString(decryptedBytes);
+                var encryptedBytes = Convert.FromBase64String(httpCookie.Value);
+                var decryptedBytes = ProtectedData.Unprotect(encryptedBytes, null, DataProtectionScope.CurrentUser);
+                return Encoding.UTF8.GetString(decryptedBytes);
+            }
+            return _httpContext.Request.Cookies[name].IfNotNull(x => x.Value);
         }
 
         public void Set(string name, string value)
@@ -43,7 +48,7 @@ namespace HitThatLine.Services
             _httpContext.Response.Cookies.Add(new HttpCookie(name)
                                                          {
                                                              Value = Convert.ToBase64String(encryptedBytes),
-                                                             Expires = DateTime.Now.AddYears(20)
+                                                             Expires = DateTime.UtcNow.AddYears(20)
                                                          });
         }
 
@@ -51,7 +56,7 @@ namespace HitThatLine.Services
         {
             _httpContext.Response.Cookies.Add(new HttpCookie(name)
             {
-                Expires = DateTime.Now.AddYears(-1)
+                Expires = DateTime.UtcNow.AddYears(-1)
             });
         }
     }

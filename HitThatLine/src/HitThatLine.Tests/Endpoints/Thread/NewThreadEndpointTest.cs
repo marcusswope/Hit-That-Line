@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HitThatLine.Domain.Accounts;
 using HitThatLine.Domain.Discussion;
 using HitThatLine.Endpoints.Home.Models;
 using HitThatLine.Endpoints.Thread;
@@ -37,7 +38,7 @@ namespace HitThatLine.Tests.Endpoints.Thread
             public void CreatesNewThreadAndSavesIt()
             {
                 var endpoint = TestableNewThreadEndpoint.Build();
-                var command = new NewThreadCommand { Tags = "test,tags" };
+                var command = new NewThreadCommand { Tags = "test,tags", TagInput = "hogs baseball", Author = new UserAccount() };
                 var request = new ViewThreadRequest();
 
                 endpoint.Mapper

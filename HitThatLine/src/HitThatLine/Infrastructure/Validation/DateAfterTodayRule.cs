@@ -5,6 +5,7 @@ using FluentValidation.Results;
 using FluentValidation.Validators;
 using FubuCore.Reflection;
 using HitThatLine.Utility;
+using FubuCore;
 
 namespace HitThatLine.Infrastructure.Validation
 {
@@ -22,9 +23,9 @@ namespace HitThatLine.Infrastructure.Validation
             if (rawValue == null) yield break;
 
             var value = (DateTime) rawValue;
-            var validationFailure = new ValidationFailure(_propertyChain.Name, string.Format("{0} cannot be in the future", context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString()));
+            var validationFailure = new ValidationFailure(_propertyChain.Name, "{0} cannot be in the future".ToFormat(context.PropertyChain.BuildPropertyName(_propertyChain.Name).ToPrettyString()));
 
-            if (value > DateTime.Now)
+            if (value > DateTime.UtcNow)
             {
                 yield return validationFailure;
             }

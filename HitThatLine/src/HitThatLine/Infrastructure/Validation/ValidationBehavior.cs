@@ -41,7 +41,7 @@ namespace HitThatLine.Infrastructure.Validation
             if (!result.IsValid)
             {
                 var transferToModel = inputModel.TransferToOnFailed;
-                transferToModel = _mapper.Map(inputModel, transferToModel, inputModel.GetType(), transferToModel.GetType());
+                transferToModel = _mapper.Map(inputModel, typeof(T), transferToModel.GetType());
 
                 _request.Set(result);
                 _director.TransferTo(transferToModel);

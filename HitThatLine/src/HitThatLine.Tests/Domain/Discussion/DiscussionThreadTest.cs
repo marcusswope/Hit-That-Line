@@ -1,4 +1,5 @@
-﻿using HitThatLine.Domain.Discussion;
+﻿using HitThatLine.Domain.Accounts;
+using HitThatLine.Domain.Discussion;
 using NUnit.Framework;
 using HitThatLine.Tests.Utility;
 
@@ -14,8 +15,9 @@ namespace HitThatLine.Tests.Domain.Discussion
             {
                 var title = "New Thread";
                 var body = "This is a body. And this is **really important**.";
-                var thread = new DiscussionThread(title, body, "test,tags".Split(','));
-                
+                var author = new UserAccount { Username = "test", EmailHash = "testhash" };
+                var thread = new DiscussionThread(title, body, "test,tags".Split(','), author);
+
                 thread.Id.ShouldEqual("threads/");
                 thread.Title.ShouldEqual(title);
                 thread.MarkdownBody.ShouldEqual(body);
@@ -26,6 +28,9 @@ namespace HitThatLine.Tests.Domain.Discussion
                 thread.Score.ShouldBeGreaterThan(0);
                 thread.Tags[0].ShouldEqual("test");
                 thread.Tags[1].ShouldEqual("tags");
+                thread.AuthorKey.ShouldEqual(author.DocumentKey);
+                thread.AuthorProfilePictureUrl.ShouldEqual(author.ProfilePictureUrl);
+                thread.AuthorUsername.ShouldEqual(author.Username);
             }
         }
 
@@ -35,7 +40,8 @@ namespace HitThatLine.Tests.Domain.Discussion
             [Test]
             public void IncrementsPostCount()
             {
-                var thread = new DiscussionThread("title", "body", "test,tags".Split(','));
+                var author = new UserAccount { Username = "test", EmailHash = "testhash" };
+                var thread = new DiscussionThread("title", "body", "test,tags".Split(','), author);
                 thread.PostCount.ShouldEqual(0);
                 thread.AddPost();
                 thread.PostCount.ShouldEqual(1);
@@ -48,11 +54,12 @@ namespace HitThatLine.Tests.Domain.Discussion
             [Test]
             public void IncrementsVoteCountAndRecalculatesTheScore()
             {
-                var thread = new DiscussionThread("title", "body", "test,tags".Split(','));
+                var author = new UserAccount { Username = "test", EmailHash = "testhash" };
+                var thread = new DiscussionThread("title", "body", "test,tags".Split(','), author);
                 var originalScore = thread.Score;
                 thread.UpVotes.ShouldEqual(1);
                 thread.DownVotes.ShouldEqual(0);
-                
+
                 thread.VoteUp();
                 thread.UpVotes.ShouldEqual(2);
                 thread.DownVotes.ShouldEqual(0);

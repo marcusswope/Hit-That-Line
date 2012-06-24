@@ -1,5 +1,6 @@
 using FubuMVC.Core;
 using FubuMVC.Razor;
+using HitThatLine.Infrastructure.Html;
 using HitThatLine.Infrastructure.Raven;
 using HitThatLine.Infrastructure.Security;
 using HitThatLine.Infrastructure.Validation;
