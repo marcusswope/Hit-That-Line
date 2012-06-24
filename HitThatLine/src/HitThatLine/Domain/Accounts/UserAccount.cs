@@ -43,7 +43,7 @@ namespace HitThatLine.Domain.Accounts
         [JsonIgnore]
         public string ProfilePictureUrl
         {
-            get { return "http://www.gravatar.com/avatar/{0}?d=identicon&r=pg&s=70".ToFormat(EmailHash); }
+            get { return "http://www.gravatar.com/avatar/{0}?d=identicon&r=pg&s=60".ToFormat(EmailHash); }
         }
 
         public List<string> Roles { get; set; }

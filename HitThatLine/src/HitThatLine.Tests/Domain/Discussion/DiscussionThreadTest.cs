@@ -28,7 +28,6 @@ namespace HitThatLine.Tests.Domain.Discussion
                 thread.Score.ShouldBeGreaterThan(0);
                 thread.Tags[0].ShouldEqual("test");
                 thread.Tags[1].ShouldEqual("tags");
-                thread.AuthorKey.ShouldEqual(author.DocumentKey);
                 thread.AuthorProfilePictureUrl.ShouldEqual(author.ProfilePictureUrl);
                 thread.AuthorUsername.ShouldEqual(author.Username);
             }
@@ -43,8 +42,10 @@ namespace HitThatLine.Tests.Domain.Discussion
                 var author = new UserAccount { Username = "test", EmailHash = "testhash" };
                 var thread = new DiscussionThread("title", "body", "test,tags".Split(','), author);
                 thread.PostCount.ShouldEqual(0);
-                thread.AddPost();
+                thread.AddPost("anotherUser");
                 thread.PostCount.ShouldEqual(1);
+                thread.LastActivity.ShouldBeWithinOneSecondFromNow();
+                thread.LastActivityUsername.ShouldEqual("anotherUser");
             }
         }
 

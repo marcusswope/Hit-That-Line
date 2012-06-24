@@ -14,16 +14,22 @@ namespace HitThatLine.Domain.Discussion
         public long NetVotes { get { return UpVotes - DownVotes; } }
         public double Score { get; private set; }
         public DateTime CreatedOn { get; private set; }
-        public DateTime? LastModified { get; private set; }
-        public string UserAccountKey { get; private set; }
+        public DateTime LastActivity { get; private set; }
+        public string Username { get; private set; }
         public string ThreadId { get; private set; }
 
-        public Post(string markDownText, UserAccount userAccount)
+        private Post(){}
+
+        public Post(string markDownText, string discussionThreadId, UserAccount userAccount)
         {
             MarkdownText = markDownText;
             DisplayText = markDownText.Transform();
-            UserAccountKey = userAccount.DocumentKey;
+            ThreadId = discussionThreadId;
+            Username = userAccount.Username;
             CreatedOn = DateTime.UtcNow;
+            LastActivity = DateTime.UtcNow;
+            UpVotes = 1;
+            calculateScore();
         }
 
         public void VoteUp()

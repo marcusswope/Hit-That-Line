@@ -144,6 +144,7 @@
     <Content Include="content\images\select_arrow.gif" />
     <Content Include="content\scripts\adapt.min.js" />
     <Content Include="content\scripts\accountRegistration.js" />
+    <Content Include="content\scripts\viewThread.js" />
     <Content Include="content\scripts\newThread.js" />
     <Content Include="content\scripts\login.js" />
     <Content Include="content\scripts\jquery.validate.min.js" />
@@ -196,11 +197,12 @@
     <Compile Include="Endpoints\Tags\Models\TagCount.cs" />
     <Compile Include="Endpoints\Tags\TagStatisticsEndpoint.cs" />
     <Compile Include="Endpoints\Thread\Models\NewThread.cs" />
+    <Compile Include="Endpoints\Thread\Models\PostReply.cs" />
     <Compile Include="Endpoints\Thread\Models\ViewThread.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpoint.cs" />
+    <Compile Include="Endpoints\Thread\PostReplyEndpoint.cs" />
     <Compile Include="Endpoints\Thread\Validation\NewThreadCommandValidator.cs" />
     <Compile Include="Endpoints\Thread\ViewThreadEndpoint.cs" />
-    <Compile Include="Infrastructure\AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperRegistry.cs" />
     <Compile Include="Infrastructure\BackgroundTask.cs" />
     <Compile Include="Infrastructure\ModelBinding\TimeZoneInfoPropertyBinder.cs" />
@@ -221,7 +223,7 @@
     <Compile Include="Infrastructure\Validation\Attributes\MinLengthAttribute.cs" />
     <Compile Include="Infrastructure\Validation\Attributes\RequiredAttribute.cs" />
     <Compile Include="Infrastructure\Validation\ConventionBasedValidator.cs" />
-    <Compile Include="Infrastructure\LabelConventions.cs" />
+    <Compile Include="Infrastructure\Html\LabelConventions.cs" />
     <Compile Include="Infrastructure\RouteConventions.cs" />
     <Compile Include="Infrastructure\Validation\DateAfterTodayRule.cs" />
     <Compile Include="Infrastructure\Validation\EmailAddressRule.cs" />
@@ -230,7 +232,7 @@
     <Compile Include="Infrastructure\Validation\PropertyRequiredRule.cs" />
     <Compile Include="Infrastructure\Validation\ValidationConvention.cs" />
     <Compile Include="Infrastructure\HitThatLineRegistry.cs" />
-    <Compile Include="Infrastructure\InputConventions.cs" />
+    <Compile Include="Infrastructure\Html\InputConventions.cs" />
     <Compile Include="Infrastructure\ModelBinding\CookieStoragePropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\FubuRequestPropertyBinder.cs" />
     <Compile Include="Infrastructure\ModelBinding\HttpContextPropertyBinder.cs" />
@@ -281,6 +283,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Endpoints\Home\Views\ThreadSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Thread\Views\ViewThread.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Endpoints\Thread\Views\Reply.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

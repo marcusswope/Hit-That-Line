@@ -1,0 +1,42 @@
+﻿@using HitThatLine.Endpoints.Thread.Models
+@using FubuMVC.Core.UI
+@using HitThatLine.Utility
+@model HitThatLine.Endpoints.Thread.Models.ViewThreadViewModel
+@{this.Asset("markdownStyles");}
+@{this.Asset("viewThread");}
+<div class="grid_2">
+    <img src="@Model.AuthorProfilePictureUrl"/>
+    @this.Clear(5)
+    <a href="#" class="username">@Model.AuthorUsername</a>
+</div>
+<div class="grid_9">
+    <div class="section-title">
+        @Model.Title
+    </div>
+    @Raw(Model.DisplayBody)
+</div>
+@this.Clear(10)
+@foreach (var reply in Model.Replies)
+{
+    @Raw(this.PartialFor(reply))
+}
+@this.Clear(10)
+<div class="grid_12" style="border-top:1px solid gray">
+    <div class="section-title">
+        Reply
+    </div>
+    @(this.FormFor(Model.ReplyCommand).Id("threadForm"))
+    <div id="wmd-button-bar" class="grid">
+    </div>
+    @this.InputFor(x => x.ReplyBody).Id("wmd-input").AddClass("wmd-input").Grid(12)
+    @this.Clear(10)
+    <div class="wmd-preview-container grid_12">
+        <div id="wmd-preview" class="wmd-preview">
+        </div>
+    </div>
+    @this.Clear(15)
+    <div class="grid_2">
+        <input type="submit" class="grid_2" />
+    </div>
+    @this.Clear(15)
+</div>

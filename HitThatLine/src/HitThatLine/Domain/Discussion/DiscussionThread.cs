@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Utility;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace HitThatLine.Domain.Discussion
 {
     public class DiscussionThread
     {
         public string Id { get; set; }
+        [JsonIgnore]
+        public string UriId { get { return Id.Replace("threads/", string.Empty); } }
 
         public string Title { get; private set; }
         public string MarkdownBody { get; private set; }
@@ -16,8 +19,8 @@ namespace HitThatLine.Domain.Discussion
         public IList<string> Tags { get; private set; }
         public DateTime CreatedOn { get; private set; }
         public DateTime LastActivity { get; private set; }
+        public string LastActivityUsername { get; private set; }
         public long PostCount { get; private set; }
-        public string AuthorKey { get; private set; }
         public string AuthorProfilePictureUrl { get; private set; }
         public string AuthorUsername { get; private set; }
 
@@ -25,6 +28,11 @@ namespace HitThatLine.Domain.Discussion
         public long DownVotes { get; private set; }
         public long NetVotes { get { return UpVotes - DownVotes; } }
         public double Score { get; private set; }
+
+        public static string BuildDocumentKey(string uri)
+        {
+            return "threads/" + uri;
+        }
 
         private DiscussionThread()
         { }
@@ -39,15 +47,16 @@ namespace HitThatLine.Domain.Discussion
             LastActivity = DateTime.UtcNow;
             UpVotes = 1;
             Tags = tags.ToList();
-            AuthorKey = author.DocumentKey;
             AuthorUsername = author.Username;
             AuthorProfilePictureUrl = author.ProfilePictureUrl;
             calculateScore();
         }
 
-        public void AddPost()
+        public void AddPost(string username)
         {
             PostCount++;
+            LastActivity = DateTime.UtcNow;
+            LastActivityUsername = username;
         }
 
         public void VoteUp()

@@ -1,48 +1,37 @@
-﻿@using HitThatLine.Domain.Accounts
-@using HitThatLine.Endpoints.Home.Models
-@using HitThatLine.Endpoints.Thread.Models
-@using HitThatLine.Utility
+﻿@using HitThatLine.Utility
 @using FubuMVC.Core.UI
 @model HitThatLine.Endpoints.Home.Models.ThreadSummaryViewModel
-<style>
-    .threadSummaryWrapper {
-        margin: 15px 15px 0px 15px;
-        padding: 10px 0px 0px 0px;
-        border-top: 1px solid gray;
-    }
-    .threadSummaryTitle {
-        font-weight: bold;
-        font-size: 20px;
-        margin-bottom: 3px;
-    }
-    .threadSummaryBody {
-        max-height: 75px;
-        overflow: hidden;
-    }
-    a.username {
-        font-weight: bold;
-        color: #c41e3a;
-        cursor: pointer;
-    }
-</style>
 <div class="threadSummaryWrapper grid_12">
-    <div class="grid_2" style="text-align:center">
+    <div class="grid_1" style="text-align: center">
+        @this.Clear(10)
+        <div style="font-size: 32px; font-weight: bold">@Model.NetVotes</div>
+        @this.Clear(20)
+        <div style="font-weight: bold">@Model.PostCount replies</div>
+        @this.Clear(10)
+        <div style="font-weight: bold">
+            0 views</div>
+    </div>
+    <div class="grid_1">
         <img src="@Model.AuthorProfilePictureUrl"/>
     </div>
-    <div class="threadSummaryBody grid_9">
-        <a href="#" class="threadSummaryTitle">@Model.Title</a>
+    <div class="grid_9">
+        @this.LinkTo(Model.ViewThreadRequest).Text(Model.Title).AddClass("threadSummaryTitle")
         @this.Clear()
-        <div>@Raw(Model.DisplayBody)</div>
-    </div>
-    @this.Clear(5)
-    <div class="grid_9 prefix_2">
-        @foreach(var tag in Model.Tags)
+        <div class="grid">@Model.TimePostedDifference</div>
+        @this.Clear(5)
+        <div class="threadPreview">@Raw(Model.DisplayBody)</div>
+        @this.Clear(5)
+        @foreach (var tag in Model.Tags)
         {
-            <div class="selectedTag"><a href="#">@tag</a></div>
+            <div class="selectedTag">
+                <a href="#">@tag</a></div>
         }
+        @this.Clear()
     </div>
     @this.Clear(5)
     <div class="grid_9 prefix_2">
-        by <a href="#" class="username">@Model.AuthorUsername</a> @Model.TimePostedDifference
+        <div class="grid">
+            last active @Model.LastActivityDifference by <a href="#" class="username-small">@Model.LastActivityUsername</a>
+        </div>
     </div>
 </div>

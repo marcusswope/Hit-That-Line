@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HitThatLine.Endpoints.Thread.Models;
 using HitThatLine.Utility;
 
 namespace HitThatLine.Endpoints.Home.Models
@@ -12,7 +13,7 @@ namespace HitThatLine.Endpoints.Home.Models
 
     public class HomeViewModel : HomeRequest
     {
-
+        public int TotalPages { get; set; }
     }
 
     public class ThreadSummaryViewModel
@@ -23,9 +24,15 @@ namespace HitThatLine.Endpoints.Home.Models
         public string AuthorUsername { get; set; }
         public long PostCount { get; set; }
         public long NetVotes { get; set; }
+        public DateTime LastActivity { get; set; }
+        public string LastActivityUsername { get; set; }
         public DateTime CreatedOn { get; set; }
         public TimeSpan TimeZoneOffset { get; set; }
         public string TimePostedDifference { get { return CreatedOn.DisplayDateDifference(TimeZoneOffset); } }
+        public string LastActivityDifference { get { return LastActivity.DisplayDateDifference(TimeZoneOffset); } }
         public List<string> Tags { get; set; }
+
+        public string UriId { get; set; }
+        public ViewThreadRequest ViewThreadRequest { get { return new ViewThreadRequest { UriId = UriId, Title = Title }; } }
     }
 }

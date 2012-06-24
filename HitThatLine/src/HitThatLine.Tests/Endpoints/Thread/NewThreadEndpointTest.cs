@@ -48,7 +48,7 @@ namespace HitThatLine.Tests.Endpoints.Thread
                 var continuation = endpoint.NewThread(command);
 
                 endpoint.Session.Verify(x => x.Store(It.IsAny<DiscussionThread>()));
-                continuation.AssertWasRedirectedTo<HomeRequest>();
+                continuation.AssertWasRedirectedTo<ViewThreadRequest>();
             }
         }
 

@@ -14,9 +14,8 @@ namespace HitThatLine.Tests.Domain.Accounts
             public void ReturnsGravatarUrlWithEmailHash()
             {
                 var account = new UserAccount { EmailHash = "someHash" };
-                account.ProfilePictureUrl.ShouldEqual("http://www.gravatar.com/avatar/someHash?d=identicon&r=pg&s=70");
+                account.ProfilePictureUrl.ShouldEqual("http://www.gravatar.com/avatar/someHash?d=identicon&r=pg&s=60");
             }
         }
-
     }
 }

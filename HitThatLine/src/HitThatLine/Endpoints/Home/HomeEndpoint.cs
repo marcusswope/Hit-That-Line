@@ -3,11 +3,13 @@ using HitThatLine.Domain.Discussion;
 using HitThatLine.Endpoints.Home.Models;
 using Raven.Client;
 using System.Linq;
+using Raven.Client.Linq;
 
 namespace HitThatLine.Endpoints.Home
 {
     public class HomeEndpoint
     {
+        public const int DefaultPageCount = 20;
         private readonly IDocumentSession _session;
         private readonly IMappingEngine _mapper;
 
@@ -19,11 +21,14 @@ namespace HitThatLine.Endpoints.Home
 
         public HomeViewModel Home(HomeRequest input)
         {
-            var threads = _session
-                .Query<DiscussionThread>()
-                .OrderByDescending(x => x.Score)
-                .Take(20).ToList();
-            
+            RavenQueryStatistics stats;
+            var threads = _session.Query<DiscussionThread>()
+                            .Statistics(out stats)
+                            .OrderByDescending(x => x.Score)
+                            .Take(DefaultPageCount).ToList();
+
+            var totalPages = stats.TotalResults / DefaultPageCount;
+
             var threadSummaries = threads.Select(x =>
                             {
                                 var summary = _mapper.Map<DiscussionThread, ThreadSummaryViewModel>(x);
@@ -31,7 +36,7 @@ namespace HitThatLine.Endpoints.Home
                                 return summary;
                             });
 
-            return new HomeViewModel { Threads = threadSummaries.ToList() };
+            return new HomeViewModel { TotalPages = totalPages, Threads = threadSummaries.ToList() };
         }
 
         public ThreadSummaryViewModel Summary(ThreadSummaryViewModel model)

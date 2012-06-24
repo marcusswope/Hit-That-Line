@@ -8,6 +8,8 @@ $(function () {
         setCookie(timeZoneCookieName, offset);
         location.reload(true);
     }
+
+    $('#main-logo').click(function () { window.location = $.htl.url.home; });
 });
 
 function setCookie(name, value) {

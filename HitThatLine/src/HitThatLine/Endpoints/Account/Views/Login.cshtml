@@ -2,10 +2,10 @@
 @using HitThatLine.Utility
 @model HitThatLine.Endpoints.Account.Models.LoginViewModel
 @{ this.Script("loginJs"); }
-<div class="section-title">
-    Login
-</div>
 <div class="section grid_12">
+    <div class="section-title">
+        Login    
+    </div>
     @(this.FormFor<LoginCommand>().Id("loginForm"))
     @this.LabelFor(x => x.Username).Grid(3).Autofocus()
     @this.Clear()
