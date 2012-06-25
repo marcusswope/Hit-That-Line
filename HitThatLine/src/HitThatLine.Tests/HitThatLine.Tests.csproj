@@ -140,7 +140,7 @@
     <Compile Include="Infrastructure\ModelBinding\FubuRequestPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinderTest.cs" />
-    <Compile Include="Infrastructure\TaskExecutorTest.cs" />
+    <Compile Include="Infrastructure\TaskExecution\TaskExecutorTest.cs" />
     <Compile Include="Services\CookieStorageTest.cs" />
     <Compile Include="Services\UserAccountServiceTest.cs" />
     <Compile Include="TestHelpers\TestableMappingEngine.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="Infrastructure\Raven\RavenBehaviorTest.cs" />
     <Compile Include="TestHelpers\RavenTestBase.cs" />
     <Compile Include="Endpoints\Account\Validation\RegisterCommandValidatorTest.cs" />
-    <Compile Include="Infrastructure\AutoMapperTest.cs" />
+    <Compile Include="Infrastructure\AutoMapper\AutoMapperTest.cs" />
     <Compile Include="Infrastructure\AppStartFubuMVCTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\GeneralTestingExtensions.cs" />

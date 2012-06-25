@@ -21,6 +21,7 @@ namespace HitThatLine.Domain.Discussion
         public DateTime LastActivity { get; private set; }
         public string LastActivityUsername { get; private set; }
         public long PostCount { get; private set; }
+        public long ViewCount { get; private set; }
         public string AuthorProfilePictureUrl { get; private set; }
         public string AuthorUsername { get; private set; }
 
@@ -29,7 +30,7 @@ namespace HitThatLine.Domain.Discussion
         public long NetVotes { get { return UpVotes - DownVotes; } }
         public double Score { get; private set; }
 
-        public static string BuildDocumentKey(string uri)
+        public static string Key(string uri)
         {
             return "threads/" + uri;
         }

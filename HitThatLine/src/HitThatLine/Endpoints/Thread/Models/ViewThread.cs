@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Web;
+using HitThatLine.Domain.Accounts;
 
 namespace HitThatLine.Endpoints.Thread.Models
 {
@@ -7,6 +8,8 @@ namespace HitThatLine.Endpoints.Thread.Models
     {
         public string UriId { get; set; }
         public string Title { get; set; }
+        public HttpContextBase HttpContext { get; set; }
+        public UserAccount UserAccount { get; set; }
     }
 
     public class ViewThreadViewModel

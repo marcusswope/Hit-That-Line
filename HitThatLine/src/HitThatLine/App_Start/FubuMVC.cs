@@ -5,6 +5,7 @@ using FubuMVC.Core;
 using FubuMVC.Core.Continuations;
 using FubuMVC.StructureMap;
 using HitThatLine.Infrastructure;
+using HitThatLine.Infrastructure.TaskExecution;
 using StructureMap;
 using System.Collections.Generic;
 

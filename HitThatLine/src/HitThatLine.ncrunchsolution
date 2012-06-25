@@ -7,6 +7,7 @@
   <FrameworkUtilisationTypeForMSpec>UseStaticAnalysis</FrameworkUtilisationTypeForMSpec>
   <FrameworkUtilisationTypeForMSTest>UseStaticAnalysis</FrameworkUtilisationTypeForMSTest>
   <EngineModes>Run all tests automatically:BFRydWU=;Run all tests manually:BUZhbHNl;Run impacted tests automatically, others manually (experimental!):CklzSW1wYWN0ZWQ=;Run pinned tests automatically, others manually:CElzUGlubmVk</EngineModes>
-  <MetricsExclusions>C:\Projects\Hit-That-Line\HitThatLine\src\HitThatLine.Web.Tests\HitThatLine.Web.Tests.csproj
-C:\Projects\Hit-That-Line\HitThatLine\src\HitThatLine.Tests\HitThatLine.Tests.csproj</MetricsExclusions>
+  <MetricsExclusionList>
+HitThatLine.Tests\HitThatLine.Tests.csproj
+</MetricsExclusionList>
 </SolutionConfiguration>

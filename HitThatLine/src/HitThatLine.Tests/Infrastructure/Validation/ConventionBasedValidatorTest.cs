@@ -1,12 +1,11 @@
 ﻿using System;
-using HitThatLine.Infrastructure;
 using HitThatLine.Infrastructure.Validation;
 using HitThatLine.Infrastructure.Validation.Attributes;
 using HitThatLine.Tests.Utility;
 using NUnit.Framework;
 using FluentValidation.TestHelper;
 
-namespace HitThatLine.Tests.Infrastructure.Conventions.Validation
+namespace HitThatLine.Tests.Infrastructure.Validation
 {
     [TestFixture]
     public class ConventionBasedValidatorTest

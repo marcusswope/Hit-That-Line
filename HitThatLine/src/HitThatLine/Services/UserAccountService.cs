@@ -63,7 +63,7 @@ namespace HitThatLine.Services
                                   Username = command.Username
                               };
             account.Roles.Add(UserAccount.BasicUserRole);
-            _session.Store(account, UserAccount.BuildDocumentKey(account.Username));
+            _session.Store(account, UserAccount.Key(account.Username));
             Login(account);
             return account;
         }

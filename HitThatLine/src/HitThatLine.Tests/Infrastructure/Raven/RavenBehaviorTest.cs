@@ -5,7 +5,7 @@ using Moq;
 using NUnit.Framework;
 using Raven.Client;
 
-namespace HitThatLine.Tests.Infrastructure.Behaviors
+namespace HitThatLine.Tests.Infrastructure.Raven
 {
     [TestFixture]
     public class RavenBehaviorTest

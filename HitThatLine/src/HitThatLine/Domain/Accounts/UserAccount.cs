@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Security.Principal;
-using System.Web;
 using FubuCore;
-using FubuMVC.Core.Security;
 using HitThatLine.Infrastructure.Security;
-using HitThatLine.Services;
 using Newtonsoft.Json;
-using HitThatLine.Utility;
 
 namespace HitThatLine.Domain.Accounts
 {
@@ -23,9 +19,9 @@ namespace HitThatLine.Domain.Accounts
 
         public string DocumentKey
         {
-            get { return BuildDocumentKey(Username); }
+            get { return Key(Username); }
         }
-        public static string BuildDocumentKey(string username)
+        public static string Key(string username)
         {
             return "users/" + username;
         }

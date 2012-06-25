@@ -1,4 +1,5 @@
-﻿using Raven.Client;
+﻿using HitThatLine.Infrastructure.TaskExecution;
+using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 using Raven.Client.MvcIntegration;
@@ -18,6 +19,7 @@ namespace HitThatLine.Infrastructure.Raven
             TaskExecutor.DocumentStore = store;
 
             For<IDocumentSession>().Use(store.OpenSession);
+            For<IDocumentStore>().Singleton().Use(store);
         }
     }
 }

@@ -4,16 +4,14 @@ using FluentValidation.Results;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Continuations;
 using FubuMVC.Core.Runtime;
-using HitThatLine.Endpoints.Account.Models;
 using HitThatLine.Infrastructure.Validation;
-using HitThatLine.Tests.Infrastructure.Conventions.Validation;
 using HitThatLine.Tests.Utility;
 using Moq;
 using NUnit.Framework;
 using StructureMap;
 using StructureMap.Query;
 
-namespace HitThatLine.Tests.Infrastructure.Behaviors
+namespace HitThatLine.Tests.Infrastructure.Validation
 {
     [TestFixture]
     public class ValidationBehaviorTest

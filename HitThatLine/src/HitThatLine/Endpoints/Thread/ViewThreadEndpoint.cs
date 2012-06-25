@@ -4,6 +4,8 @@ using FubuMVC.Core;
 using HitThatLine.Domain.Accounts;
 using HitThatLine.Domain.Discussion;
 using HitThatLine.Endpoints.Thread.Models;
+using HitThatLine.Endpoints.Thread.Tasks;
+using HitThatLine.Infrastructure.TaskExecution;
 using Raven.Client;
 using Raven.Client.Linq;
 using System.Linq;
@@ -14,21 +16,25 @@ namespace HitThatLine.Endpoints.Thread
     {
         private readonly IDocumentSession _session;
         private readonly IMappingEngine _mapper;
+        private readonly ITaskQueue _taskQueue;
 
-        public ViewThreadEndpoint(IDocumentSession session, IMappingEngine mapper)
+        public ViewThreadEndpoint(IDocumentSession session, IMappingEngine mapper, ITaskQueue taskQueue)
         {
             _session = session;
             _mapper = mapper;
+            _taskQueue = taskQueue;
         }
 
         [UrlPattern("threads/{UriId}/{Title}")]
         public ViewThreadViewModel Thread(ViewThreadRequest request)
         {
-            var thread = _session.Load<DiscussionThread>(DiscussionThread.BuildDocumentKey(request.UriId));
+            _taskQueue.ExecuteLater(new RecordThreadViewTask(request));
+
+            var thread = _session.Load<DiscussionThread>(DiscussionThread.Key(request.UriId));
             var replies = _session.Query<Post>().Where(x => x.ThreadId == thread.Id).ToList();
 
-            var userKeys = new List<string> { UserAccount.BuildDocumentKey(thread.AuthorUsername) };
-            userKeys.AddRange(replies.Select(x => UserAccount.BuildDocumentKey(x.Username)).Distinct().ToList());
+            var userKeys = new List<string> { UserAccount.Key(thread.AuthorUsername) };
+            userKeys.AddRange(replies.Select(x => UserAccount.Key(x.Username)).Distinct().ToList());
             var users = _session.Load<UserAccount>(userKeys).ToList();
 
             var viewModel = _mapper.Map<DiscussionThread, ViewThreadViewModel>(thread);

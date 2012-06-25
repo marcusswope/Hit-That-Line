@@ -1,19 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using FubuMVC.Core.Registration.Nodes;
 using FubuMVC.Core.Runtime;
 using FubuMVC.Core.Security;
-using HitThatLine.Domain.Accounts;
 using HitThatLine.Services;
-using Raven.Client;
 
 namespace HitThatLine.Infrastructure.Security
 {
     public class AccessAuthorizationPolicy<THandler> : IAuthorizationPolicy
     {
         private readonly IUserAccountService _service;
-
         public AccessAuthorizationPolicy(IUserAccountService service)
         {
             _service = service;

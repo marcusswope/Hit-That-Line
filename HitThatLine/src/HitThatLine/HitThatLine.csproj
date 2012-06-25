@@ -185,6 +185,7 @@
     <Compile Include="Domain\Accounts\UserAccount.cs" />
     <Compile Include="Domain\Discussion\DiscussionThread.cs" />
     <Compile Include="Domain\Discussion\Post.cs" />
+    <Compile Include="Domain\Discussion\ThreadView.cs" />
     <Compile Include="Endpoints\Account\Models\DuplicateEmailAddressCommand.cs" />
     <Compile Include="Endpoints\Account\Models\DuplicateUsernames.cs" />
     <Compile Include="Endpoints\Account\SummaryEndpoint.cs" />
@@ -201,13 +202,17 @@
     <Compile Include="Endpoints\Thread\Models\ViewThread.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpoint.cs" />
     <Compile Include="Endpoints\Thread\PostReplyEndpoint.cs" />
+    <Compile Include="Endpoints\Thread\Tasks\RecordThreadViewTask.cs" />
     <Compile Include="Endpoints\Thread\Validation\NewThreadCommandValidator.cs" />
     <Compile Include="Endpoints\Thread\ViewThreadEndpoint.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperRegistry.cs" />
-    <Compile Include="Infrastructure\BackgroundTask.cs" />
+    <Compile Include="Infrastructure\PolicyConventions.cs" />
+    <Compile Include="Infrastructure\TaskExecution\BackgroundTask.cs" />
     <Compile Include="Infrastructure\ModelBinding\TimeZoneInfoPropertyBinder.cs" />
     <Compile Include="Infrastructure\Security\AccessAuthorizationConvention.cs" />
     <Compile Include="Infrastructure\Security\UserAccountBehavior.cs" />
+    <Compile Include="Infrastructure\TaskExecution\TaskExecutorBehavior.cs" />
+    <Compile Include="Infrastructure\TaskExecution\TaskQueue.cs" />
     <Compile Include="Infrastructure\Validation\IValidatedCommand.cs" />
     <Compile Include="Endpoints\Account\Models\Login.cs" />
     <Compile Include="Endpoints\Account\Models\Logout.cs" />
@@ -243,7 +248,7 @@
     <Compile Include="Infrastructure\Security\HTLPrincipal.cs" />
     <Compile Include="Infrastructure\Security\OnlyAllowRolesAttribute.cs" />
     <Compile Include="Infrastructure\Raven\Threads_TagCount.cs" />
-    <Compile Include="Infrastructure\TaskExecutor.cs" />
+    <Compile Include="Infrastructure\TaskExecution\TaskExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CookieStorage.cs" />
     <Compile Include="Services\UserAccountService.cs" />

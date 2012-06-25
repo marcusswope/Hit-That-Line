@@ -17,7 +17,7 @@ namespace HitThatLine.Endpoints.Thread
         [UrlPattern("reply/{DiscussionUri}")]
         public FubuContinuation Reply(PostReplyCommand command)
         {
-            var discussionKey = DiscussionThread.BuildDocumentKey(command.DiscussionUri);
+            var discussionKey = DiscussionThread.Key(command.DiscussionUri);
             var thread = _session.Load<DiscussionThread>(discussionKey);
             thread.AddPost(command.UserAccount.Username);
             var post = new Post(command.ReplyBody, discussionKey, command.UserAccount);
