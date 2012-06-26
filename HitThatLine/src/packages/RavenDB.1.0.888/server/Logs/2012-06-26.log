@@ -1,0 +1,681 @@
+time,logger,level,message,exception
+2012-06-26 07:44:53.5351,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-06-26 07:44:55.2568,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:03.2519,Raven.Database.Server.HttpServer,Debug,"Request #2,299: GET     - 7,995 ms - HitThatLine - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=100&noCache=-554907885",
+2012-06-26 07:45:03.6259,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:03.6259,Raven.Database.Server.HttpServer,Debug,"Request #2,300: GET     - 8,371 ms - <default>  - 200 - /databases/?pageSize=1024&noCache=-2090614863",
+2012-06-26 07:45:03.7675,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-26 07:45:03.8203,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:03.8203,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-26 07:45:03.9150,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:04.0214,Raven.Database.Server.HttpServer,Debug,"Request #2,301: GET     -   768 ms - HitThatLine - 200 - /stats?noCache=-1179379123",
+2012-06-26 07:45:08.6474,Raven.Database.Server.HttpServer,Debug,"Request #2,302: GET     - 5,331 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:08.6474,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 5,331 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-26 07:45:08.6474,Raven.Database.Server.HttpServer,Debug,"Request #2,303: GET     - 13,394 ms - HitThatLine - 200 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=64&aggregation=None&noCache=-30140879",
+2012-06-26 07:45:08.6474,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 13,392 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:08.7246,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2012-06-26 07:45:08.7656,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 526385152
+  PollingInterval     = 00:02:00",
+2012-06-26 07:45:08.7656,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 65536
+  DatabasePageSize = 4096",
+2012-06-26 07:45:12.4394,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2012-06-26 07:45:12.5244,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Threads%2fTagCount:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int32)(x.Count)))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int32>)(x => ((System.Int32)(x.Count)))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int32)(x.Count)))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int32>)(x => ((System.Int32)(x.Count)))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+",
+2012-06-26 07:45:12.5244,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2012-06-26 07:45:12.5244,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2012-06-26 07:45:12.6171,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Threads/TagCount,
+2012-06-26 07:45:12.6171,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Threads/TagCount,
+2012-06-26 07:45:13.0283,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2012-06-26 07:45:13.0654,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2012-06-26 07:45:13.0654,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2012-06-26 07:45:13.0654,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:13.0703,Raven.Database.Server.HttpServer,Debug,"Request #2,304: GET     - 4,415 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:13.0703,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 5,331 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-26 07:45:13.0703,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 21 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.1630,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:13.2480,Raven.Database.Server.HttpServer,Debug,"Request #2,305: GET     -   168 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:13.2480,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 5,331 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-26 07:45:13.2480,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 21 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.2578,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 167 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:13.2792,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:13.2792,Raven.Database.Server.HttpServer,Debug,"Request #2,306: GET     -    18 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:13.2792,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 5,331 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-26 07:45:13.2792,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 21 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.2900,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 167 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:13.2900,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 17 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.2900,Raven.Database.Server.HttpServer,Debug,"Request #2,307: POST    - 9,984 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:13.2900,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 5,331 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 0 total.
+",
+2012-06-26 07:45:13.3115,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 21 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.3115,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 167 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:13.3212,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 17 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:13.3466,Raven.Database.Server.HttpServer,Debug,"Request #2,308: GET     -    34 ms - HitThatLine - 200 - /stats?noCache=1019322090",
+2012-06-26 07:45:14.4169,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:14.4365,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:14.4365,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:14.4365,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:14.4365,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 20 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:18.6787,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"Request #2,309: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:18.6787,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"Request #2,310: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:18.6787,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"Request #2,311: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:18.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"Request #2,312: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:18.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:18.7119,Raven.Database.Server.HttpServer,Debug,"Request #2,313: POST    -    34 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:18.7119,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:18.7119,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:18.7119,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:18.7119,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:19.7001,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:19.7001,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:19.7001,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:19.7001,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:19.7001,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:23.8886,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-26 07:45:23.8886,Raven.Database.Server.HttpServer,Debug,"Request #2,314: GET     -     2 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:23.8886,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:23.8974,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:23.8974,Raven.Database.Server.HttpServer,Debug,"Request #2,315: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:23.8974,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:23.8974,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:23.8974,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:23.8974,Raven.Database.Server.HttpServer,Debug,"Request #2,316: GET     -     3 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:23.8974,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:23.9160,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:23.9160,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:23.9160,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:23.9160,Raven.Database.Server.HttpServer,Debug,"Request #2,317: GET     -     2 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:23.9287,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:23.9287,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:23.9287,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:23.9287,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:23.9472,Raven.Database.Server.HttpServer,Debug,"Request #2,318: POST    -    60 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:23.9472,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:23.9472,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:23.9472,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:23.9628,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:24.8857,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:24.8857,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:24.8857,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:24.8857,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:24.8857,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:29.0410,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-26 07:45:29.0410,Raven.Database.Server.HttpServer,Debug,"Request #2,319: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:29.0410,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:29.0410,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:29.0410,Raven.Database.Server.HttpServer,Debug,"Request #2,320: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:29.0410,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:29.0556,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:29.0556,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:29.0556,Raven.Database.Server.HttpServer,Debug,"Request #2,321: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:29.0556,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:29.0556,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:29.0693,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:29.0693,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:29.0693,Raven.Database.Server.HttpServer,Debug,"Request #2,322: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:29.0693,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:29.0693,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:29.0693,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:29.0869,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:29.0869,Raven.Database.Server.HttpServer,Debug,"Request #2,323: POST    -    51 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:29.0869,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:29.0869,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:29.1005,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:29.1005,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:30.0566,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:30.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:30.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:30.0566,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:30.0566,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:35.0908,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:35.0908,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:35.0908,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:35.0908,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:35.0908,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:35.1035,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-26 07:45:35.1035,Raven.Database.Server.HttpServer,Debug,"Request #2,324: GET     -     2 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:35.1035,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:35.1035,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:35.1035,Raven.Database.Server.HttpServer,Debug,"Request #2,325: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:35.1035,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:35.1035,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:35.1162,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"Request #2,326: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:35.1162,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"Request #2,327: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:35.1162,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:35.1337,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:35.1337,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:35.1337,Raven.Database.Server.HttpServer,Debug,"Request #2,328: POST    -    41 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:35.1337,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:35.1494,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:35.1494,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:35.1494,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.6621,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:47.6630,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-129' was found,
+2012-06-26 07:45:47.6630,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2012-06-26 07:45:47.6630,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2012-06-26 07:45:47.6630,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 2 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 3 returned out of 3 total.
+",
+2012-06-26 07:45:47.6630,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:DiscussionThreads,
+2012-06-26 07:45:47.6787,Raven.Database.Server.HttpServer,Debug,"Request #2,329: GET     -     3 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253ADiscussionThreads&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:47.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:47.6787,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:Posts,
+2012-06-26 07:45:47.6787,Raven.Database.Server.HttpServer,Debug,"Request #2,330: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253APosts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:47.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:47.6787,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.6943,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:ThreadViews,
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"Request #2,331: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AThreadViews&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:47.6943,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Raven/DocumentsByEntityName for: Tag:UserAccounts,
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"Request #2,332: GET     -     1 ms - HitThatLine - 0 - /indexes/Raven/DocumentsByEntityName?query=Tag%253AUserAccounts&start=0&pageSize=0&aggregation=None",
+2012-06-26 07:45:47.6943,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:47.7138,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.7138,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:47.7138,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.7255,Raven.Database.Server.HttpServer,Debug,"Request #2,333: POST    -    51 ms - HitThatLine - 200 - /multi_get/",
+2012-06-26 07:45:47.7255,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:DiscussionThreads
+	Time: 3 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 4 total.
+",
+2012-06-26 07:45:47.7255,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:Posts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:47.7255,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:ThreadViews
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 3 total.
+",
+2012-06-26 07:45:47.7255,Raven.Database.Server.HttpServer,Debug,"	Query: Tag:UserAccounts
+	Time: 1 ms
+	Index: Raven/DocumentsByEntityName
+	Results: 0 returned out of 2 total.
+",
+2012-06-26 07:45:56.4931,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,
+2012-06-26 07:45:56.5175,Raven.Database.Indexing.WorkContext,Debug,Stopping background workers,

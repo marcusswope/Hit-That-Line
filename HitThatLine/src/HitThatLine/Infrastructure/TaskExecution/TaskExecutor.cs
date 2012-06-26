@@ -26,7 +26,7 @@ namespace HitThatLine.Infrastructure.TaskExecution
 
         public static Action<Exception> ExceptionHandler { get; set; }
 
-        public static void ExcuteLater(BackgroundTask task)
+        public static void ExecuteLater(BackgroundTask task)
         {
             tasksToExecute.Value.Add(task);
         }

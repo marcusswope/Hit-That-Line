@@ -8,7 +8,7 @@ namespace HitThatLine.Infrastructure.Raven
     public class ThreadCountByTag
     {
         public string Tag { get; set; }
-        public long Count { get; set; }
+        public int Count { get; set; }
     }
 
     public class Threads_TagCount : AbstractIndexCreationTask<DiscussionThread, ThreadCountByTag>
@@ -20,7 +20,7 @@ namespace HitThatLine.Infrastructure.Raven
                              select new
                              {
                                  Tag = tag,
-                                 Count = (long) 1
+                                 Count = 1
                              };
 
             Reduce = results => from result in results

@@ -22,8 +22,9 @@ namespace HitThatLine.Endpoints.Home.Models
         public string DisplayBody { get; set; }
         public string AuthorProfilePictureUrl { get; set; }
         public string AuthorUsername { get; set; }
-        public long PostCount { get; set; }
-        public long NetVotes { get; set; }
+        public int PostCount { get; set; }
+        public int ViewCount { get; set; }
+        public int NetVotes { get; set; }
         public DateTime LastActivity { get; set; }
         public string LastActivityUsername { get; set; }
         public DateTime CreatedOn { get; set; }

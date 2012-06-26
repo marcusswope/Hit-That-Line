@@ -18,7 +18,7 @@ namespace HitThatLine.Infrastructure.TaskExecution
 
         public void ExecuteLater(BackgroundTask task)
         {
-            TaskExecutor.ExcuteLater(task);
+            TaskExecutor.ExecuteLater(task);
         }
 
         public void Discard()

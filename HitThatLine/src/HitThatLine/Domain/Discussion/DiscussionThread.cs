@@ -20,14 +20,14 @@ namespace HitThatLine.Domain.Discussion
         public DateTime CreatedOn { get; private set; }
         public DateTime LastActivity { get; private set; }
         public string LastActivityUsername { get; private set; }
-        public long PostCount { get; private set; }
-        public long ViewCount { get; private set; }
+        public int PostCount { get; private set; }
+        public int ViewCount { get; private set; }
         public string AuthorProfilePictureUrl { get; private set; }
         public string AuthorUsername { get; private set; }
 
-        public long UpVotes { get; private set; }
-        public long DownVotes { get; private set; }
-        public long NetVotes { get { return UpVotes - DownVotes; } }
+        public int UpVotes { get; private set; }
+        public int DownVotes { get; private set; }
+        public int NetVotes { get { return UpVotes - DownVotes; } }
         public double Score { get; private set; }
 
         public static string Key(string uri)

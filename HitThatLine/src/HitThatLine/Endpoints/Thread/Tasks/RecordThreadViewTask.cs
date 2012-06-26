@@ -17,20 +17,17 @@ namespace HitThatLine.Endpoints.Thread.Tasks
 
         public override void Execute()
         {
-            var ipAddress = _request.HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (string.IsNullOrWhiteSpace(ipAddress)) ipAddress = _request.HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (string.IsNullOrWhiteSpace(ipAddress)) ipAddress = _request.HttpContext.Request.UserHostAddress;
             var username = _request.UserAccount.IfNotNull(x => x.Username);
             var threadId = DiscussionThread.Key(_request.UriId);
 
             var exists = Session.Query<ThreadView>()
                                 .Any(x => x.DiscussionThreadId == threadId &&
-                                          x.IPAddress == ipAddress &&
+                                          x.IPAddress == _request.IPAddress &&
                                           x.Username == username);
             if (!exists)
             {
-                Session.Store(new ThreadView(ipAddress, username, threadId));
-                Store.DatabaseCommands.Patch(threadId, new[] { new PatchRequest { Type = PatchCommandType.Inc, Name = "ViewCount" } });
+                Session.Store(new ThreadView(_request.IPAddress, username, threadId));
+                Store.DatabaseCommands.Patch(threadId, new[] { new PatchRequest { Type = PatchCommandType.Inc, Name = "ViewCount", Value = 1 } });
             }
         }
     }

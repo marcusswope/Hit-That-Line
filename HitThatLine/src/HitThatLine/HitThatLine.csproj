@@ -206,6 +206,7 @@
     <Compile Include="Endpoints\Thread\Validation\NewThreadCommandValidator.cs" />
     <Compile Include="Endpoints\Thread\ViewThreadEndpoint.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperRegistry.cs" />
+    <Compile Include="Infrastructure\ModelBinding\IPAddressPropertyBinder.cs" />
     <Compile Include="Infrastructure\PolicyConventions.cs" />
     <Compile Include="Infrastructure\TaskExecution\BackgroundTask.cs" />
     <Compile Include="Infrastructure\ModelBinding\TimeZoneInfoPropertyBinder.cs" />

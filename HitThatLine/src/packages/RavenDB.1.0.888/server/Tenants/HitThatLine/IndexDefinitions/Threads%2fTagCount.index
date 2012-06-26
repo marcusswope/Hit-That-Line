@@ -4,7 +4,7 @@
   "Maps": [
     "docs.DiscussionThreads\r\n\t.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})"
   ],
-  "Reduce": "results\r\n\t.GroupBy(result => result.Tag)\r\n\t.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int64)(((long)x.Count))))})",
+  "Reduce": "results\r\n\t.GroupBy(result => result.Tag)\r\n\t.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int32)(x.Count)))})",
   "TransformResults": null,
   "IsMapReduce": true,
   "IsCompiled": false,

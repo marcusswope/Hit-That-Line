@@ -26,7 +26,11 @@ namespace HitThatLine.Infrastructure.AutoMapper
             configStore.CreateMap<RegisterRequest, RegisterViewModel>();
             configStore.CreateMap<NewThreadRequest, NewThreadViewModel>();
             configStore.CreateMap<NewThreadCommand, NewThreadRequest>();
-            configStore.CreateMap<DiscussionThread, ViewThreadRequest>();
+            
+            configStore.CreateMap<DiscussionThread, ViewThreadRequest>()
+                .ForMember(x => x.IPAddress, opt => opt.Ignore())
+                .ForMember(x => x.UserAccount, opt => opt.Ignore());
+
             configStore.CreateMap<DiscussionThread, ThreadSummaryViewModel>()
                 .ForMember(x => x.TimeZoneOffset, opt => opt.Ignore());
 

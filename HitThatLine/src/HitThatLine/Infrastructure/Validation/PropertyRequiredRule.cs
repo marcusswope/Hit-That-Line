@@ -38,15 +38,7 @@ namespace HitThatLine.Infrastructure.Validation
             {
                 yield return validationFailure;
             }
-            else if (_property.PropertyType == typeof(long?) && !((long?)rawValue).HasValue)
-            {
-                yield return validationFailure;
-            }
             else if (_property.PropertyType == typeof(int) && (int)rawValue == default(int))
-            {
-                yield return validationFailure;
-            }
-            else if (_property.PropertyType == typeof(long) && (long)rawValue == default(long))
             {
                 yield return validationFailure;
             }

@@ -28,8 +28,6 @@ namespace HitThatLine.Tests.Infrastructure.Validation
             _validator.ShouldHaveValidationErrorFor(x => x.RequiredNullDate, null as DateTime?);
             _validator.ShouldHaveValidationErrorFor(x => x.RequiredInt, 0);
             _validator.ShouldHaveValidationErrorFor(x => x.RequiredNullInt, null as int?);
-            _validator.ShouldHaveValidationErrorFor(x => x.RequiredLong, 0);
-            _validator.ShouldHaveValidationErrorFor(x => x.RequiredNullLong, null as long?);
             _validator.ShouldHaveValidationErrorFor(x => x.Child, null as ChildConventionalModel);
         }
 
@@ -94,8 +92,6 @@ namespace HitThatLine.Tests.Infrastructure.Validation
             RequiredNullDate = DateTime.Now;
             RequiredInt = 2;
             RequiredNullInt = 3;
-            RequiredLong = 4;
-            RequiredNullLong = 5;
             Password = "asdfasdf";
             Username = "asdf";
             Username = "asdf";
@@ -117,10 +113,6 @@ namespace HitThatLine.Tests.Infrastructure.Validation
         public int RequiredInt { get; set; }
         [Required]
         public int? RequiredNullInt { get; set; }
-        [Required]
-        public long RequiredLong { get; set; }
-        [Required]
-        public long? RequiredNullLong { get; set; }
         [Required]
         public ChildConventionalModel Child { get; set; }
 

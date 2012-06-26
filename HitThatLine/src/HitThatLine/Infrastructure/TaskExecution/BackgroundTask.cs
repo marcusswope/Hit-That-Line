@@ -11,7 +11,7 @@ namespace HitThatLine.Infrastructure.TaskExecution
         protected IDocumentSession Session;
         protected IDocumentStore Store;
 
-        protected virtual void Initialize(IDocumentSession session, IDocumentStore store)
+        public virtual void Initialize(IDocumentSession session, IDocumentStore store)
         {
             Session = session;
             Store = store;

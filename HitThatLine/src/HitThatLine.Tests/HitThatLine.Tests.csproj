@@ -127,9 +127,11 @@
     <Compile Include="Endpoints\Account\SummaryEndpointTest.cs" />
     <Compile Include="Endpoints\Account\Validation\LoginCommandValidatorTest.cs" />
     <Compile Include="Endpoints\Home\HomeEndpointTest.cs" />
-    <Compile Include="Endpoints\Thread\NewThreadCommandTest.cs" />
-    <Compile Include="Endpoints\Thread\NewThreadCommandValidatorTest.cs" />
+    <Compile Include="Endpoints\Thread\Models\NewThreadCommandTest.cs" />
+    <Compile Include="Endpoints\Thread\Tasks\RecordThreadViewTaskTest.cs" />
+    <Compile Include="Endpoints\Thread\Validation\NewThreadCommandValidatorTest.cs" />
     <Compile Include="Endpoints\Thread\NewThreadEndpointTest.cs" />
+    <Compile Include="Infrastructure\ModelBinding\IPAddressPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\TimeZoneInfoPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\Security\AccessAuthorizationPolicyTest.cs" />
     <Compile Include="Infrastructure\Security\UserAccountBehaviorTest.cs" />
@@ -140,7 +142,7 @@
     <Compile Include="Infrastructure\ModelBinding\FubuRequestPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\PasswordPropertyBinderTest.cs" />
     <Compile Include="Infrastructure\ModelBinding\UserAccountPropertyBinderTest.cs" />
-    <Compile Include="Infrastructure\TaskExecution\TaskExecutorTest.cs" />
+    <Compile Include="Infrastructure\TaskExecution\TaskQueueTest.cs" />
     <Compile Include="Services\CookieStorageTest.cs" />
     <Compile Include="Services\UserAccountServiceTest.cs" />
     <Compile Include="TestHelpers\TestableMappingEngine.cs" />
