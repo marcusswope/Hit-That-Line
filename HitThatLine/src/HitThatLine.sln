@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitThatLine", "HitThatLine\HitThatLine.csproj", "{1F298714-C40F-4199-B518-19705B52B338}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitThatLine.Tests", "HitThatLine.Tests\HitThatLine.Tests.csproj", "{EDCDE091-A844-4ED1-AFA8-7AC346ECEA3F}"

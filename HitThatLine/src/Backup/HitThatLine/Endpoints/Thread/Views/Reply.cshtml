@@ -1,0 +1,14 @@
+﻿@using HitThatLine.Endpoints.Thread.Models
+@using HitThatLine.Utility
+@model HitThatLine.Endpoints.Thread.Models.ViewThreadReplyViewModel
+<div class="grid_12" style="border-top: 1px solid gray">
+    @this.Clear(10)
+    <div class="grid_2">
+        <img src="@Model.UserProfilePictureUrl"/>
+        @this.Clear(5)
+        <a href="#" class="username">@Model.Username</a>
+    </div>
+    <div class="grid_9">
+        @Raw(Model.DisplayBody)
+    </div>
+</div>

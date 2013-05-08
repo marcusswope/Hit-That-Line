@@ -1,0 +1,1218 @@
+time,logger,level,message,exception
+2013-05-07 17:11:46.1848,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3153068032
+  PollingInterval     = 00:02:00",
+2013-05-07 17:11:46.3038,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096",
+2013-05-07 17:11:49.8472,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:11:49.9022,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2013-05-07 17:11:50.0172,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2013-05-07 17:11:50.2472,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2013-05-07 17:11:50.6333,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:11:50.6823,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:12:44.7317,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2013-05-07 17:12:44.8887,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2013-05-07 17:12:44.9897,Raven.Database.Impl.DocumentCacher,Info,"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3153068032
+  PollingInterval     = 00:02:00",
+2013-05-07 17:12:44.9897,Raven.Storage.Esent.TransactionalStorage,Info,"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096",
+2013-05-07 17:12:45.0237,Raven.Database.Server.HttpServer,Debug,Request #   1: GET     -   166 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2013-05-07 17:12:45.2817,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2013-05-07 17:12:45.4427,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:12:45.9628,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Threads%2fTagCount:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int32)(x.Count)))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int32>)(x => ((System.Int32)(x.Count)))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Threads_2fTagCount : AbstractViewGenerator
+{
+	public Index_Threads_2fTagCount()
+	{
+		this.ViewText = @""docs.DiscussionThreads
+	.SelectMany(thread => thread.Tags, (thread, tag) => new {Tag = tag, Count = 1})
+results
+	.GroupBy(result => result.Tag)
+	.Select(g => new {Tag = g.Key, Count = g.Sum(x => ((System.Int32)(x.Count)))})
+
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => docs.Where(__document => __document[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads"").SelectMany((Func<dynamic, IEnumerable<dynamic>>)(thread => (IEnumerable<dynamic>)(thread.Tags)), (Func<dynamic, dynamic, dynamic>)((thread, tag) => new { Tag = tag, Count = 1, __document_id = thread.__document_id })));
+		this.ReduceDefinition = results => results.GroupBy((Func<dynamic, dynamic>)(result => result.Tag)).Select((Func<IGrouping<dynamic,dynamic>, dynamic>)(g => new { Tag = g.Key, Count = g.Sum((Func<dynamic, System.Int32>)(x => ((System.Int32)(x.Count)))) }));
+		this.GroupByExtraction = result => result.Tag;
+		this.AddField(""Tag"");
+		this.AddField(""Count"");
+	}
+}
+",
+2013-05-07 17:12:45.9628,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Raven/DocumentsByEntityName,
+2013-05-07 17:12:45.9628,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Raven/DocumentsByEntityName,
+2013-05-07 17:12:46.1728,Raven.Database.Indexing.IndexStorage.Startup,Debug,Loading saved index Threads/TagCount,
+2013-05-07 17:12:46.1728,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Threads/TagCount,
+2013-05-07 17:12:46.2188,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Backup/Status' was not found,
+2013-05-07 17:12:46.2468,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:12:46.2468,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 0, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:12:46.2528,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2013-05-07 17:12:46.2528,Raven.Database.Server.HttpServer,Debug,"Request #   2: GET     - 1,548 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations",
+2013-05-07 17:12:46.2678,Raven.Database.Server.HttpServer,Debug,Request #   3: HEAD    -   986 ms - HitThatLine - 200 - /indexes/Threads/TagCount,
+2013-05-07 17:12:46.7609,Raven.Database.Server.HttpServer,Debug,Request #   4: PUT     -   322 ms - HitThatLine - 201 - /indexes/Threads/TagCount,
+2013-05-07 17:12:50.8203,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fDiscussionThreads%2fByScoreSortByScore:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fDiscussionThreads_2fByScoreSortByScore : AbstractViewGenerator
+{
+	public Index_Temp_2fDiscussionThreads_2fByScoreSortByScore()
+	{
+		this.ViewText = @""from doc in docs.DiscussionThreads
+select new { Score = doc.Score }
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads""
+			select new { Score = doc.Score, __document_id = doc.__document_id });
+		this.AddField(""Score"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Score"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Score"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fDiscussionThreads_2fByScoreSortByScore : AbstractViewGenerator
+{
+	public Index_Temp_2fDiscussionThreads_2fByScoreSortByScore()
+	{
+		this.ViewText = @""from doc in docs.DiscussionThreads
+select new { Score = doc.Score }
+"";
+		this.ForEntityNames.Add(""DiscussionThreads"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""DiscussionThreads""
+			select new { Score = doc.Score, __document_id = doc.__document_id });
+		this.AddField(""Score"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Score"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Score"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:12:50.9193,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/DiscussionThreads/ByScoreSortByScore with encoded name Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:12:51.4053,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:12:51.4513,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 1 because: PUT INDEX Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:12:51.4653,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 1, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:12:51.5743,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:51.6184,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 14 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2013-05-07 17:12:51.7214,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2013-05-07 17:12:51.7214,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/ThreadViews,
+2013-05-07 17:12:51.7294,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/posts,
+2013-05-07 17:12:51.7294,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 11 documents remained",
+2013-05-07 17:12:51.7794,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 4 documents in IndexName: Temp/DiscussionThreads/ByScoreSortByScore, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2013-05-07 17:12:51.7924,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 4 documents for index: Temp/DiscussionThreads/ByScoreSortByScore. (threads/39,threads/38,threads/37,threads/40)",
+2013-05-07 17:12:51.7924,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:51.9044,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.0054,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.1074,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.2074,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.3084,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.3764,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/39 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/39
+	Score I-: 4589.8293552
+	Score_Range I-: 4589.8293552
+",
+2013-05-07 17:12:52.4094,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.5104,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.6104,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.7055,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/38 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/38
+	Score I-: 4589.8284315
+	Score_Range I-: 4589.8284315
+",
+2013-05-07 17:12:52.7095,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/37 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/37
+	Score I-: 4589.8194773
+	Score_Range I-: 4589.8194773
+",
+2013-05-07 17:12:52.7095,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/40 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/40
+	Score I-: 4589.8531573
+	Score_Range I-: 4589.8531573
+",
+2013-05-07 17:12:52.7095,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.8165,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:52.9165,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:53.0165,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:53.1185,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:53.2195,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:53.2805,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 12 documents for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:12:53.3025,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 2 because: WORK BY IndexingExecuter,
+2013-05-07 17:12:53.3025,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:12:53.3025,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 2, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:12:53.3205,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:12:53.4315,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:12:53.4315,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:12:53.4315,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/38' was found,
+2013-05-07 17:12:53.4315,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:12:53.5135,Raven.Database.Server.HttpServer,Debug,"Request #   5: GET     - 3,190 ms - HitThatLine - 200 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score",
+2013-05-07 17:12:53.5225,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 3,084 ms
+	Index: Temp/DiscussionThreads/ByScoreSortByScore
+	Results: 4 returned out of 4 total.
+",
+2013-05-07 17:13:01.8154,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Replication/Destinations' was not found,
+2013-05-07 17:13:01.8154,Raven.Database.Server.HttpServer,Debug,Request #   6: GET     -     0 ms - HitThatLine - 404 - /docs/Raven/Replication/Destinations,
+2013-05-07 17:13:02.0074,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Databases/HitThatLine' was found,
+2013-05-07 17:13:02.0074,Raven.Database.Server.HttpServer,Debug,Request #   7: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/HitThatLine,
+2013-05-07 17:13:02.2364,Raven.Database.Server.HttpServer,Debug,Request #   8: HEAD    -     0 ms - HitThatLine - 200 - /indexes/Threads/TagCount,
+2013-05-07 17:13:02.3674,Raven.Database.Server.HttpServer,Debug,Request #   9: PUT     -     2 ms - HitThatLine - 201 - /indexes/Threads/TagCount,
+2013-05-07 17:13:08.9871,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:13:08.9871,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:13:08.9871,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:13:08.9871,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/38' was found,
+2013-05-07 17:13:08.9871,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:13:08.9871,Raven.Database.Server.HttpServer,Debug,Request #  10: GET     -    13 ms - HitThatLine - 200 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:13:08.9871,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 10 ms
+	Index: Temp/DiscussionThreads/ByScoreSortByScore
+	Results: 4 returned out of 4 total.
+",
+2013-05-07 17:13:16.0228,Raven.Database.Server.HttpServer,Debug,Request #  11: GET     -     2 ms - HitThatLine - 304 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:13:16.0228,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+",
+2013-05-07 17:13:21.5333,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:13:21.5333,Raven.Database.Server.HttpServer,Debug,Request #  12: GET     -     2 ms - HitThatLine - 200 - /docs/threads/40,
+2013-05-07 17:13:21.8614,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fPosts%2fByThreadId:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fPosts_2fByThreadId : AbstractViewGenerator
+{
+	public Index_Temp_2fPosts_2fByThreadId()
+	{
+		this.ViewText = @""from doc in docs.Posts
+select new { ThreadId = doc.ThreadId }
+"";
+		this.ForEntityNames.Add(""Posts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Posts""
+			select new { ThreadId = doc.ThreadId, __document_id = doc.__document_id });
+		this.AddField(""ThreadId"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""ThreadId"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""ThreadId"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fPosts_2fByThreadId : AbstractViewGenerator
+{
+	public Index_Temp_2fPosts_2fByThreadId()
+	{
+		this.ViewText = @""from doc in docs.Posts
+select new { ThreadId = doc.ThreadId }
+"";
+		this.ForEntityNames.Add(""Posts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Posts""
+			select new { ThreadId = doc.ThreadId, __document_id = doc.__document_id });
+		this.AddField(""ThreadId"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""ThreadId"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""ThreadId"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/Posts/ByThreadId with encoded name Temp/Posts/ByThreadId,
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/Posts/ByThreadId,
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 3 because: PUT INDEX Temp/Posts/ByThreadId,
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 3, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 14 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2013-05-07 17:13:21.8674,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2013-05-07 17:13:21.8674,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/posts,
+2013-05-07 17:13:21.8674,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/ThreadViews,
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 11 documents remained",
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 2 documents in IndexName: Temp/Posts/ByThreadId, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2013-05-07 17:13:21.8674,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 2 documents for index: Temp/Posts/ByThreadId. (posts-33,posts-65)",
+2013-05-07 17:13:21.8874,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/40,
+2013-05-07 17:13:21.9294,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on posts-33 result in index Temp/Posts/ByThreadId gave document: 	__document_id IS: posts-33
+	ThreadId I-: threads/40
+",
+2013-05-07 17:13:21.9454,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on posts-65 result in index Temp/Posts/ByThreadId gave document: 	__document_id IS: posts-65
+	ThreadId I-: threads/39
+",
+2013-05-07 17:13:21.9454,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 6 documents for Temp/Posts/ByThreadId,
+2013-05-07 17:13:21.9454,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 4 because: WORK BY IndexingExecuter,
+2013-05-07 17:13:21.9454,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:13:21.9454,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 4, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:22.2894,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/40,
+2013-05-07 17:13:22.3264,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'posts-33' was found,
+2013-05-07 17:13:22.3264,Raven.Database.Server.HttpServer,Debug,Request #  13: GET     -   754 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F40&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:13:22.3264,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/40
+	Time: 753 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:13:22.3764,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:13:22.3764,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:13:22.3824,Raven.Database.Server.HttpServer,Debug,Request #  14: GET     -    23 ms - HitThatLine - 200 - /queries/?&id=users/marcus&id=users/test,
+2013-05-07 17:13:25.3507,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fThreadViews%2fByDiscussionThreadIdAndIPAddressAndUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fThreadViews_2fByDiscussionThreadIdAndIPAddressAndUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fThreadViews_2fByDiscussionThreadIdAndIPAddressAndUsername()
+	{
+		this.ViewText = @""from doc in docs.ThreadViews
+select new { DiscussionThreadId = doc.DiscussionThreadId, IPAddress = doc.IPAddress, Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""ThreadViews"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""ThreadViews""
+			select new { DiscussionThreadId = doc.DiscussionThreadId, IPAddress = doc.IPAddress, Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""DiscussionThreadId"");
+		this.AddField(""IPAddress"");
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""DiscussionThreadId"");
+		this.AddQueryParameterForMap(""IPAddress"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""DiscussionThreadId"");
+		this.AddQueryParameterForReduce(""IPAddress"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fThreadViews_2fByDiscussionThreadIdAndIPAddressAndUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fThreadViews_2fByDiscussionThreadIdAndIPAddressAndUsername()
+	{
+		this.ViewText = @""from doc in docs.ThreadViews
+select new { DiscussionThreadId = doc.DiscussionThreadId, IPAddress = doc.IPAddress, Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""ThreadViews"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""ThreadViews""
+			select new { DiscussionThreadId = doc.DiscussionThreadId, IPAddress = doc.IPAddress, Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""DiscussionThreadId"");
+		this.AddField(""IPAddress"");
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""DiscussionThreadId"");
+		this.AddQueryParameterForMap(""IPAddress"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""DiscussionThreadId"");
+		this.AddQueryParameterForReduce(""IPAddress"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:13:25.3507,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername with encoded name Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:13:25.3507,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:13:25.3507,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 5 because: PUT INDEX Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:13:25.3507,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]],
+2013-05-07 17:13:25.3507,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 5, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:25.3637,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 14 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2013-05-07 17:13:25.3637,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2013-05-07 17:13:25.3637,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/posts,
+2013-05-07 17:13:25.3637,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/ThreadViews,
+2013-05-07 17:13:25.3637,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 11 documents remained",
+2013-05-07 17:13:25.3637,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 3 documents in IndexName: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2013-05-07 17:13:25.3637,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 3 documents for index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername. (ThreadViews-129,ThreadViews-161,ThreadViews-162)",
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-129 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-129
+	DiscussionThreadId I-: threads/40
+	IPAddress I-: ::1
+	Username I-: test
+",
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-161 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-161
+	DiscussionThreadId I-: threads/40
+	IPAddress I-: ::1
+	Username I-: marcus
+",
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-162 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-162
+	DiscussionThreadId I-: threads/40
+	IPAddress I-: ::1
+	Username I-: NULL_VALUE
+",
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 9 documents for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 6 because: WORK BY IndexingExecuter,
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:25.4287,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 6, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:13:25.5137,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]],
+2013-05-07 17:13:25.5647,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2013-05-07 17:13:25.5647,Raven.Database.Server.HttpServer,Debug,Request #  15: GET     -   585 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F40%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:13:25.5647,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]]
+	Time: 584 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:13:32.1384,Raven.Database.Server.HttpServer,Debug,Request #  16: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:13:32.1384,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+",
+2013-05-07 17:13:40.9588,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:13:40.9588,Raven.Database.Server.HttpServer,Debug,Request #  17: GET     -     1 ms - HitThatLine - 200 - /docs/threads/37,
+2013-05-07 17:13:40.9648,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/37,
+2013-05-07 17:13:40.9648,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:13:40.9648,Raven.Database.Server.HttpServer,Debug,Request #  18: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F37&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:13:40.9648,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/37
+	Time: 4 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 0 returned out of 0 total.
+",
+2013-05-07 17:13:40.9648,Raven.Database.Server.HttpServer,Debug,Request #  19: GET     -     1 ms - HitThatLine - 200 - /queries/?&id=users/test,
+2013-05-07 17:13:40.9898,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/37 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]],
+2013-05-07 17:13:41.0058,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/ThreadViews' was found,
+2013-05-07 17:13:40.9898,Raven.Database.Server.HttpServer,Debug,Request #  20: GET     -     6 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F37%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:13:41.0158,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/37 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]]
+	Time: 5 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 0 returned out of 0 total.
+",
+2013-05-07 17:13:41.0058,Raven.Database.Server.HttpServer,Debug,Request #  21: GET     -     1 ms - HitThatLine - 200 - /docs/Raven/Hilo/ThreadViews,
+2013-05-07 17:13:41.2308,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/ThreadViews', update: True, ",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 7 because: PUT Raven/Hilo/ThreadViews,
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 7, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2200-0000-000000000013,
+2013-05-07 17:13:41.2308,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/ThreadViews,
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000001, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000001, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Threads/TagCount, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000001, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000001, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.2308,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/ThreadViews with etag 00000000-0000-2500-0000-000000000001,
+2013-05-07 17:13:41.2308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/DiscussionThreads/ByScoreSortByScore, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000001, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.2458,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 8 because: WORK BY IndexingExecuter,
+2013-05-07 17:13:41.2458,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:41.2458,Raven.Database.Server.HttpServer,Debug,Request #  22: PUT     -   211 ms - HitThatLine - 201 - /docs/Raven/Hilo/ThreadViews,
+2013-05-07 17:13:41.2458,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 8, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:13:41.3498,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:13:41.4138,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'threads/37', update: True, ",
+2013-05-07 17:13:41.4158,Raven.Database.DocumentDatabase,Debug,Put document threads/37 with etag 00000000-0000-2500-0000-000000000002,
+2013-05-07 17:13:41.4158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 9 because: PUT threads/37, PATCH threads/37",
+2013-05-07 17:13:41.4158,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0862568,
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-000000000001,
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-000000000001",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/DiscussionThreads/ByScoreSortByScore, LastIndexedEtag: 00000000-0000-2500-0000-000000000001",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000002, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000002, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-2500-0000-000000000001",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 9, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/DiscussionThreads/ByScoreSortByScore. (threads/37),
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Threads/TagCount. (threads/37),
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (threads/37),
+2013-05-07 17:13:41.4158,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/37 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/37
+	Score I-: 4589.8194773
+	Score_Range I-: 4589.8194773
+",
+2013-05-07 17:13:41.4378,Raven.Database.Server.HttpServer,Debug,Request #  23: POST    -   155 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:13:41.4458,Raven.Database.Server.HttpServer,Debug,"	PATCH threads/37
+",
+2013-05-07 17:13:41.4768,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:13:41.4988,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'ThreadViews-193', update: False, ",
+2013-05-07 17:13:41.4988,Raven.Database.DocumentDatabase,Debug,Put document ThreadViews-193 with etag 00000000-0000-2500-0000-000000000003,
+2013-05-07 17:13:41.4988,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 10 because: PUT ThreadViews-193,
+2013-05-07 17:13:41.4988,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0105813,
+2013-05-07 17:13:41.4988,Raven.Database.Server.HttpServer,Debug,Request #  24: POST    -    16 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:13:41.4988,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 10, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:41.4988,Raven.Database.Server.HttpServer,Debug,"	PUT ThreadViews-193
+",
+2013-05-07 17:13:41.5738,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/37 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threads/37
+	Tag I-: DiscussionThreads
+	LastModified I-: 20130507221341407
+",
+2013-05-07 17:13:41.6878,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/37': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2013-05-07 17:13:41.7178,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/37': '{
+  ""Tag"": ""topic"",
+  ""Count"": 1
+}'",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 2 documents for Threads/TagCount,
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 11 because: WORK BY IndexingExecuter,
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-000000000002,
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-000000000002",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, LastIndexedEtag: 00000000-0000-2500-0000-000000000002",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/DiscussionThreads/ByScoreSortByScore, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000003, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000003, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Threads/TagCount, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000003, 5/7/2013 10:13:41 PM",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (ThreadViews-193),
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername. (ThreadViews-193),
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-193 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threadviews-193
+	Tag I-: ThreadViews
+	LastModified I-: 20130507221341500
+",
+2013-05-07 17:13:41.7308,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-193 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-193
+	DiscussionThreadId I-: threads/37
+	IPAddress I-: ::1
+	Username I-: NULL_VALUE
+",
+2013-05-07 17:13:41.7428,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:13:41.7748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 3 mapped results for keys [test, topic] for index Threads/TagCount",
+2013-05-07 17:13:41.8278,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 2 reduce keys for index Threads/TagCount,
+2013-05-07 17:13:41.8508,Raven.Database.Tasks.ReduceTask,Debug,Read 2 reduce keys in 00:00:00.0082338 with 9 results for index Threads/TagCount,
+2013-05-07 17:13:41.8808,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:13:41.8868,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 12 because: WORK BY IndexingExecuter,
+2013-05-07 17:13:41.8868,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 12, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:13:41.9458,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 8
+	Count_Range IS: 8
+",
+2013-05-07 17:13:42.0338,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on topic result in index Threads/TagCount gave document: 	__reduce_key I-: topic
+	Tag IS: topic
+	Count IS: 1
+	Count_Range IS: 1
+",
+2013-05-07 17:13:42.1168,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 2 entries for Threads/TagCount for reduce keys: test, topic",
+2013-05-07 17:13:42.1168,Raven.Database.Tasks.ReduceTask,Debug,Indexed 2 reduce keys in 00:00:00.2659357 with 9 results for index Threads/TagCount,
+2013-05-07 17:13:42.1168,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 13 because: WORK BY ReducingExecuter,
+2013-05-07 17:13:42.1168,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 13, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:13:42.1658,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 13, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:14:12.9168,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:14:12.9168,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:14:12.9168,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:14:12.9168,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/38' was found,
+2013-05-07 17:14:12.9168,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:14:12.9258,Raven.Database.Server.HttpServer,Debug,Request #  25: GET     -    10 ms - HitThatLine - 200 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:14:12.9258,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 7 ms
+	Index: Temp/DiscussionThreads/ByScoreSortByScore
+	Results: 4 returned out of 4 total.
+",
+2013-05-07 17:14:14.5758,Raven.Database.Server.HttpServer,Debug,Request #  26: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:14:14.5788,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+",
+2013-05-07 17:14:37.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:14:37.8398,Raven.Database.Server.HttpServer,Debug,Request #  27: GET     -     8 ms - HitThatLine - 304 - /docs/threads/40,
+2013-05-07 17:14:37.8398,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/40,
+2013-05-07 17:14:37.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'posts-33' was found,
+2013-05-07 17:14:37.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:14:37.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:14:37.8398,Raven.Database.Server.HttpServer,Debug,Request #  28: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F40&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:14:37.8698,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]],
+2013-05-07 17:14:37.8528,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/40
+	Time: 3 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:14:37.8698,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-162' was found,
+2013-05-07 17:14:37.8398,Raven.Database.Server.HttpServer,Debug,Request #  29: GET     -     1 ms - HitThatLine - 304 - /queries/?&id=users/marcus&id=users/test,
+2013-05-07 17:14:37.8698,Raven.Database.Server.HttpServer,Debug,Request #  30: GET     -    10 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F40%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253A%255B%255BNULL_VALUE%255D%255D&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:37.8848,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:[[NULL_VALUE]]
+	Time: 8 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:14:47.2648,Raven.Database.Storage.IndexDefinitionStorage,Info,"New index Temp%2fUserAccounts%2fByUsername:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fUserAccounts_2fByUsername : AbstractViewGenerator
+{
+	public Index_Temp_2fUserAccounts_2fByUsername()
+	{
+		this.ViewText = @""from doc in docs.UserAccounts
+select new { Username = doc.Username }
+"";
+		this.ForEntityNames.Add(""UserAccounts"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""UserAccounts""
+			select new { Username = doc.Username, __document_id = doc.__document_id });
+		this.AddField(""Username"");
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""Username"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""Username"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+",
+2013-05-07 17:14:47.2648,Raven.Database.Indexing.IndexStorage,Info,Creating index Temp/UserAccounts/ByUsername with encoded name Temp/UserAccounts/ByUsername,
+2013-05-07 17:14:47.2648,Raven.Database.Indexing.Index.Indexing,Debug,Creating index for Temp/UserAccounts/ByUsername,
+2013-05-07 17:14:47.2648,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 14 because: PUT INDEX Temp/UserAccounts/ByUsername,
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:marcus,
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 14, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 15 documents that requires indexing since etag: 00000000-0000-0000-0000-000000000000,
+2013-05-07 17:14:47.2748,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/posts,
+2013-05-07 17:14:47.2748,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/UserAccounts,
+2013-05-07 17:14:47.2748,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/ThreadViews,
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 12 documents remained",
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 2 documents in IndexName: Temp/UserAccounts/ByUsername, LastIndexedEtag: 00000000-0000-0000-0000-000000000000",
+2013-05-07 17:14:47.2748,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 2 documents for index: Temp/UserAccounts/ByUsername. (users/marcus,users/test)",
+2013-05-07 17:14:47.3358,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on users/marcus result in index Temp/UserAccounts/ByUsername gave document: 	__document_id IS: users/marcus
+	Username I-: marcus
+",
+2013-05-07 17:14:47.3368,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on users/test result in index Temp/UserAccounts/ByUsername gave document: 	__document_id IS: users/test
+	Username I-: test
+",
+2013-05-07 17:14:47.3368,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 6 documents for Temp/UserAccounts/ByUsername,
+2013-05-07 17:14:47.3368,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 15 because: WORK BY IndexingExecuter,
+2013-05-07 17:14:47.3368,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 15, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:14:47.3368,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 15, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:14:47.3758,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/UserAccounts/ByUsername for: Username:marcus,
+2013-05-07 17:14:47.3758,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:14:47.3758,Raven.Database.Server.HttpServer,Debug,Request #  31: GET     -   391 ms - HitThatLine - 200 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:47.3758,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 390 ms
+	Index: Temp/UserAccounts/ByUsername
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:14:47.3858,Raven.Database.Server.HttpServer,Debug,Request #  32: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:47.3858,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 1 ms
+",
+2013-05-07 17:14:47.3858,Raven.Database.Server.HttpServer,Debug,Request #  33: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:47.4108,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 1 ms
+",
+2013-05-07 17:14:52.1138,Raven.Database.Server.HttpServer,Debug,Request #  34: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:52.1138,Raven.Database.Server.HttpServer,Debug,Request #  35: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:52.1138,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 0 ms
+",
+2013-05-07 17:14:52.1138,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 0 ms
+",
+2013-05-07 17:14:52.1288,Raven.Database.Server.HttpServer,Debug,Request #  37: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:52.1468,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 0 ms
+",
+2013-05-07 17:14:52.1138,Raven.Database.Server.HttpServer,Debug,Request #  36: GET     -     2 ms - HitThatLine - 304 - /indexes/dynamic/UserAccounts?query=Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:52.1618,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:14:52.1618,Raven.Database.Server.HttpServer,Debug,"	Query: Username:marcus
+	Time: 1 ms
+",
+2013-05-07 17:14:52.1618,Raven.Database.Server.HttpServer,Debug,Request #  38: GET     -     3 ms - HitThatLine - 200 - /docs/users/marcus,
+2013-05-07 17:14:52.1748,Raven.Database.Server.HttpServer,Debug,Request #  39: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:14:52.1748,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 1 ms
+",
+2013-05-07 17:14:56.7988,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:14:56.7988,Raven.Database.Server.HttpServer,Debug,Request #  40: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:14:56.7988,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:14:56.7988,Raven.Database.Server.HttpServer,Debug,Request #  41: GET     -     0 ms - HitThatLine - 304 - /docs/threads/40,
+2013-05-07 17:14:56.8058,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:14:56.8058,Raven.Database.Server.HttpServer,Debug,Request #  42: GET     -     1 ms - HitThatLine - 304 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F40&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:14:56.8058,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/40
+	Time: 0 ms
+",
+2013-05-07 17:14:56.8058,Raven.Database.Server.HttpServer,Debug,Request #  43: GET     -     1 ms - HitThatLine - 304 - /queries/?&id=users/test,
+2013-05-07 17:14:56.8228,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:marcus,
+2013-05-07 17:14:56.8228,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2013-05-07 17:14:56.8228,Raven.Database.Server.HttpServer,Debug,Request #  44: GET     -     7 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F40%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:14:56.8228,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:marcus
+	Time: 6 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:15:00.4218,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:15:00.4218,Raven.Database.Server.HttpServer,Debug,Request #  45: GET     -     0 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:15:00.4268,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:15:00.4268,Raven.Database.Server.HttpServer,Debug,Request #  46: GET     -     1 ms - HitThatLine - 304 - /docs/threads/40,
+2013-05-07 17:15:00.5428,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'Raven/Hilo/posts' was found,
+2013-05-07 17:15:00.5428,Raven.Database.Server.HttpServer,Debug,Request #  47: GET     -     1 ms - HitThatLine - 200 - /docs/Raven/Hilo/posts,
+2013-05-07 17:15:00.5518,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'Raven/Hilo/posts', update: True, ",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 16 because: PUT Raven/Hilo/posts,
+2013-05-07 17:15:00.5518,Raven.Database.DocumentDatabase,Debug,Put document Raven/Hilo/posts with etag 00000000-0000-2500-0000-000000000006,
+2013-05-07 17:15:00.5518,Raven.Database.Server.HttpServer,Debug,Request #  48: PUT     -     3 ms - HitThatLine - 201 - /docs/Raven/Hilo/posts,
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-000000000003,
+2013-05-07 17:15:00.5518,Raven.Database.Impl.DocumentRetriever,Debug,Triggered Raven.Database.Plugins.Builtins.FilterRavenInternalDocumentsReadTrigger asked us to ignore Raven/Hilo/posts,
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 0 documents remained",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 16, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Raven/DocumentsByEntityName, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/DiscussionThreads/ByScoreSortByScore, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Threads/TagCount, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000006, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 17 because: WORK BY IndexingExecuter,
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 17, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:15:00.5518,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 17, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:15:00.5738,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'threads/40', update: True, ",
+2013-05-07 17:15:00.5738,Raven.Database.DocumentDatabase,Debug,Put document threads/40 with etag 00000000-0000-2500-0000-000000000007,
+2013-05-07 17:15:00.5738,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'posts-97', update: False, ",
+2013-05-07 17:15:00.5738,Raven.Database.DocumentDatabase,Debug,Put document posts-97 with etag 00000000-0000-2500-0000-000000000008,
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 18 because: PUT threads/40, PUT posts-97",
+2013-05-07 17:15:00.5738,Raven.Database.DocumentDatabase,Debug,Successfully executed 2 commands in 00:00:00.0038005,
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 2 documents that requires indexing since etag: 00000000-0000-2500-0000-000000000006,
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 2 documents remained",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 2 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-000000000006",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/DiscussionThreads/ByScoreSortByScore, LastIndexedEtag: 00000000-0000-2500-0000-000000000006",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/Posts/ByThreadId, LastIndexedEtag: 00000000-0000-2500-0000-000000000006",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000008, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000008, 5/7/2013 10:15:00 PM",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-2500-0000-000000000006",
+2013-05-07 17:15:00.5738,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 18, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:15:00.5738,Raven.Database.Server.HttpServer,Debug,Request #  49: POST    -    13 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Indexing 2 documents for index: Raven/DocumentsByEntityName. (threads/40,posts-97)",
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/DiscussionThreads/ByScoreSortByScore. (threads/40),
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/Posts/ByThreadId. (posts-97),
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/40 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threads/40
+	Tag I-: DiscussionThreads
+	LastModified I-: 20130507221500573
+",
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/40 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/40
+	Score I-: 4589.8531573
+	Score_Range I-: 4589.8531573
+",
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on posts-97 result in index Temp/Posts/ByThreadId gave document: 	__document_id IS: posts-97
+	ThreadId I-: threads/40
+",
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Threads/TagCount. (threads/40),
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/40': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/Posts/ByThreadId,
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 1 documents for Threads/TagCount,
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:15:00.5818,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on posts-97 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: posts-97
+	Tag I-: Posts
+	LastModified I-: 20130507221500574
+",
+2013-05-07 17:15:00.5738,Raven.Database.Server.HttpServer,Debug,"	PUT threads/40
+	PUT posts-97
+",
+2013-05-07 17:15:00.6048,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:15:00.6048,Raven.Database.Server.HttpServer,Debug,Request #  50: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:15:00.6048,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:15:00.6048,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:15:00.6048,Raven.Database.Server.HttpServer,Debug,Request #  51: GET     -     1 ms - HitThatLine - 200 - /docs/threads/40,
+2013-05-07 17:15:00.6158,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/40,
+2013-05-07 17:15:00.6158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'posts-33' was found,
+2013-05-07 17:15:00.6158,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'posts-97' was found,
+2013-05-07 17:15:00.6158,Raven.Database.Server.HttpServer,Debug,Request #  52: GET     -     7 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F40&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:15:00.6338,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:15:00.6338,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/40
+	Time: 5 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 2 returned out of 2 total.
+",
+2013-05-07 17:15:00.6488,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:marcus,
+2013-05-07 17:15:00.6338,Raven.Database.Server.HttpServer,Debug,Request #  53: GET     -     1 ms - HitThatLine - 304 - /queries/?&id=users/test,
+2013-05-07 17:15:00.6488,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threadviews-161' was found,
+2013-05-07 17:15:00.6488,Raven.Database.Server.HttpServer,Debug,Request #  54: GET     -     8 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F40%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:15:00.6588,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/40 AND IPAddress:\:\:1) AND Username:marcus
+	Time: 7 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:15:00.7488,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 6 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:15:00.7488,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 19 because: WORK BY IndexingExecuter,
+2013-05-07 17:15:00.7528,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 2 mapped results for keys [topic, test] for index Threads/TagCount",
+2013-05-07 17:15:00.7528,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 2 reduce keys for index Threads/TagCount,
+2013-05-07 17:15:00.7528,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 19, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:15:00.7528,Raven.Database.Tasks.ReduceTask,Debug,Read 2 reduce keys in 00:00:00.0005809 with 9 results for index Threads/TagCount,
+2013-05-07 17:15:00.7528,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on topic result in index Threads/TagCount gave document: 	__reduce_key I-: topic
+	Tag IS: topic
+	Count IS: 1
+	Count_Range IS: 1
+",
+2013-05-07 17:15:00.7528,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 8
+	Count_Range IS: 8
+",
+2013-05-07 17:15:00.8158,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 2 entries for Threads/TagCount for reduce keys: topic, test",
+2013-05-07 17:15:00.8158,Raven.Database.Tasks.ReduceTask,Debug,Indexed 2 reduce keys in 00:00:00.0615062 with 9 results for index Threads/TagCount,
+2013-05-07 17:15:00.8158,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 20 because: WORK BY ReducingExecuter,
+2013-05-07 17:15:00.8158,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 20, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:15:00.8158,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 20, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:15:05.2998,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:15:05.2998,Raven.Database.Server.HttpServer,Debug,Request #  55: GET     -     0 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:15:05.2998,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:15:05.2998,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:15:05.3078,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:15:05.3078,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/38' was found,
+2013-05-07 17:15:05.3078,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:15:05.3078,Raven.Database.Server.HttpServer,Debug,Request #  56: GET     -     6 ms - HitThatLine - 200 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:15:05.3078,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 3 ms
+	Index: Temp/DiscussionThreads/ByScoreSortByScore
+	Results: 4 returned out of 4 total.
+",
+2013-05-07 17:15:22.3618,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:15:22.3618,Raven.Database.Server.HttpServer,Debug,Request #  57: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:15:23.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:15:23.8398,Raven.Database.Server.HttpServer,Debug,Request #  58: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:16:02.8318,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:16:02.8318,Raven.Database.Server.HttpServer,Debug,Request #  59: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:16:02.8318,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:16:02.8318,Raven.Database.Server.HttpServer,Debug,Request #  60: GET     -     1 ms - HitThatLine - 200 - /docs/threads/39,
+2013-05-07 17:16:02.8398,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/39,
+2013-05-07 17:16:02.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'posts-65' was found,
+2013-05-07 17:16:02.8398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:16:02.8398,Raven.Database.Server.HttpServer,Debug,Request #  61: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F39&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:16:02.8398,Raven.Database.Server.HttpServer,Debug,Request #  62: GET     -     1 ms - HitThatLine - 304 - /queries/?&id=users/test,
+2013-05-07 17:16:02.8578,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/39 AND IPAddress:\:\:1) AND Username:marcus,
+2013-05-07 17:16:02.8398,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/39
+	Time: 3 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 1 returned out of 1 total.
+",
+2013-05-07 17:16:02.8718,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:16:02.8718,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'threads/39', update: True, ",
+2013-05-07 17:16:02.8718,Raven.Database.DocumentDatabase,Debug,Put document threads/39 with etag 00000000-0000-2500-0000-00000000000a,
+2013-05-07 17:16:02.8718,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:16:02.8718,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 21 because: PUT threads/39, PATCH threads/39",
+2013-05-07 17:16:02.8718,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0051371,
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 21, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-000000000008,
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/DiscussionThreads/ByScoreSortByScore, LastIndexedEtag: 00000000-0000-2500-0000-000000000008",
+2013-05-07 17:16:02.8578,Raven.Database.Server.HttpServer,Debug,Request #  63: GET     -     5 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F39%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000a, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-000000000008",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000a, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000a, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-2500-0000-000000000008",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (threads/39),
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/DiscussionThreads/ByScoreSortByScore. (threads/39),
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/39 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threads/39
+	Tag I-: DiscussionThreads
+	LastModified I-: 20130507221602879
+",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/39 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/39
+	Score I-: 4589.8293552
+	Score_Range I-: 4589.8293552
+",
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Threads/TagCount. (threads/39),
+2013-05-07 17:16:02.8838,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/39': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2013-05-07 17:16:02.8998,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/39': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2013-05-07 17:16:02.8998,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 2 documents for Threads/TagCount,
+2013-05-07 17:16:02.9258,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'ThreadViews-194', update: False, ",
+2013-05-07 17:16:02.9258,Raven.Database.DocumentDatabase,Debug,Put document ThreadViews-194 with etag 00000000-0000-2500-0000-00000000000d,
+2013-05-07 17:16:02.9258,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 22 because: PUT ThreadViews-194,
+2013-05-07 17:16:02.9258,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0017440,
+2013-05-07 17:16:02.9258,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found 3 mapped results for keys [test] for index Threads/TagCount,
+2013-05-07 17:16:02.9258,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 1 reduce keys for index Threads/TagCount,
+2013-05-07 17:16:02.9258,Raven.Database.Tasks.ReduceTask,Debug,Read 1 reduce keys in 00:00:00.0005471 with 8 results for index Threads/TagCount,
+2013-05-07 17:16:02.9258,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 8
+	Count_Range IS: 8
+",
+2013-05-07 17:16:02.8838,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/39 AND IPAddress:\:\:1) AND Username:marcus
+	Time: 4 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 0 returned out of 0 total.
+",
+2013-05-07 17:16:02.8838,Raven.Database.Server.HttpServer,Debug,Request #  64: POST    -     8 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:16:02.9448,Raven.Database.Server.HttpServer,Debug,"	PATCH threads/39
+",
+2013-05-07 17:16:02.9258,Raven.Database.Server.HttpServer,Debug,Request #  65: POST    -     4 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:16:02.9698,Raven.Database.Server.HttpServer,Debug,"	PUT ThreadViews-194
+",
+2013-05-07 17:16:02.9888,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:16:02.9888,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 23 because: WORK BY IndexingExecuter,
+2013-05-07 17:16:02.9888,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-00000000000a,
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-00000000000a",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/DiscussionThreads/ByScoreSortByScore, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000d, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, LastIndexedEtag: 00000000-0000-2500-0000-00000000000a",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000d, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000d, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Threads/TagCount, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000d, 5/7/2013 10:16:02 PM",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (ThreadViews-194),
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername. (ThreadViews-194),
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-194 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threadviews-194
+	Tag I-: ThreadViews
+	LastModified I-: 20130507221602925
+",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-194 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-194
+	DiscussionThreadId I-: threads/39
+	IPAddress I-: ::1
+	Username I-: marcus
+",
+2013-05-07 17:16:02.9938,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:16:03.0178,Raven.Database.Indexing.Index.Indexing,Debug,Reduce resulted in 1 entries for Threads/TagCount for reduce keys: test,
+2013-05-07 17:16:03.0178,Raven.Database.Tasks.ReduceTask,Debug,Indexed 1 reduce keys in 00:00:00.0887280 with 8 results for index Threads/TagCount,
+2013-05-07 17:16:03.0178,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 24 because: WORK BY ReducingExecuter,
+2013-05-07 17:16:03.0178,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 24, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:03.0468,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:16:03.0468,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 25 because: WORK BY IndexingExecuter,
+2013-05-07 17:16:03.0468,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 25, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:03.0468,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 25, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:16:08.4148,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:16:08.4148,Raven.Database.Server.HttpServer,Debug,Request #  66: GET     -     1 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:16:08.4148,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:16:08.4148,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:16:08.4148,Raven.Database.Server.HttpServer,Debug,Request #  67: GET     -     1 ms - HitThatLine - 200 - /docs/threads/37,
+2013-05-07 17:16:08.4248,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/Posts/ByThreadId for: ThreadId:threads/37,
+2013-05-07 17:16:08.4248,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/test' was found,
+2013-05-07 17:16:08.4248,Raven.Database.Server.HttpServer,Debug,Request #  68: GET     -     4 ms - HitThatLine - 200 - /indexes/dynamic/Posts?query=ThreadId%253Athreads%252F37&start=0&pageSize=128&aggregation=None,
+2013-05-07 17:16:08.4458,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername for: (DiscussionThreadId:threads/37 AND IPAddress:\:\:1) AND Username:marcus,
+2013-05-07 17:16:08.4248,Raven.Database.Server.HttpServer,Debug,"	Query: ThreadId:threads/37
+	Time: 3 ms
+	Index: Temp/Posts/ByThreadId
+	Results: 0 returned out of 0 total.
+",
+2013-05-07 17:16:08.4248,Raven.Database.Server.HttpServer,Debug,Request #  69: GET     -     1 ms - HitThatLine - 304 - /queries/?&id=users/test,
+2013-05-07 17:16:08.4458,Raven.Database.Server.HttpServer,Debug,Request #  70: GET     -     7 ms - HitThatLine - 200 - /indexes/dynamic/ThreadViews?query=(DiscussionThreadId%253Athreads%252F37%2520AND%2520IPAddress%253A%255C%253A%255C%253A1)%2520AND%2520Username%253Amarcus&start=0&pageSize=1&aggregation=None,
+2013-05-07 17:16:08.4918,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:16:08.4918,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'threads/37', update: True, ",
+2013-05-07 17:16:08.4918,Raven.Database.DocumentDatabase,Debug,Put document threads/37 with etag 00000000-0000-2500-0000-00000000000e,
+2013-05-07 17:16:08.4918,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:16:08.4918,Raven.Database.Indexing.WorkContext,Debug,"Incremented work counter to 26 because: PUT threads/37, PATCH threads/37",
+2013-05-07 17:16:08.4918,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0052935,
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-00000000000d,
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-00000000000d",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/DiscussionThreads/ByScoreSortByScore, LastIndexedEtag: 00000000-0000-2500-0000-00000000000d",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000e, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000e, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-00000000000e, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Threads/TagCount, LastIndexedEtag: 00000000-0000-2500-0000-00000000000d",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 26, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (threads/37),
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/37 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threads/37
+	Tag I-: DiscussionThreads
+	LastModified I-: 20130507221608494
+",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/DiscussionThreads/ByScoreSortByScore. (threads/37),
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Threads/TagCount. (threads/37),
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on threads/37 result in index Temp/DiscussionThreads/ByScoreSortByScore gave document: 	__document_id IS: threads/37
+	Score I-: 4589.8194773
+	Score_Range I-: 4589.8194773
+",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/37': '{
+  ""Tag"": ""test"",
+  ""Count"": 1
+}'",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,"Mapped result for index 'Threads/TagCount' doc 'threads/37': '{
+  ""Tag"": ""topic"",
+  ""Count"": 1
+}'",
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/DiscussionThreads/ByScoreSortByScore,
+2013-05-07 17:16:08.4998,Raven.Database.Indexing.Index.Indexing,Debug,Mapped 2 documents for Threads/TagCount,
+2013-05-07 17:16:08.4838,Raven.Database.Server.HttpServer,Debug,"	Query: (DiscussionThreadId:threads/37 AND IPAddress:\:\:1) AND Username:marcus
+	Time: 6 ms
+	Index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername
+	Results: 0 returned out of 0 total.
+",
+2013-05-07 17:16:08.4918,Raven.Database.Server.HttpServer,Debug,Request #  71: POST    -     8 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:16:08.5218,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,"Inserted a new document with key 'ThreadViews-195', update: False, ",
+2013-05-07 17:16:08.5218,Raven.Database.DocumentDatabase,Debug,Put document ThreadViews-195 with etag 00000000-0000-2500-0000-000000000011,
+2013-05-07 17:16:08.5218,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 27 because: PUT ThreadViews-195,
+2013-05-07 17:16:08.5218,Raven.Database.DocumentDatabase,Debug,Successfully executed 1 commands in 00:00:00.0033588,
+2013-05-07 17:16:08.5218,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Found 3 mapped results for keys [test, topic] for index Threads/TagCount",
+2013-05-07 17:16:08.5218,Raven.Database.Tasks.ReduceTask,Debug,Starting to read 2 reduce keys for index Threads/TagCount,
+2013-05-07 17:16:08.5218,Raven.Database.Tasks.ReduceTask,Debug,Read 2 reduce keys in 00:00:00.0004154 with 9 results for index Threads/TagCount,
+2013-05-07 17:16:08.5218,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on test result in index Threads/TagCount gave document: 	__reduce_key I-: test
+	Tag IS: test
+	Count IS: 8
+	Count_Range IS: 8
+",
+2013-05-07 17:16:08.4998,Raven.Database.Server.HttpServer,Debug,"	PATCH threads/37
+",
+2013-05-07 17:16:08.5218,Raven.Database.Server.HttpServer,Debug,Request #  72: POST    -     6 ms - HitThatLine - 200 - /bulk_docs,
+2013-05-07 17:16:08.5348,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on topic result in index Threads/TagCount gave document: 	__reduce_key I-: topic
+	Tag IS: topic
+	Count IS: 1
+	Count_Range IS: 1
+",
+2013-05-07 17:16:08.5348,Raven.Database.Server.HttpServer,Debug,"	PUT ThreadViews-195
+",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 28 because: WORK BY IndexingExecuter,
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Found a total of 1 documents that requires indexing since etag: 00000000-0000-2500-0000-00000000000e,
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"After read triggers executed, 1 documents remained",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Raven/DocumentsByEntityName, LastIndexedEtag: 00000000-0000-2500-0000-00000000000e",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"Going to index 1 documents in IndexName: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername, LastIndexedEtag: 00000000-0000-2500-0000-00000000000e",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/Posts/ByThreadId, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000011, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/UserAccounts/ByUsername, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000011, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Threads/TagCount, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000011, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,"All documents have been filtered for Temp/DiscussionThreads/ByScoreSortByScore, no indexing will be performed, updating to 00000000-0000-2500-0000-000000000011, 5/7/2013 10:16:08 PM",
+2013-05-07 17:16:08.5818,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Raven/DocumentsByEntityName. (ThreadViews-195),
+2013-05-07 17:16:08.5938,Raven.Database.Indexing.AbstractIndexingExecuter,Debug,Indexing 1 documents for index: Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername. (ThreadViews-195),
+2013-05-07 17:16:08.5938,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-195 result in index Raven/DocumentsByEntityName gave document: 	__document_id IS: threadviews-195
+	Tag I-: ThreadViews
+	LastModified I-: 20130507221608521
+",
+2013-05-07 17:16:08.5938,Raven.Database.Indexing.Index.Indexing,Debug,"Indexing on ThreadViews-195 result in index Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername gave document: 	__document_id IS: threadviews-195
+	DiscussionThreadId I-: threads/37
+	IPAddress I-: ::1
+	Username I-: marcus
+",
+2013-05-07 17:16:08.5938,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Temp/ThreadViews/ByDiscussionThreadIdAndIPAddressAndUsername,
+2013-05-07 17:16:08.6238,Raven.Database.Indexing.Index.Indexing,Debug,"Reduce resulted in 2 entries for Threads/TagCount for reduce keys: test, topic",
+2013-05-07 17:16:08.6238,Raven.Database.Tasks.ReduceTask,Debug,Indexed 2 reduce keys in 00:00:00.0972697 with 9 results for index Threads/TagCount,
+2013-05-07 17:16:08.6258,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 29 because: WORK BY ReducingExecuter,
+2013-05-07 17:16:08.6258,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 29, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:08.6608,Raven.Database.Indexing.Index.Indexing,Debug,Indexed 3 documents for Raven/DocumentsByEntityName,
+2013-05-07 17:16:08.6608,Raven.Database.Indexing.WorkContext,Debug,Incremented work counter to 30 because: WORK BY IndexingExecuter,
+2013-05-07 17:16:08.6608,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 30, for: ReducingExecuter, will wait for additional work",
+2013-05-07 17:16:08.6608,Raven.Database.Indexing.WorkContext,Debug,"No work was found, workerWorkCounter: 30, for: IndexingExecuter, will wait for additional work",
+2013-05-07 17:16:15.6398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'users/marcus' was found,
+2013-05-07 17:16:15.6398,Raven.Database.Server.HttpServer,Debug,Request #  73: GET     -     0 ms - HitThatLine - 304 - /docs/users/marcus,
+2013-05-07 17:16:15.6398,Raven.Database.Indexing.Index.Querying,Debug,Issuing query on index Temp/DiscussionThreads/ByScoreSortByScore for all documents,
+2013-05-07 17:16:15.6398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/40' was found,
+2013-05-07 17:16:15.6398,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/39' was found,
+2013-05-07 17:16:15.6448,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/38' was found,
+2013-05-07 17:16:15.6448,Raven.Storage.Esent.StorageActions.DocumentStorageActions,Debug,Document with key 'threads/37' was found,
+2013-05-07 17:16:15.6448,Raven.Database.Server.HttpServer,Debug,Request #  74: GET     -     5 ms - HitThatLine - 200 - /indexes/dynamic/DiscussionThreads?query=&start=0&pageSize=20&aggregation=None&sort=-Score,
+2013-05-07 17:16:15.6448,Raven.Database.Server.HttpServer,Debug,"	Query: 
+	Time: 3 ms
+	Index: Temp/DiscussionThreads/ByScoreSortByScore
+	Results: 4 returned out of 4 total.
+",

@@ -1,0 +1,20 @@
+{
+  "Name": "Temp/DiscussionThreads/ByScoreSortByScore",
+  "Map": "from doc in docs.DiscussionThreads\r\nselect new { Score = doc.Score }",
+  "Maps": [
+    "from doc in docs.DiscussionThreads\r\nselect new { Score = doc.Score }"
+  ],
+  "Reduce": null,
+  "TransformResults": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "IsTemp": true,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {
+    "Score": "Double"
+  },
+  "Analyzers": {},
+  "Fields": [],
+  "Type": "Temp"
+}

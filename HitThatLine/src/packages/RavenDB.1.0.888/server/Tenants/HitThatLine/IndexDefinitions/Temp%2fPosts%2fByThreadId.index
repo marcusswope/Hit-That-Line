@@ -1,0 +1,18 @@
+{
+  "Name": "Temp/Posts/ByThreadId",
+  "Map": "from doc in docs.Posts\r\nselect new { ThreadId = doc.ThreadId }",
+  "Maps": [
+    "from doc in docs.Posts\r\nselect new { ThreadId = doc.ThreadId }"
+  ],
+  "Reduce": null,
+  "TransformResults": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "IsTemp": true,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {},
+  "Analyzers": {},
+  "Fields": [],
+  "Type": "Temp"
+}

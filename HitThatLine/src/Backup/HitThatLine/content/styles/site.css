@@ -1,0 +1,117 @@
+﻿html { border: 0; margin: 0; padding: 0; vertical-align: baseline; }
+body { background-color: #EAE9E6; border: 0; margin: 0; padding: 0; vertical-align: baseline; height: 100%; font: 12px/18px 'Ubuntu', Helvetica, sans-serif; color: #545454 }
+a { color: black; text-decoration: none }
+a:visited { color: black; }
+a:hover { text-decoration: underline; }
+p { font-size: 14px;}
+label { font-size: 18px; }
+label.error { font-style: italic;color: #c41e3a;}
+
+div.section { border-radius: 5px;padding: 5px 0px 0px 0px;display: inline;float:left }
+div.section-title { font-size: 32px;margin: 10px 10px 10px 0px;height: 30px;width: 100%;color: #000000;text-shadow: #CAC9C6 1px 2px 3px }
+
+div#nav-bar a { margin: 5px;font-size: 18px; margin-right:30px }
+div#nav-bar:first-child a { margin-left:15px }
+
+div#main-header { height:95px;width:100%;background-color: #FFFFFF;margin-bottom: 15px;background-image: url('../images/main-header-logo.png');background-repeat: repeat-x }
+div#main-header a { margin-top: 20px;}
+#main-logo { height:70px; margin: 5px 20px 5px 5px;float: left;cursor: pointer; }
+#user-summary { height:70px; float: right;vertical-align: middle; font-size:20px }
+div.user-summary-actions { margin:30px 30px 0px 0px }
+div.user-summary-pic { margin-top:10px; height: 70px; }
+
+div.main-section {
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    padding: 10px;
+    -moz-box-shadow: 0px 1px 6px 0px #676767;
+    -webkit-box-shadow: 0px 1px 6px 0px #676767;
+    -box-shadow: 0px 1px 6px 0px #676767;
+}
+
+html.range_4 div#main-header object { height: 70px; }
+html.range_3 div#main-header object { height: 70px; }
+html.range_2 div#main-header object { height: 65px; }
+html.range_1 div#main-header object { height: 60px; }
+html.range_0 div#main-header object { height: 55px; }
+
+div.tagEditor { border: 1px solid black;position: absolute;background-color: #F6F5F4; }
+div.tagSelector:hover { background-color: #E24660; cursor:pointer }
+div.selectedTag { background-color: #E24660; border-radius: 7px; border: 2px solid #96172D;padding: 0px 2px 0px 4px;margin: 2px 2px 0px 2px;float: left;z-index: 999; }
+div.selectedTag a { color: whitesmoke;font-weight: bold; }
+img.removeTag { margin: -3px 0px 1px 3px;height: 16px;width: 16px; cursor:pointer }
+
+select.error,
+input[type="date"].error,
+input[type="datetime"].error,
+input[type="datetime-local"].error,
+input[type="email"].error,
+input[type="month"].error,
+input[type="number"].error,
+input[type="password"].error,
+input[type="search"].error,
+input[type="tel"].error,
+input[type="text"].error,
+input[type="time"].error,
+input[type="url"].error,
+input[type="week"].error,
+input[type="textarea"].error,
+textarea.error {
+    background-image: url('../images/exclamation.png');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}
+
+select.valid,
+input[type="date"].valid,
+input[type="datetime"].valid,
+input[type="datetime-local"].valid,
+input[type="email"].valid,
+input[type="month"].valid,
+input[type="number"].valid,
+input[type="password"].valid,
+input[type="search"].valid,
+input[type="tel"].valid,
+input[type="text"].valid,
+input[type="time"].valid,
+input[type="url"].valid,
+input[type="week"].valid {
+    background-image: url('../images/accept.png');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}
+
+select.waiting,
+input[type="date"].waiting,
+input[type="datetime"].waiting,
+input[type="datetime-local"].waiting,
+input[type="email"].waiting,
+input[type="month"].waiting,
+input[type="number"].waiting,
+input[type="password"].waiting,
+input[type="search"].waiting,
+input[type="tel"].waiting,
+input[type="text"].waiting,
+input[type="time"].waiting,
+input[type="url"].waiting,
+input[type="week"].waiting {
+    background-image: url('../images/small-ajax-loader.gif');
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    padding-right: 22px
+}
+
+label.textbox-on-right {
+    margin-right: 0px;
+    padding-top: 0px;
+    margin-top: 5px;
+}
+
+.threadSummaryWrapper { margin: 15px 15px 0px 15px; padding: 10px 0px 0px 0px; border-top: 1px solid gray; }
+.threadSummaryTitle { font-weight: bold; font-size: 20px; margin-bottom: 3px; margin-right: 10px; }
+.threadPreview { max-height: 55px; overflow: hidden; }
+.threadPreview p { font-size: 12px; }
+a.username-small { font-weight: bold; color: #c41e3a; }
+a.username { font-weight: bold;font-size: 14px; color: #c41e3a; }

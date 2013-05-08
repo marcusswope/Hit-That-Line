@@ -1,0 +1,12 @@
+﻿@using HitThatLine.Domain.Accounts
+@using HitThatLine.Endpoints.Home.Models
+@using HitThatLine.Endpoints.Thread.Models
+@using HitThatLine.Utility
+@using FubuMVC.Core.UI
+@model HitThatLine.Endpoints.Home.Models.HomeViewModel
+<div id="threads">
+    @foreach(var thread in Model.Threads)
+    {
+        @Raw(this.PartialFor(thread))
+    }
+</div>
